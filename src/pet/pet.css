@@ -1,0 +1,458 @@
+:root { --pet-control-size: 40px; }
+
+/* 桌面宠物（?view=pet）：透明窗口紧贴内容，内容整体右下角锚定（.pet-stack）。
+   配色全部走主题变量（--bg-1 卡片 / --text 前景 / --text-dim 次级 / --border 边框）：
+   宠物窗本来就跑 resolveActiveTheme + applyAppearance（PetApp.tsx），以前却把白底黑字写死，
+   深色主题下桌面上会挂着一块刺眼的白斑，外观设置里的卡片色/前景色完全管不到它。
+   阴影例外保留固定黑：宠物浮在任意壁纸上，需要与桌面拉开距离，而不是跟主题走。
+   compose 向左展开（右缘固定），窗口尺寸由渲染层实测 stack 后 pet:resize 上报。 */
+
+html.sage-pet,
+html.sage-pet body,
+html.sage-pet #root {
+  background: transparent !important;
+  overflow: hidden;
+  user-select: none;
+}
+
+.pet-root {
+  position: fixed;
+  inset: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif;
+  color: var(--text);
+}
+
+/* 内容栈：右下角锚定，自下而上是 胶囊 → 项目面板/菜单 → 气泡；
+   ResizeObserver 测它的包围盒上报窗口尺寸。 */
+.pet-stack {
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  /* Measure content independently of the current native window width. */
+  width: max-content;
+}
+
+.pet-anchor {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 6px;
+  min-height: var(--pet-control-size);
+}
+
+/* Idle cats are transparent assets. No themed square or circular backing. */
+.pet-avatar { position:relative; display:block; width:96px; height:96px; flex:none; background:transparent; border:0; }
+.pet-cat-sprite { display:block; width:100%; height:100%; overflow:hidden; }
+.pet-cat.pixel .pet-cat-sprite, .pet-cat.dog-pixel .pet-cat-sprite { image-rendering:pixelated; }
+.pet-cat.peek { width:60px; height:52px; }
+.pet-sleep-mark { position:absolute; right:10px; top:5px; color:var(--text-dim); font:600 13px monospace; animation:cat-sleep 2.6s ease-in-out infinite; }
+.pet-cat.motion-sleep .pet-cat-sprite { animation:cat-breathe 3.2s ease-in-out infinite; transform-origin:center bottom; }
+.pet-cat.motion-turn .pet-cat-sprite { animation:cat-step .48s steps(2) infinite; }
+.pet-cat.motion-tail .pet-cat-sprite { animation:cat-tail .8s ease-in-out infinite; transform-origin:center bottom; }
+.pet-cat.emerge { animation:cat-emerge .6s ease-out both; --cat-x:0px; --cat-y:0px; }
+.pet-cat.from-left { --cat-x:-36px; } .pet-cat.from-right { --cat-x:36px; }
+.pet-cat.from-top { --cat-y:-36px; } .pet-cat.from-bottom { --cat-y:36px; }
+.pet-cat.from-top-left { --cat-x:-36px; --cat-y:-36px; }
+.pet-cat.from-top-right { --cat-x:36px; --cat-y:-36px; }
+.pet-cat.from-bottom-left { --cat-x:-36px; --cat-y:36px; }
+.pet-cat.from-bottom-right { --cat-x:36px; --cat-y:36px; }
+.pet-root.docked .pet-stack { right:0; bottom:0; gap:0; }
+.pet-peek { position:relative; display:block; border:0; background:transparent; padding:0; width:60px; height:52px; animation:cat-tuck .35s ease-out; }
+.pet-root.docked.edge-left .pet-peek,
+.pet-root.docked.edge-right .pet-peek { width:52px; height:60px; }
+.pet-root.docked.edge-left .pet-cat.peek,
+.pet-root.docked.edge-right .pet-cat.peek { position:absolute; left:50%; top:50%; }
+.pet-root.docked.edge-left .pet-cat.peek { transform:translate(-50%,-50%) rotate(90deg); }
+.pet-root.docked.edge-right .pet-cat.peek { transform:translate(-50%,-50%) rotate(-90deg); }
+.pet-root.docked.edge-top .pet-cat.peek { transform:rotate(180deg); }
+.pet-root.docked.edge-left .pet-peek { transform-origin:left center; }
+.pet-root.docked.edge-right .pet-peek { transform-origin:right center; }
+.pet-root.docked.edge-top .pet-peek { transform-origin:center top; }
+.pet-root.docked.edge-bottom .pet-peek { transform-origin:center bottom; }
+/* Keep the head at the edge while tools and messages grow into the work area. */
+.pet-content { display:contents; }
+.pet-root.docked .pet-content { display:flex; flex-direction:column; align-items:flex-end; gap:10px; }
+.pet-content[hidden] { display:none !important; }
+.pet-root.docked.dock-open .pet-stack { gap:8px; }
+.pet-root.docked.edge-left .pet-stack { flex-direction:row; align-items:flex-end; }
+.pet-root.docked.edge-right .pet-stack { flex-direction:row-reverse; align-items:flex-end; }
+.pet-root.docked.edge-bottom .pet-stack { flex-direction:column-reverse; }
+.pet-root.docked.edge-top .pet-stack { flex-direction:column; }
+.pet-root.docked.edge-top .pet-content { flex-direction:column-reverse; }
+.pet-root.docked .pet-anchor:not(:has(.pet-pill)) { display:none; }
+.pet-root.docked .pet-peek { flex:none; }
+.pet-root.docked .pet-compose-slot { margin-top:0; }
+.pet-root.docked .pet-pill { animation:none; }
+/* A diagonal head fits inside its own corner slot. All transient content grows
+   toward the desktop interior, leaving this slot fixed through every resize. */
+.pet-root.dock-corner.edge-top-left { --peek-angle:135deg; --tuck-x:-80px; --tuck-y:-80px; }
+.pet-root.dock-corner.edge-top-right { --peek-angle:-135deg; --tuck-x:80px; --tuck-y:-80px; }
+.pet-root.dock-corner.edge-bottom-left { --peek-angle:45deg; --tuck-x:-80px; --tuck-y:80px; }
+.pet-root.dock-corner.edge-bottom-right { --peek-angle:-45deg; --tuck-x:80px; --tuck-y:80px; }
+.pet-root.docked.dock-corner .pet-peek { width:80px; height:80px; }
+.pet-root.docked.dock-corner .pet-cat.peek {
+  position:absolute; left:50%; top:50%;
+  transform:translate(-50%,-50%) rotate(var(--peek-angle));
+}
+.pet-root.docked.dock-corner[data-dock-x="left"] .pet-stack { left:0; right:auto; flex-direction:row; }
+.pet-root.docked.dock-corner[data-dock-x="right"] .pet-stack { right:0; left:auto; flex-direction:row-reverse; }
+.pet-root.docked.dock-corner[data-dock-x="left"] .pet-content,
+.pet-root.docked.dock-corner[data-dock-x="left"] .pet-anchor { align-items:flex-start; }
+.pet-root.docked.dock-corner[data-dock-y="top"] .pet-stack { top:0; bottom:auto; align-items:flex-start; }
+.pet-root.docked.dock-corner[data-dock-y="bottom"] .pet-stack { bottom:0; top:auto; align-items:flex-end; }
+.pet-root.docked.dock-corner[data-dock-y="top"] .pet-content { flex-direction:column-reverse; }
+.pet-root.docked.dock-corner[data-dock-x="left"][data-dock-y="top"] .pet-peek { transform-origin:left top; }
+.pet-root.docked.dock-corner[data-dock-x="right"][data-dock-y="top"] .pet-peek { transform-origin:right top; }
+.pet-root.docked.dock-corner[data-dock-x="left"][data-dock-y="bottom"] .pet-peek { transform-origin:left bottom; }
+.pet-root.docked.dock-corner[data-dock-x="right"][data-dock-y="bottom"] .pet-peek { transform-origin:right bottom; }
+.pet-cat.motion-peek-greet .pet-cat-sprite { animation:pet-peek-greet 1.19s ease-in-out; transform-origin:50% 80%; }
+@keyframes pet-peek-greet {
+  0%,100% { transform:none; }
+  20%,85% { transform:scaleY(.96); }
+  40% { transform:scale(.94) rotate(-3deg); }
+  65% { transform:scale(.94) rotate(3deg); }
+}
+.pet-menu [aria-checked="true"] { color:var(--accent); background:var(--accent-soft); }
+.pet-root.tucking .pet-cat { animation:pet-tuck-away .28s ease-in both; }
+.pet-root.tucking.edge-left { --tuck-x:-80px; --tuck-y:0px; }
+.pet-root.tucking.edge-right { --tuck-x:80px; --tuck-y:0px; }
+.pet-root.tucking.edge-top { --tuck-x:0px; --tuck-y:-80px; }
+.pet-root.tucking.edge-bottom { --tuck-x:0px; --tuck-y:80px; }
+@keyframes pet-tuck-away { to { transform:translate(var(--tuck-x),var(--tuck-y)); opacity:0; } }
+@keyframes cat-tuck { from { transform:scale(1.35); opacity:.45; } to { transform:scale(1); opacity:1; } }
+@keyframes cat-emerge { from { transform:translate(var(--cat-x),var(--cat-y)); opacity:.5; } to { transform:translate(0,0); opacity:1; } }
+@keyframes cat-step { 50% { transform:translateY(-2px); } }
+@keyframes cat-tail { 50% { transform:rotate(2deg); } }
+@keyframes cat-breathe { 50% { transform:scaleY(.96); } }
+@keyframes cat-sleep { 50% { transform:translateY(-5px); opacity:.4; } }
+@media (prefers-reduced-motion:reduce) { .pet-cat,.pet-cat-sprite,.pet-peek,.pet-sleep-mark { animation:none !important; } }
+
+/* 项目面板开在下方时（屏幕上方放不下）：stack 改顶边锚定。不这么做的话 stack
+   永远贴着窗口底边，窗口向下长会把整只宠物一起推下去（看着像往下跳一格）。 */
+.pet-stack.pin-top { top: 8px; bottom: auto; }
+.pet-stack.pin-top .pet-projects { order: 1; }
+
+/* ── 胶囊工具条（图3/图4/图5/图6） ── */
+.pet-pill {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: var(--pet-control-size);
+  padding: 0 6px;
+  border-radius: 20px;
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.14), 0 1px 3px rgba(0, 0, 0, 0.08);
+  transform-origin: right center;
+  animation: pet-pop 0.22s ease-out;
+}
+
+/* A stable footer under the pet prevents hover/click from moving the avatar. */
+.pet-compose-slot {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: var(--pet-control-size);
+}
+.pet-root.no-avatar .pet-compose-slot { min-height: 0; }
+.pet-pill.pet-launcher {
+  width: 96px;
+  height: var(--pet-control-size);
+  min-height: 0;
+  padding: 0 6px;
+  justify-content: center;
+}
+.pet-launcher button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Keep the input width stable as the project chip extends the compact bar. */
+.pet-pill.expanded {
+  --pet-input-w: 180px;
+  width: auto;
+  max-width: 100%;
+}
+
+/* 鼠标靠近：胶囊从右缘（语音按钮位置）向左扩大出现 */
+@keyframes pet-pop {
+  from { transform: scale(0.15); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* 全局 button chrome 泄漏——黑点“偏大”真正的根因（0.6.495）。0.6.487 把 16px 改成“按墨迹对齐”、
+   0.6.492 又改到 12px，屏幕上却一点变化都没有，因为那两个数字根本没生效：
+   src/styles/index.css 里有一条裸 `button{min-height:32px;padding:7px 14px}`，叠加
+   `*{box-sizing:border-box}`，而胶囊里的按钮只声明了自己的 width/height，抵不掉 padding 与 min-height：
+     · .pet-rec-dot 声明 12×12 → 实际被撑成 28×32（宽 = 14+14 内边距，高 = min-height 32），
+       28:32 = 0.875 正是用户截图里“高比宽大一点的黑椭圆”（截图量出 56×64 = @2x 的 28×32）；
+     · .pet-bubble-actions button 声明 22×22 → 同样变成 28×32。
+   所以必须先在胶囊这一层把 padding/min-height 归零，宠物自己的尺寸声明才作数
+   （.pet-pill button 特异性 0,1,1 > 裸 button 0,0,1，与书写顺序无关）。
+   .pet-menu button 不受影响：它是 width:100% 的整行菜单项，自己声明了 padding，
+   32px 行高反而是合适的点击区，刻意不动。 */
+.pet-pill button,
+.pet-bubble-actions button {
+  min-height: 0;
+  padding: 0;
+}
+
+.pet-tool {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.pet-tool:hover { background: color-mix(in srgb, var(--text) 8%, transparent); }
+
+.pet-divider {
+  width: 1px;
+  height: 18px;
+  margin: 0 4px;
+  background: color-mix(in srgb, var(--text) 14%, transparent);
+}
+
+/* A 12px recording dot retains the same 32px slot as the voice button. */
+.pet-rec-dot {
+  width: 12px;
+  height: 12px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 50%;
+  background: var(--text);
+  cursor: pointer;
+  transition: transform 0.08s ease-out;
+}
+
+/* ── compose 元素 ── */
+.pet-plus {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.pet-plus:hover, .pet-plus.open { background: color-mix(in srgb, var(--text) 12%, transparent); }
+
+/* 选中项目后：[项目名 +] 合并成一个向左延伸的胶囊（截图样式） */
+.pet-project-pill {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 2px;
+  height: 30px;
+  padding: 0 2px 0 7px;
+  margin-right: 2px;
+  border-radius: 15px;
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+}
+
+.pet-project-chip {
+  flex: 0 1 auto;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.pet-input {
+  /* 定宽不伸不缩：项目芯片的长短只影响胶囊往左延伸多少 */
+  flex: 0 0 var(--pet-input-w, 180px);
+  width: var(--pet-input-w, 180px);
+  min-width: 0;
+  height: 28px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 12px;
+  color: var(--text);
+}
+
+.pet-input::placeholder { color: var(--text-mute); }
+
+/* 提交按钮：未选项目/无文字 = 图8 弱化态（前景色低透明度底 + --text-mute 图标）；可用时主色 = 外观配置 --accent */
+.pet-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  color: var(--text-mute);
+  cursor: default;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.pet-submit.ready {
+  background: var(--accent, #6a5cff);
+  color: #fff;
+  cursor: pointer;
+}
+
+.pet-submit.ready:hover { filter: brightness(1.08); }
+
+/* Compact recent-project picker. */
+.pet-projects {
+  width: 304px;
+  max-width: 100%;
+  max-height: 240px;
+  overflow-y: auto;
+  padding: 10px;
+  border-radius: 18px;
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.16);
+  animation: pet-pop 0.18s ease;
+}
+
+.pet-projects-title {
+  padding: 4px 8px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+
+.pet-project-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.pet-project-row:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }
+.pet-project-row.selected { background: color-mix(in srgb, var(--accent, #6a5cff) 14%, var(--bg-1)); }
+
+.pet-project-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.pet-project-path { font-size: 11px; color: var(--text-mute); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pet-projects-empty { padding: 10px; font-size: 12px; color: var(--text-mute); text-align: center; }
+
+/* ── 结果 / 推送气泡（宠物上方） ── */
+.pet-bubble {
+  position: relative;
+  max-width: 304px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: var(--bg-1);
+  border: 1px solid color-mix(in srgb, var(--border) 78%, transparent);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10), 0 2px 6px rgba(0, 0, 0, 0.06);
+  animation: pet-pop 0.18s ease;
+}
+
+.pet-bubble p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 160px;
+  overflow-y: auto;
+  user-select: text;
+}
+
+/* Untitled live replies reserve the same toolbar space on their first text block. */
+.pet-bubble > p:first-child { padding-right: 48px; min-height: 22px; }
+
+.pet-bubble strong {
+  display: block;
+  margin-bottom: 5px;
+  padding-right: 48px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-dim);
+  overflow-wrap: anywhere;
+}
+.pet-bubble-error { border-color: color-mix(in srgb, var(--err, #e5484d) 45%, var(--bg-1)); }
+.pet-bubble-error p { color: var(--err, #b3272c); }
+
+.pet-bubble-actions {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  display: flex;
+  gap: 2px;
+}
+
+.pet-bubble-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-mute);
+  cursor: pointer;
+}
+
+.pet-bubble-actions button:hover { background: color-mix(in srgb, var(--text) 8%, transparent); color: var(--text); }
+
+/* 右键菜单：目前仅「退出」（持久关闭宠物开关）；随 stack 右对齐展示在胶囊上方 */
+.pet-menu {
+  z-index: 20;
+  min-width: 104px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-1);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.22);
+  user-select: none;
+}
+
+.pet-menu button {
+  display: block;
+  width: 100%;
+  padding: 5px 9px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.pet-menu button:hover { background: color-mix(in srgb, var(--text) 8%, transparent); }
+
+/* The reach sprite faces the pointer; a held pet pivots around the scruff. */
+.pet-cat.reach-right .pet-cat-sprite { transform:scaleX(-1); }
+.pet-cat.motion-held { height:144px; }
+.pet-cat.motion-held .pet-cat-sprite { transform-origin:50% 36%; animation:pet-held-sway 1.3s ease-in-out infinite; }
+.pet-cat.landing .pet-cat-sprite { animation:pet-land .5s ease-out both; transform-origin:center bottom; }
+.pet-root.dragging, .pet-root.dragging * { cursor:grabbing !important; }
+@keyframes pet-held-sway { 0%,100% { transform:rotate(-3deg); } 50% { transform:rotate(3deg); } }
+@keyframes pet-land { 0% { transform:translateY(-18px) scale(.92); } 60% { transform:translateY(0) scale(1.05,.9); } 80% { transform:translateY(-4px) scale(.98,1.02); } 100% { transform:none; } }
+
+.pet-bubble[role="button"] { cursor:pointer; }
+.pet-bubble:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }

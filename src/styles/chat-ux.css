@@ -1,0 +1,468 @@
+/* ─── Chat UX: 工具状态 / 待办卡 / 澄清块 / 思考指示器 ─── */
+
+/* 工具执行状态：转圈图标 */
+.tool-spin {
+  animation: sage-spin 0.9s linear infinite;
+}
+
+/* 工具完成状态标签 */
+.tool-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tool-status-tag.done {
+  color: var(--ok, #4ade80);
+  background: rgba(74, 222, 128, 0.1);
+}
+
+/* 状态标签颜色变体 */
+.tool-status-tag.running {
+  color: var(--accent);
+  background: var(--accent-soft, rgba(59, 130, 246, 0.12));
+}
+
+.tool-status-tag.canceled {
+  color: var(--text-mute, #999);
+  background: var(--bg-2);
+}
+
+/* AskUser 头部里的状态标签 */
+.askuser-head .tool-status-tag {
+  margin-left: auto;
+}
+
+/* ─── 深度思考指示器（静态原子图标 + 固定颜色文字） ─── */
+
+.thinking-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 2px;
+  font-size: 12px;
+  color: var(--text-mute, #999);
+  font-variant-numeric: tabular-nums;
+}
+
+.thinking-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+
+.thinking-label {
+  white-space: nowrap;
+}
+
+/* ─── AskUser 批量合并卡片 ─── */
+
+.askuser-card {
+  background: rgba(59, 130, 246, 0.06);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+}
+
+/* ── 等待回答：一行提示卡片（不重复底部交互面板的完整内容） ── */
+.askuser-card-pending {
+  background: rgba(59, 130, 246, 0.04);
+  padding: 8px 14px;
+  gap: 4px;
+}
+
+.askuser-pending-hint {
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 2px 0;
+  color: var(--text-dim, #888);
+}
+
+.askuser-count {
+  font-variant-numeric: tabular-nums;
+}
+
+.askuser-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.askuser-item {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 8px 0;
+}
+
+.askuser-item + .askuser-item {
+  border-top: 1px dashed var(--border);
+}
+
+.askuser-item-no {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent-soft, rgba(59, 130, 246, 0.15));
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+.askuser-item-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 已回答的条目：问题略微弱化，答案成为主体 */
+.askuser-item.answered .askuser-question {
+  color: var(--text-dim);
+}
+
+.askuser-answer.canceled {
+  color: var(--text-mute, #999);
+}
+
+.askuser-question {
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--text);
+}
+
+.askuser-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.askuser-option {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-1);
+  font-size: 12px;
+}
+
+.askuser-option-desc {
+  opacity: 0.75;
+}
+
+.askuser-answer {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+}
+
+.askuser-answer-label {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.askuser-answer-text {
+  font-size: 13px;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ─── AskUser 提问卡片（参考「问题澄清」样式） ─── */
+
+.askuser-card-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.askuser-card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─── TodoWrite 任务清单卡片（「添加待办」风格） ─── */
+
+.todo-card {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  font-size: 12px;
+}
+
+.todo-card-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 8px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.todo-card-count {
+  margin-left: auto;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+.todo-card-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.todo-card-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+.todo-card-item svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.todo-card-item.pending { color: var(--text-dim); }
+.todo-card-item.active  { color: var(--accent); font-weight: 500; }
+.todo-card-item.done    { color: var(--text-mute, #8b949e); }
+.todo-card-item.done .todo-card-text { text-decoration: line-through; }
+
+.todo-card-text {
+  word-break: break-word;
+}
+
+/* ─── 消息分段（正文与工具卡按时间顺序交错） ─── */
+
+.msg-segments {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.msg-seg-text > :first-child {
+  margin-top: 0;
+}
+
+.msg-seg-text > :last-child {
+  margin-bottom: 0;
+}
+
+/* ─── 问题澄清卡片：多问题分块（主问题 + 补充说明列表） ─── */
+
+.clarify-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 主问题：保持较大字体和正常权重，作为视觉主体 */
+.clarify-question-main {
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* 补充说明列表：较小字体，较弱颜色，无编号，视觉上作为主问题的附注 */
+.clarify-question-subs {
+  list-style: none;
+  margin: 2px 0 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.clarify-question-sub {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-dim, #888);
+  padding-left: 14px;
+  position: relative;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.clarify-question-sub::before {
+  content: '·';
+  position: absolute;
+  left: 4px;
+  color: var(--text-mute, #999);
+}
+
+/* 兼容旧版（已不再使用，保留避免潜在样式问题） */
+.clarify-question-block {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.clarify-question-no {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent-soft, rgba(59, 130, 246, 0.15));
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.clarify-question-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* 问题澄清卡片：同批次待答进度 */
+.clarify-batch-progress {
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.clarify-step-card{background:var(--bg-1);border:1px solid var(--border);border-radius:8px;padding:8px 10px;gap:4px;box-shadow:none}
+.clarify-step-card .clarify-head{min-height:24px;gap:6px}
+.clarify-step-card .clarify-tag{background:none;color:var(--text);font-size:13px;padding:0;gap:8px}
+.clarify-pagination{margin-left:auto;display:flex;align-items:center;gap:6px;white-space:nowrap;font-size:12px;color:var(--text-dim)}
+.clarify-pagination button{width:24px;height:24px;min-height:24px;min-width:24px;padding:0;display:grid;place-items:center;border:0;background:none;color:inherit}
+.clarify-step-card .clarify-questions-list{min-height:160px;max-height:320px;overflow:auto}
+.clarify-step-card .clarify-question{font-weight:600;font-size:13px}
+.clarify-step-card .clarify-question-item{border:0;background:none;padding:0;border-radius:0}
+.clarify-step-card .clarify-input-row{align-items:flex-start}
+.clarify-step-card .clarify-options{display:grid;gap:6px}
+.clarify-step-card .clarify-option{display:grid;grid-template-columns:26px minmax(0,1fr);max-width:none;width:100%;gap:4px 10px;border:0;border-radius:4px;background:transparent;padding:6px 0;align-items:start}
+.clarify-option-letter{grid-row:span 2;display:grid;place-items:center;width:24px;height:24px;border:1px solid var(--border);border-radius:4px;color:var(--text-dim);font-weight:600}
+.clarify-step-card .clarify-option.active .clarify-option-letter{background:var(--text);color:var(--bg-1);border-color:var(--text)}
+.clarify-step-card .clarify-option-label,.clarify-step-card .clarify-option-desc{overflow-wrap:anywhere;min-width:0}
+.clarify-step-card .clarify-actions{display:flex;justify-content:flex-end;gap:6px;margin-top:6px;flex-wrap:wrap}
+.clarify-step-card .clarify-actions button{min-height:26px;padding:3px 10px;font-size:12px;line-height:18px}
+.clarify-step-card .clarify-submit-btn{min-width:80px}
+.memory-fusion-toolbar{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.memory-fusion-editor{display:grid;gap:6px;margin:8px 0}
+.memory-fusion-editor textarea,.memory-fusion-editor input{width:100%;min-width:0}
+.memory-list-content{white-space:pre-wrap}
+.memory-panel .settings-group-title{flex-wrap:wrap}
+.memory-panel .settings-group-title>.muted{flex-basis:100%}
+.model-type-icons{display:inline-flex;align-items:center;gap:3px;flex-shrink:0}
+.model-type-icons:empty{display:none}
+.model-type-icon{width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%}
+.model-type-icon.vision{color:#168743;background:rgba(22,135,67,.1)}
+.model-type-icon.webSearch{color:#217ba3;background:rgba(33,123,163,.1)}
+.model-type-icon.reasoning{color:#6b63cb;background:rgba(107,99,203,.1)}
+.model-type-icon.tool{color:#c76212;background:rgba(199,98,18,.1)}
+.model-type-icon.reranker{color:#ad447f;background:rgba(173,68,127,.1)}
+.model-type-icon.embedding{color:#168782;background:rgba(22,135,130,.1)}
+.provider-model-chip{max-width:100%;gap:5px;flex-wrap:wrap}
+.provider-model-chip-name{min-width:0;overflow-wrap:anywhere}
+
+
+.message-work-duration {
+  color: var(--text-mute);
+  font-size: 12px;
+  line-height: 1.5;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  font-variant-numeric: tabular-nums;
+}
+
+.tool-group-heading { display:flex; align-items:center; flex-wrap:wrap; gap:8px; }
+.tool-group-exception { border:0; background:transparent; color:var(--danger, #dc4545); padding:2px 0; font-size:12px; cursor:pointer; }
+.tool-group-heading .tool-group-exception,
+.tool-group-heading .tool-calls-toggle,
+.tool-group-heading .tool-group-exception:hover,
+.tool-group-heading .tool-calls-toggle:hover,
+.tool-group-heading .tool-group-exception[aria-pressed="true"] {
+  background:transparent; text-decoration:none; box-shadow:none; cursor:pointer;
+}
+.tool-failure-reason { color:var(--danger, #dc4545); }
+
+.tool-result-exception { border-left-color:var(--danger, #dc4545); }
+
+.markdown-table-wrap { position:relative; padding:0 32px 0 0; min-width:0; box-sizing:border-box; }
+.markdown-table-actions { position:absolute; top:6px; right:0; width:28px; display:flex; flex-direction:column; align-items:center; gap:6px; color:var(--text-mute); font-size:11px; }
+.markdown-table-actions button { display:flex; align-items:center; justify-content:center; padding:4px; color:inherit; background:transparent; border:0; border-radius:4px; cursor:pointer; }
+.markdown-table-actions button:focus-visible { outline:2px solid var(--accent); }
+.markdown-table-actions button:disabled { opacity:.5; cursor:wait; }
+
+.askuser-card.askuser-simple { border:0; border-left:0; background:transparent; padding:0; border-radius:0; box-shadow:none; }
+.askuser-simple .askuser-intro { color:var(--text); margin-bottom:10px; font-size:13px; }
+.askuser-simple .askuser-items { border:1px solid var(--border); border-radius:8px; padding:12px 14px; display:grid; gap:14px; }
+.askuser-simple .askuser-item { border:0; margin:0; padding:0; }
+.askuser-simple .askuser-question { color:var(--text); font-weight:600; margin:0 0 4px; }
+.askuser-simple .askuser-answer { border:0; background:none; padding:0; margin:0; }
+.askuser-simple .askuser-answer-text { color:var(--text-dim); font-weight:400; }
+.clarify-mode { color:var(--text-mute); font-size:12px; font-weight:400; }
+.clarify-step-card .clarify-mode { margin:4px 0 8px; }
+
+.markdown-table-actions { opacity:0; pointer-events:none; }
+.markdown-table-wrap:hover .markdown-table-actions,
+.markdown-table-wrap:focus-within .markdown-table-actions { opacity:1; pointer-events:auto; }
+
+.tool-timeline .tool-calls-toggle, .tool-timeline .tool-calls-toggle * { cursor:pointer; }
+
+.markdown-table-wrap { width:fit-content; max-width:100%; margin:0.8em 0; }
+.chat-bubble .md .markdown-table-wrap table { width:auto; max-width:100%; margin:0; }
+
+.clarify-section { min-width:0; }
+.clarify-intro { font-size:13px; line-height:1.6; margin:0 0 10px; color:var(--text); }
+.clarify-step-card .clarify-head { justify-content:flex-end; }
+
+.clarify-step-card .clarify-head { justify-content:space-between; align-items:flex-start; gap:12px; }
+.clarify-step-card .clarify-current-title { flex:1; min-width:0; margin:0; line-height:1.5; white-space:pre-line; }
+.clarify-step-card .clarify-pagination { flex:none; }
+.clarify-step-card .clarify-mode { margin:2px 0 4px; }
+.clarify-step-card .clarify-options { gap:2px; }
+.clarify-step-card .clarify-option { padding:4px 0; row-gap:1px; }
+.clarify-step-card .clarify-option-desc { margin:0; line-height:1.4; }
+.clarify-step-card .clarify-input-row { margin-top:4px; }
+
+.markdown-table-actions > [role="status"] { position:absolute; right:32px; top:0; white-space:nowrap; }
+
+.chat-msg-assistant:has(> .message-work-duration) { width:100%; max-width:none; align-self:stretch; }
+.message-work-duration { width:100%; box-sizing:border-box; }

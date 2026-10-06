@@ -1,0 +1,36 @@
+feat(settings): 沙箱配置项 textarea 自动扩展高度
+
+## 问题
+- 固定 rows 属性（3-5 行）导致内容多了需要滚动条
+- 用户无法看到完整内容
+
+## 解决方案
+1. **CSS 改造**
+   - 移除 `resize: vertical`（禁止手动拖拽）
+   - 设置 `min-height: 60px`（最小高度）
+   - 设置 `overflow: hidden`（隐藏滚动条）
+   - 高度由 JS 动态控制
+
+2. **JS 动态调整高度**
+   - `onChangeField` 函数接收 event 而非 text
+   - 每次输入时：`textarea.style.height = 'auto'` → `textarea.style.height = scrollHeight + 'px'`
+   - 自动扩展以显示全部内容
+
+3. **初始加载自动调整**
+   - useEffect 在组件挂载时调整所有 textarea 高度
+   - 依赖 `sandboxDefaults`，确保默认值加载后立即显示正确高度
+
+4. **批量更新**
+   - 9 个 textarea 的 onChange 全部改为传递 event
+   - 删除所有 `rows={}` 属性
+
+## 效果
+- 打开设置面板时，每个 textarea 立即显示完整默认值（无滚动条）
+- 用户编辑时，textarea 自动扩展
+- 删除内容时，textarea 自动收缩
+- 始终保持所有内容可见，无需滚动
+
+## 技术细节
+- CSS 使用 `overflow: hidden` 防止出现滚动条
+- JS 使用 `scrollHeight` 计算内容实际高度
+- 先设 `auto` 再设 `scrollHeight`，确保收缩时也能正确调整

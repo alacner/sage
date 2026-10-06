@@ -1,0 +1,9 @@
+<h2>Snippets</h2><p>Store reusable values. Values are encrypted by Sage and masked here. A blank value keeps the saved secret.</p><div id="rows"></div><button id="add">Add snippet</button><button id="save">Save</button><span id="status" role="status"></span>
+<script>
+const rows=document.getElementById('rows'),status=document.getElementById('status');let entries=[];
+function render(){rows.replaceChildren();for(const item of entries){const row=document.createElement('fieldset');row.dataset.id=item.id;for(const [key,title,type] of [['name','Name','text'],['keyword','Keyword','text'],['value','Snippet','password']]){const label=document.createElement('label'),input=document.createElement('input');label.textContent=title;input.type=type;input.value=key==='value'?'':item[key]||'';input.placeholder=key==='value'&&item.hasValue?'Saved securely; blank keeps current value':'';input.autocomplete='new-password';input.dataset.key=key;label.append(input);row.append(label);}const remove=document.createElement('button');remove.type='button';remove.textContent='Remove';remove.onclick=()=>{entries=entries.filter(x=>x.id!==item.id);render();};row.append(remove);rows.append(row);}}
+async function call(method,args){return sage.call('config',method,args)}
+call('list',{}).then(items=>{entries=items.map(x=>({...x,value:''}));render();}).catch(e=>status.textContent=e.message);
+document.getElementById('add').onclick=()=>{entries.push({id:crypto.randomUUID(),name:'',keyword:'',value:'',hasValue:false});render();};
+document.getElementById('save').onclick=async()=>{const next=[...rows.children].map(row=>Object.fromEntries([...row.querySelectorAll('input')].map(input=>[input.dataset.key,input.value]).concat([['id',row.dataset.id]])));try{await call('save',{entries:next});entries=(await call('list',{})).map(x=>({...x,value:''}));render();status.textContent='Saved securely';sage.setDirty(false);}catch(e){status.textContent=e.message;}};
+</script>

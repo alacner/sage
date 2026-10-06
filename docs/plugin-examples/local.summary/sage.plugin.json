@@ -1,0 +1,48 @@
+{
+  "format": 1,
+  "id": "local.summary",
+  "name": "Text Summary",
+  "version": "1.0.0",
+  "sdk": "^1.0.0",
+  "category": "workflow",
+  "entry": "plugin.js",
+  "permissions": [
+    "models.use"
+  ],
+  "services": {
+    "summary": {
+      "version": "1.0.0",
+      "methods": {
+        "generate": {
+          "description": "Summarize user-provided text",
+          "input": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 20000
+              }
+            },
+            "required": [
+              "text"
+            ],
+            "additionalProperties": false
+          },
+          "output": {
+            "type": "string"
+          },
+          "tool": true
+        }
+      }
+    }
+  },
+  "settings": {
+    "style": {
+      "title": "Summary style",
+      "type": "string",
+      "default": "Three concise bullet points",
+      "scope": "global"
+    }
+  }
+}

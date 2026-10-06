@@ -1,0 +1,33 @@
+<!doctype html>
+<meta charset="utf-8">
+<h2>Project Notes</h2>
+<label for="note">Note</label>
+<textarea id="note" rows="8" maxlength="10000" disabled></textarea>
+<button id="save" disabled>Save</button>
+<p id="status" role="status"></p>
+<script>
+const note = document.getElementById('note');
+const save = document.getElementById('save');
+const status = document.getElementById('status');
+note.oninput = () => sage.setDirty(true);
+save.onclick = async () => {
+  note.disabled = save.disabled = true;
+  try {
+    await sage.call('notes', 'save', {text: note.value});
+    sage.setDirty(false);
+    status.textContent = 'Saved';
+  } catch (error) {
+    status.textContent = String(error.message || error);
+  } finally {
+    note.disabled = save.disabled = false;
+  }
+};
+(async () => {
+  try {
+    note.value = await sage.call('notes', 'read', {});
+    note.disabled = save.disabled = false;
+  } catch (error) {
+    status.textContent = 'Load failed: ' + String(error.message || error);
+  }
+})();
+</script>

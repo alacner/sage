@@ -1,0 +1,43 @@
+.settings-backend-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0 8px;
+}
+.settings-backend-controls > .settings-row-item {
+  flex: 0 1 300px;
+  min-width: 0;
+  margin: 0;
+  border-top: 0;
+}
+.settings-backend-controls > .settings-row-item:first-child { flex-basis: 228px; }
+.settings-backend-controls > .settings-row-item + .settings-row-item { border-top: 0; }
+.settings-backend-controls .settings-row-label { line-height: 1.5; }
+.settings-backend-controls .settings-row-control,
+.settings-backend-controls .settings-row-control select,
+.settings-api-user-agent,
+.settings-api-user-agent-custom,
+.settings-api-user-agent-custom input {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.settings-backend-controls .settings-api-user-agent {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+.settings-api-user-agent-hint { line-height: 1.5; }
+.settings-backend-controls + .settings-row-help {
+  margin-top: 0;
+  padding: 0 14px 12px;
+}
+@media (max-width: 720px) {
+  .settings-backend-controls > .settings-row-item,
+  .settings-backend-controls > .settings-row-item:first-child { flex: 1 1 240px; }
+}
+
+.settings-backend-controls > .settings-api-user-agent-custom-row { flex: 1 1 240px; }
+.settings-api-user-agent-custom { display: flex; flex-direction: column; gap: 8px; }

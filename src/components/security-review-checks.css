@@ -1,0 +1,100 @@
+.security-settings-page .security-review-mode-choices {
+  gap: 6px;
+}
+
+.security-settings-page .security-review-card {
+  min-width: 0;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.security-settings-page .security-review-card.selected {
+  background: color-mix(in srgb, var(--accent) 5%, var(--bg-0));
+}
+
+.security-review-mode-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.security-review-mode-row > span {
+  min-width: 0;
+}
+
+.security-settings-page .security-review-card .security-review-options {
+  margin: 16px 0 0 26px;
+}
+
+.security-review-checks {
+  min-width: 0;
+  margin: 0 0 16px;
+  padding: 0;
+  border: 0;
+}
+
+.security-review-checks legend {
+  margin-bottom: 8px;
+  padding: 0;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.security-review-check-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.security-settings-page .security-review-options .security-review-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  margin: 0;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-0);
+  color: var(--text-dim);
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.security-settings-page .security-review-options .security-review-check.selected {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+  color: var(--text);
+}
+
+.security-review-check input[type='checkbox'] {
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.security-review-check span {
+  overflow-wrap: anywhere;
+}
+
+.security-review-instructions textarea {
+  width: 100%;
+  margin-top: 8px;
+  resize: vertical;
+}
+
+.security-review-card .security-review-example {
+  margin-bottom: 0;
+}
+
+@media (max-width: 560px) {
+  .security-settings-page .security-review-card .security-review-options {
+    margin-left: 0;
+  }
+}
+
+.security-review-edit-trigger { margin-bottom:8px; }
+.security-review-editor { padding:14px;border:1px solid var(--border);border-radius:8px;margin-bottom:12px; }
+.security-review-editor-actions { display:flex;flex-wrap:wrap;gap:8px;margin:8px 0; }
+.security-review-editor-row { border-top:1px solid var(--border);padding:12px 0; }
+.security-review-editor-row input { width:100%;box-sizing:border-box;padding:8px;background:var(--bg-2);color:var(--text);border:1px solid var(--border);border-radius:6px; }

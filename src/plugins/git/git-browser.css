@@ -1,0 +1,125 @@
+.git-repo-browser {padding:6px 8px;font-size:12px;overflow:auto;height:100%;box-sizing:border-box;}
+.git-repo-browser button,.git-commit-browser button,.git-browser-toolbar button,.git-path-tree button {border:0;background:none;color:inherit;font:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:5px;padding:2px 6px;border-radius:4px;text-align:left;}
+.git-repo-browser button:hover,.git-commit-browser button:hover,.git-path-tree button:hover {background:var(--bg-2);}
+/* 紧凑行高：全局 button 的 min-height:32px 会把侧栏引用行撑得很稀，这里覆盖 */
+.git-repo-browser button,.git-repo-browser summary {min-height:22px;}
+.git-repo-browser header,.git-unmanaged {display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.git-repository {margin:4px 0 10px;}.git-repository>summary {display:flex;align-items:center;gap:6px;}.git-repository summary,.git-path-tree summary {cursor:pointer;padding:2px 0;white-space:nowrap;}.git-repository summary svg,.git-path-tree summary svg {vertical-align:middle;margin-right:6px;}.git-repository>summary>svg {flex-shrink:0;margin-right:0;}.git-repository-name {min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.git-repo-root-badge {flex-shrink:0;margin-left:auto;padding:1px 5px;border-radius:4px;background:var(--bg-2);color:var(--text-dim);font-size:10px;font-weight:500;}
+.git-repository-sections {margin-left:10px;padding:2px 4px;}.git-repository-sections details>details {padding-left:10px;}.git-repository-sections button {width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.git-current-ref {font-weight:600!important;}.git-current-ref small {margin-left:auto;}
+/* 侧栏引用行：默认无背景，仅当前历史标签选中的引用行高亮 */
+.git-ref-row.git-ref-selected {background:color-mix(in srgb,var(--accent) 12%,transparent);border-radius:4px;}.git-repository-sections button.git-ref-selected {background:color-mix(in srgb,var(--accent) 12%,transparent);}
+.git-path-tree .git-tree-children {padding-left:12px;}.git-path-tree button {display:flex;width:100%;min-width:0;white-space:nowrap;}.git-path-tree button>span:last-child {overflow:hidden;text-overflow:ellipsis;}.git-path-tree svg {flex-shrink:0;}
+/* 分支树行：紧凑单行 + 悬停操作（查看历史 / 仅显示该引用提交） */
+.git-ref-row {display:flex;align-items:center;gap:2px;}
+.git-ref-row-main {flex:1;min-width:0;}
+.git-ref-label {flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.git-ref-group>summary {display:flex;align-items:center;gap:5px;}
+.git-ref-group-children {padding-left:12px;}
+.git-ref-actions {display:flex;gap:2px;margin-left:auto;flex-shrink:0;opacity:0;}
+.git-ref-row:hover .git-ref-actions,.git-ref-group>summary:hover .git-ref-actions,.git-ref-row:focus-within .git-ref-actions {opacity:1;}
+/* 过滤涉及的引用：漏斗常显并高亮（不依赖悬停） */
+.git-ref-row:has(.git-filter-on) .git-ref-actions,.git-ref-group>summary:has(.git-filter-on) .git-ref-actions {opacity:1;}
+.git-ref-actions button {width:auto;padding:1px 3px!important;color:var(--text-dim);}
+.git-ref-actions button.git-filter-on {color:var(--accent);}
+.git-ref-actions button:hover {color:var(--accent)!important;background:var(--bg-2)!important;}
+/* 历史页过滤横幅：Filtered by … + 清除过滤 */
+.git-filter-bar {display:flex;align-items:center;gap:8px;padding:6px 12px;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--accent) 8%,transparent);color:var(--text-dim);font-size:12px;flex-shrink:0;}
+.git-filter-bar>svg {flex-shrink:0;color:var(--accent);}
+.git-filter-bar>span {flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.git-filter-clear {width:auto!important;color:var(--accent)!important;font-size:12px;flex-shrink:0;}
+.git-browser-history {background:var(--bg-1);color:var(--text);min-height:0;}.git-browser-toolbar {display:flex;align-items:center;gap:8px;padding:7px 12px;border-bottom:1px solid var(--border);}.git-browser-toolbar strong {flex:1;font-size:13px;}.git-browser-history>.git-history-list {flex:1 1 auto;min-height:120px;overflow:auto;}.git-browser-history .git-commit-row {min-width:640px;}.git-browser-history .git-commit-time {width:150px;}.git-browser-history .selected,.git-commit-browser .selected {background:color-mix(in srgb,var(--accent) 12%,var(--bg-1));}.git-browser-history .git-commit-row:hover {background:var(--bg-2);}.git-history-splitter {flex:0 0 5px;cursor:row-resize;border-top:1px solid var(--border);background:transparent;}.git-history-splitter:hover,.git-history-splitter.dragging {background:color-mix(in srgb,var(--accent) 30%,transparent);}.git-history-detail {flex:none;height:35%;min-height:120px;overflow:hidden;}
+/* 详情面板内容支持选中复制（正文区默认 user-select:none） */
+.git-history-detail,.git-history-detail * {user-select:text;-webkit-user-select:text;}
+.git-history-detail button,.git-history-detail input,.git-history-detail .line-no {user-select:none;-webkit-user-select:none;}
+.git-history-detail button {cursor:pointer;}
+.git-commit-browser {display:flex;flex-direction:column;height:100%;min-height:0;color:var(--text);background:var(--bg-1);font-size:13px;}.git-commit-browser>nav {display:flex;align-items:center;gap:10px;padding:5px 10px;border-bottom:1px solid var(--border);flex-shrink:0;}.git-open-detail {margin-left:auto;}.git-commit-overview {overflow:auto;flex:1;padding:16px 18px;}.git-author {display:flex;align-items:center;gap:14px;}.git-author p {margin:4px 0;}.git-author small,.git-author time {font-size:11px;color:var(--text-dim);}.git-avatar {width:40px;height:40px;border-radius:9px;display:grid;place-items:center;background:var(--bg-2);font-size:20px;}
+.git-commit-overview dl {display:grid;grid-template-columns:65px 1fr;gap:6px;margin:14px 0;}.git-commit-overview dt {color:var(--text-dim);font-size:11px;text-align:right;}.git-commit-overview dd {margin:0;overflow-wrap:anywhere;}.git-commit-overview dd button {padding:0 6px;color:var(--accent);}.git-message {border-block:1px solid var(--border);padding:12px 65px;}.git-message h3 {margin:0 0 8px;font-size:15px;}.git-message pre {white-space:pre-wrap;font:inherit;}.git-expand-toolbar {display:flex;justify-content:space-between;align-items:center;color:var(--text-dim);font-size:11px;padding:6px;}.git-inline-file {border-bottom:1px solid var(--border);}.git-inline-file>header {display:flex;align-items:center;gap:8px;}.git-inline-file>header button:first-child {overflow-wrap:anywhere;}.git-inline-file>header .git-file-diff-btn {color:var(--accent);}.git-inline-file>header .git-file-open-btn {color:var(--text-dim);flex-shrink:0;}.git-inline-file>header .git-file-open-btn:hover {color:var(--accent);}.git-status {font:10px ui-monospace,monospace;border-radius:3px;padding:1px 3px;background:#eab308;color:white;}.status-A {background:#16a34a;}.status-D {background:#dc2626;}.status-R {background:#2563eb;}
+.git-selected-meta {display:flex;gap:12px;padding:7px 12px;border-bottom:1px solid var(--border);font-size:11px;white-space:nowrap;overflow:hidden;flex-shrink:0;}.git-selected-meta>span {overflow:hidden;text-overflow:ellipsis;}.git-files-layout {display:flex;flex:1;min-height:0;}.git-files-layout aside {width:230px;min-width:140px;max-width:45%;resize:horizontal;overflow:auto;border-right:1px solid var(--border);padding:6px;}.git-files-layout aside input {width:100%;box-sizing:border-box;margin-bottom:6px;}.git-files-layout main {flex:1;min-width:0;overflow:auto;display:flex;flex-direction:column;}.git-files-layout main>header {display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);padding:4px 10px;flex-shrink:0;}.git-files-layout main>header span {flex:1;overflow-wrap:anywhere;}.git-blob {margin:0;padding:12px;font-size:12px;tab-size:4;}
+/* 提交内图片预览（tree/changes 头部触发，就地渲染 blob base64） */
+.git-blob-image {display:grid;place-items:center;padding:12px;flex:1;min-height:0;}.git-blob-image img {max-width:100%;max-height:70vh;object-fit:contain;border-radius:4px;background:repeating-conic-gradient(var(--bg-2) 0 25%,transparent 0 50%) 50%/16px 16px;}
+/* 文件行/差异头部的操作按钮（预览图片、在标签页打开、查看差异） */
+.git-file-open-btn,.git-file-diff-btn {display:inline-flex;align-items:center;justify-content:center;border:0;background:transparent;color:var(--text-dim);cursor:pointer;padding:2px;border-radius:4px;flex-shrink:0;}.git-file-open-btn:hover,.git-file-diff-btn:hover {background:var(--bg-3,var(--bg-2));color:var(--text);}
+.git-patch-scroll {overflow:auto;min-height:0;}.git-patch {width:100%;border-collapse:collapse;font:12px/1.6 ui-monospace,SFMono-Regular,monospace;tab-size:4;}.git-patch td {padding:0 4px;vertical-align:top;}.git-patch pre {margin:0;font:inherit;white-space:pre;}.git-patch .line-no {width:30px;min-width:30px;text-align:right;color:var(--text-dim);user-select:none;}.git-patch .add {background:color-mix(in srgb,#22c55e 14%,var(--bg-1));}.git-patch .remove {background:color-mix(in srgb,#ef4444 14%,var(--bg-1));}.git-patch .hunk {color:var(--text-dim);background:var(--bg-2);}.git-patch.split {table-layout:fixed;}.git-patch.split td:not(.line-no) {overflow:auto;}.git-patch-empty {white-space:pre-wrap;font-size:12px;padding:10px;}.git-browser-history [role=alert],.git-commit-browser [role=alert] {color:var(--err);padding:10px;}
+@media(max-width:700px){.git-files-layout aside {width:155px;}.git-message {padding:12px 0;}.git-selected-meta time {display:none;}.git-browser-toolbar strong {display:none;}}
+
+.git-patch code,.git-blob code {background:none!important;padding:0!important;border:0!important;border-radius:0!important;font:inherit;}
+/* 引用徽章：按类型着色（当前分支/本地分支/远程/标签）+ 类型图标 */
+/* white-space:nowrap 是硬要求：历史行高固定 28px，长分支名（release/php7.4-max-support）
+   在徽章里折成三行会溢出整行、盖住下一条提交；min-width:0 让徽章在窄列里能被压短而不是顶破。 */
+.git-browser-history .git-ref,.git-commit-overview .git-ref {--ref-c:#64748b;display:inline-flex;align-items:center;gap:3px;min-width:0;white-space:nowrap;border:1px solid color-mix(in srgb,var(--ref-c) 45%,transparent);border-radius:4px;background:color-mix(in srgb,var(--ref-c) 13%,transparent);color:color-mix(in srgb,var(--ref-c) 72%,var(--text));font-size:11px;padding:1px 5px;margin-right:4px;}
+/* 名字单独一层才能出省略号（flex 容器自身的 text-overflow 管不到 flex item）。
+   空间不够时宁可截断成 origin/relea…，也不在斜杠或连字符处换行。 */
+.git-commit-refs .git-ref {flex-shrink:1;}
+.git-commit-refs .git-ref-name {min-width:0;overflow:hidden;text-overflow:ellipsis;}
+.git-ref svg {flex-shrink:0;}
+/* Commit 元信息（REFS/SHA/PARENTS）两列网格：标签右对齐、值左对齐且同列，逐行对齐（参考设计稿）。 */
+.git-commit-overview dl {display:grid;grid-template-columns:auto 1fr;column-gap:12px;row-gap:6px;align-items:baseline;margin:12px 0;}
+.git-commit-overview dt {text-align:right;color:var(--text-dim);font-size:11px;letter-spacing:.05em;white-space:nowrap;}
+.git-commit-overview dd {margin:0;min-width:0;overflow-wrap:anywhere;}
+.git-commit-overview dd button {display:inline;background:none;border:0;padding:0;min-height:0;min-width:0;color:var(--accent,#7c6aef);text-decoration:underline;cursor:pointer;font:inherit;font-size:inherit;margin-right:8px;}
+.git-commit-overview dd button:hover {color:var(--text);background:none;}
+.git-ref--head {--ref-c:var(--git-ref-head,#16a34a);font-weight:600;}
+.git-ref--branch {--ref-c:var(--git-ref-branch,#2563eb);}
+.git-ref--remote {--ref-c:var(--git-ref-remote,#7c3aed);}
+.git-ref--tag {--ref-c:var(--git-ref-tag,#d97706);}
+/* Git 配色可在「设置 → 外观 → 主题配色 → 高级 → Git 配色」逐项覆盖（--git-ref-* / --git-cc-*）。
+   默认值写在 fallback 里，没覆盖时与以前一模一样；深/浅各一套规则不能合并：
+   用户覆盖注入在 [data-theme=…] 上，var() 是动态解析的，两个模式各自取自己的兜底。 */
+[data-theme="dark"] .git-ref--head {--ref-c:var(--git-ref-head,#4ade80);}
+[data-theme="dark"] .git-ref--branch {--ref-c:var(--git-ref-branch,#60a5fa);}
+[data-theme="dark"] .git-ref--remote {--ref-c:var(--git-ref-remote,#a78bfa);}
+[data-theme="dark"] .git-ref--tag {--ref-c:var(--git-ref-tag,#fbbf24);}
+/* conventional commit 语义前缀着色（默认可被 --git-cc-* 覆盖，见上方 Git 配色说明） */
+.git-cc {font-weight:600;}
+.git-cc-feat {color:var(--git-cc-feat,#16a34a);}.git-cc-fix {color:var(--git-cc-fix,#dc2626);}.git-cc-docs {color:var(--git-cc-docs,#2563eb);}.git-cc-style {color:var(--git-cc-style,#0891b2);}.git-cc-refactor {color:var(--git-cc-refactor,#7c3aed);}.git-cc-perf {color:var(--git-cc-perf,#d97706);}.git-cc-test {color:var(--git-cc-test,#ea580c);}.git-cc-build {color:var(--git-cc-build,#0d9488);}.git-cc-ci {color:var(--git-cc-ci,#64748b);}.git-cc-chore {color:var(--git-cc-chore,#64748b);}.git-cc-revert {color:var(--git-cc-revert,#db2777);}
+[data-theme="dark"] .git-cc-feat {color:var(--git-cc-feat,#4ade80);}[data-theme="dark"] .git-cc-fix {color:var(--git-cc-fix,#f87171);}[data-theme="dark"] .git-cc-docs {color:var(--git-cc-docs,#60a5fa);}[data-theme="dark"] .git-cc-style {color:var(--git-cc-style,#22d3ee);}[data-theme="dark"] .git-cc-refactor {color:var(--git-cc-refactor,#a78bfa);}[data-theme="dark"] .git-cc-perf {color:var(--git-cc-perf,#fbbf24);}[data-theme="dark"] .git-cc-test {color:var(--git-cc-test,#fb923c);}[data-theme="dark"] .git-cc-build {color:var(--git-cc-build,#2dd4bf);}[data-theme="dark"] .git-cc-ci {color:var(--git-cc-ci,#94a3b8);}[data-theme="dark"] .git-cc-chore {color:var(--git-cc-chore,#94a3b8);}[data-theme="dark"] .git-cc-revert {color:var(--git-cc-revert,#f472b6);}
+/* 作者头像：名字哈希取色 */
+.git-author-avatar {width:16px;height:16px;border-radius:50%;display:inline-grid;place-items:center;font-size:9px;font-weight:600;color:#fff;flex-shrink:0;}
+.git-browser-history .git-commit-author {display:flex;align-items:center;justify-content:flex-start;gap:5px;width:104px;text-align:left;}
+.git-commit-author-name {overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+/* 工具栏"仅当前引用"过滤开关激活态 */
+.git-browser-toolbar .git-only-on {color:var(--accent);background:color-mix(in srgb,var(--accent) 15%,transparent);}
+.git-patch.split td:nth-child(3) {border-left:1px solid var(--border);}
+
+.git-patch.split pre {white-space:pre-wrap;overflow-wrap:anywhere;}
+
+.git-unmanaged-tree>summary {cursor:pointer;list-style:none;min-height:30px;}
+.git-unmanaged-tree>summary::-webkit-details-marker {display:none;}
+.git-unmanaged-name {display:flex;align-items:center;gap:6px;min-width:0;}
+.git-unmanaged-name>span {overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.git-unmanaged-name svg,.git-unmanaged button {flex-shrink:0;}
+.git-unmanaged-tree[open]>summary .git-unmanaged-chevron {transform:rotate(90deg);}
+.git-unmanaged-children {list-style:none;margin:0 0 0 20px;padding:0 0 0 18px;border-left:1px solid var(--border);}
+.git-unmanaged-children>li {position:relative;min-height:30px;}
+.git-unmanaged-children>li::before {content:'';position:absolute;left:-18px;top:15px;width:12px;border-top:1px solid var(--border);}
+ .git-copyable{position:relative}.git-copy-button{position:absolute!important;right:8px;top:6px;z-index:2;color:var(--text-dim)!important;background:var(--bg-2)!important;border:1px solid var(--border)!important;padding:4px!important}.git-copy-button:hover{color:var(--text)!important}
+.git-scan-hint {display:flex;align-items:center;gap:8px;padding:10px 6px;color:var(--text-dim);font-size:12px;}
+.git-inline-copy {display:inline-flex;vertical-align:middle;margin-left:6px;padding:2px!important;color:var(--text-dim);}
+.git-inline-copy:hover {color:var(--text)!important;background:var(--bg-2)!important;}
+.git-spin {animation:git-spin 1s linear infinite;}
+@keyframes git-spin {to {transform:rotate(360deg);}}
+.git-repo-refreshing {color:var(--text-dim);}
+
+.git-branch-menu { position: fixed; z-index: 10000; width: 290px; font-size: 11px; line-height: 14px; max-height: calc(100vh - 16px); overflow-y: auto; padding: 4px; background: var(--bg-primary); color: var(--text-primary); border: 1px solid var(--border); border-radius: 9px; box-shadow: 0 8px 28px color-mix(in srgb, var(--text) 18%, transparent); }
+.git-branch-menu button { display: block; width: 100%; text-align: left; min-height: 0; padding: 4px 8px; font-size: inherit; line-height: inherit; border: 0; background: transparent; color: inherit; border-radius: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.git-branch-menu button:not(:disabled):hover, .git-branch-menu button:focus-visible { background: var(--bg-hover); }
+.git-branch-menu button:disabled { opacity: .4; }
+.git-branch-menu hr { border: 0; border-top: 1px solid var(--border); margin: 3px 4px; }
+.git-branch-backdrop { position: fixed; inset: 0; z-index: 10001; background: color-mix(in srgb, var(--bg-0) 65%, transparent); display: grid; place-items: center; }
+.git-branch-dialog { width: min(560px, calc(100vw - 40px)); max-height: calc(100vh - 40px); overflow: auto; padding: 24px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-primary); color: var(--text-primary); box-shadow: 0 10px 40px color-mix(in srgb, var(--text) 18%, transparent); }
+.git-branch-dialog p { overflow-wrap: anywhere; margin: 12px 0; }
+.git-branch-dialog label { display: grid; gap: 8px; }
+.git-branch-dialog input, .git-branch-dialog select { width: 100%; padding: 9px; background: var(--bg-secondary); color: inherit; border: 1px solid var(--border); border-radius: 6px; }
+.git-branch-dialog footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+.git-branch-dialog footer button { padding: 8px 16px; }
+.git-branch-dialog [role=alert] { color: var(--err); }
+
+/* Semantic diff colors follow the active light/dark palette. */
+.git-patch .add { background:color-mix(in srgb,var(--ok) 14%,var(--bg-1)); color:var(--text); }
+.git-patch .remove { background:color-mix(in srgb,var(--err) 14%,var(--bg-1)); color:var(--text); }
+.git-status { color:var(--warn); background:color-mix(in srgb,var(--warn) 14%,var(--bg-1)); }
+.git-status.status-A { color:var(--ok); background:color-mix(in srgb,var(--ok) 14%,var(--bg-1)); }
+.git-status.status-D { color:var(--err); background:color-mix(in srgb,var(--err) 14%,var(--bg-1)); }
+.git-status.status-R { color:var(--info); background:color-mix(in srgb,var(--info) 14%,var(--bg-1)); }
+
+.git-working-actions{padding:8px 12px;border-bottom:1px solid var(--border);flex-shrink:0;display:grid;gap:6px}.git-working-actions>div{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.git-working-actions input{flex:1;min-width:180px}.git-working-actions p{margin:0;font-size:12px;overflow-wrap:anywhere}.git-working-actions button{font-size:11px}.git-working-actions span{font-size:12px}

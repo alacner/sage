@@ -1,0 +1,1 @@
+globalThis.sagePlugin={services:{report:{read:async(args,sdk)=>{const call=(method,args)=>sdk.call('sage.browser','automation',method,args);const page=await call('create',{url:args.url});try{return await call('snapshot',page);}finally{await call('close',page);}}}}};

@@ -1,0 +1,37 @@
+import {resolveLanguage} from '../../shared/language';
+import {useAppStore} from '../stores/appStore';
+const english:Record<string,string>={
+'电子邮件':'Email','企业微信':'WeCom','钉钉':'DingTalk','飞书群机器人（单向）':'Feishu webhook bot (outbound)','飞书应用机器人':'Feishu app bot',
+'SMTP 服务器':'SMTP server','端口':'Port','用户名':'Username','密码 / 应用密码':'Password / app password','发件人':'From','收件人':'To','Gmail/163 等需使用应用专用密码':'Use an app-specific password for providers such as Gmail or 163.',
+'消息格式':'Message format','text 或 markdown（留空用 markdown）':'text or markdown (default: markdown)',
+'在群聊中添加机器人，复制 Webhook 地址':'Add a bot to the group and copy its webhook URL.',
+'@手机号（可选，逗号分隔）':'Mention phone numbers (optional, comma-separated)',
+'@手机号（逗号分隔，可选）':'Mention phone numbers (optional, comma-separated)',
+'@全体':'Mention everyone','true 或 false（默认 false）':'true or false (default: false)',
+'加签密钥（可选）':'Signing secret (optional)','签名密钥（可选）':'Signing secret (optional)',
+'如启用"加签"安全设置，填此字段':'Required when signature verification is enabled.',
+'机器人设置中开启"签名校验"后，把密钥填到这里':'Enter the secret after enabling signature verification in bot settings.',
+'钉钉群设置 → 智能群助手 → 添加机器人，复制 Webhook':'DingTalk group settings → Group assistant → Add bot → Copy webhook.',
+'飞书群设置 → 群机器人 → 添加机器人（自定义机器人）→ 复制 Webhook':'Feishu group settings → Bots → Add custom bot → Copy webhook.',
+'消息接收方式':'Incoming connection','Webhook 回调':'Webhook callback','WebSocket 长连接':'WebSocket connection',
+'长连接需在飞书开发者后台选择长连接订阅事件；无需公网回调地址。':'Select persistent-connection event subscriptions in the Feishu developer console. No public callback URL is required.',
+'回答发送方式':'Reply delivery','完成后发送':'Send when complete','实时更新回答卡片':'Update reply card live',
+'生成过程中约每秒更新同一张卡片，完成后显示最终回答。':'Update the same card about once per second while generating, then show the final answer.',
+'飞书开发者后台 → 应用 → 凭证与基础信息 → App ID':'Feishu developer console → App → Credentials & basic information → App ID',
+'飞书开发者后台 → 应用 → 凭证与基础信息 → App Secret':'Feishu developer console → App → Credentials & basic information → App Secret',
+'接收者 ID 类型':'Recipient ID type','接收者 ID':'Recipient ID',
+'发消息时的接收者 ID 类型，默认 chat_id（群聊 ID）。单聊用 open_id 或 user_id':'Recipient ID type. Default: chat_id for groups; use open_id or user_id for direct messages.',
+'消息发到哪里。群聊填 chat_id，单聊填 open_id 或 user_id（取决于上一项）':'Destination: chat_id for groups, or open_id/user_id for direct messages according to the selected type.',
+'Encrypt Key（可选）':'Encrypt Key (optional)','Verification Token（可选）':'Verification Token (optional)',
+'飞书开发者后台 → 事件订阅 → 加密策略':'Feishu developer console → Event subscriptions → Encryption',
+'事件/回调加密密钥。启用"加密策略"后，回调请求体会被 AES-256-CBC 加密，填此字段以解密':'Event/callback encryption key. Enter it to decrypt AES-256-CBC payloads when encryption is enabled.',
+'事件校验 Token。用于验证回调请求来源是否为飞书服务器（非必填，但建议启用）':'Token for verifying callbacks from Feishu (optional, recommended).',
+'123456789 或 @channel_username':'123456789 or @channel_username',
+'oc_xxxxxxxx（群聊）或 ou_xxxxxxxx（用户）':'oc_xxxxxxxx (group) or ou_xxxxxxxx (direct)',
+'从 @BotFather 创建机器人后获取，格式：数字:字符串':'Create a bot with @BotFather. Token format: number:string.',
+'接收消息的 chat（群 ID、用户 ID 或频道用户名 @xxx）':'Destination chat: group ID, user ID or channel username @xxx.',
+'HTML / Markdown / MarkdownV2（推荐 HTML，转义简单）':'HTML / Markdown / MarkdownV2 (HTML recommended for simpler escaping)',
+'API Base URL（可选）':'API Base URL (optional)',
+'默认 https://api.telegram.org；大陆用户可填反代地址':'Default: https://api.telegram.org; enter a reverse proxy URL if needed.'
+};
+export function channelLabel(value?:string){return value&&resolveLanguage(useAppStore.getState().settings?.language,useAppStore.getState().settings?._systemLocale)==='en'?(english[value]??value):value;}

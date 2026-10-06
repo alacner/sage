@@ -1,0 +1,66 @@
+{
+  "format": 1,
+  "id": "local.notes",
+  "name": "Project Notes",
+  "version": "1.0.0",
+  "sdk": "^1.0.0",
+  "category": "documentation",
+  "entry": "plugin.js",
+  "permissions": [],
+  "services": {
+    "notes": {
+      "version": "1.0.0",
+      "methods": {
+        "read": {
+          "description": "Read the project note",
+          "input": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+            "additionalProperties": false
+          },
+          "output": {
+            "type": "string"
+          },
+          "tool": true
+        },
+        "save": {
+          "description": "Save the project note",
+          "input": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "maxLength": 10000
+              }
+            },
+            "required": [
+              "text"
+            ],
+            "additionalProperties": false
+          },
+          "output": {
+            "type": "boolean"
+          },
+          "tool": true
+        }
+      }
+    }
+  },
+  "contributes": [
+    {
+      "id": "editor",
+      "slot": "sidebar.bottom",
+      "title": "Project Notes",
+      "view": "views/editor.html"
+    }
+  ],
+  "settings": {
+    "note": {
+      "title": "Project note",
+      "type": "string",
+      "default": "",
+      "scope": "project"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "format": 1,
+  "id": "sage.electron-validation",
+  "name": "Electron validation / Electron 验证",
+  "version": "1.0.1",
+  "sdk": "^1.2.0",
+  "entry": "plugin.js",
+  "artifactType": "skill",
+  "category": "development",
+  "description": "Real Electron integration testing with isolated fixtures and explicit evidence boundaries.",
+  "permissions": [],
+  "skills": [
+    {
+      "name": "electron-validation",
+      "description": "验证 Electron 项目的真实运行时、IPC、输入锁和状态切换，区分集成测试、合成输入与系统级验收，并提供可复现证据。",
+      "file": "skills/SKILL.md"
+    }
+  ],
+  "services": {
+    "validation": {
+      "version": "1.0.0",
+      "methods": {
+        "prepare": {
+          "description": "Return the bundled Electron validation runner for Sage to write into the current project and execute with its standard tools. No Codex or Sage source checkout required.",
+          "input": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+          },
+          "tool": true
+        }
+      }
+    }
+  }
+}

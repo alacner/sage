@@ -1,0 +1,36 @@
+{
+  "format": 1,
+  "id": "sage.snippets",
+  "name": "Snippets",
+  "version": "1.0.0",
+  "sdk": "^1.2.0",
+  "entry": "plugin.js",
+  "scope": "global",
+  "category": "integration",
+  "description": "Secure named text values. Resolve and type a value into the browser without returning it to the model.",
+  "permissions": ["browser.control"],
+  "dependencies": { "sage.browser": "^1.0.0" },
+  "consumes": [{ "plugin": "sage.browser", "service": "automation", "version": "^1.0.0" }],
+  "services": {
+    "snippets": {
+      "version": "1.0.0",
+      "methods": {
+        "fill": {
+          "description": "Fill a browser field from a saved snippet by name or keyword. The secret is never returned to the model.",
+          "input": { "type": "object", "properties": { "browserId": { "type": "string" }, "selector": { "type": "string" }, "reference": { "type": "string" } }, "required": ["browserId", "selector", "reference"], "additionalProperties": false },
+          "tool": true
+        },
+        "list": { "description": "List snippet names and keywords without secret values.", "input": { "type": "object", "properties": {}, "additionalProperties": false }, "tool": true }
+      }
+    },
+    "config": {
+      "version": "1.0.0",
+      "methods": {
+        "list": { "description": "List saved snippet metadata without values.", "input": { "type": "object", "properties": {}, "additionalProperties": false } },
+        "save": { "description": "Save snippet entries; blank values retain existing secrets for matching IDs.", "input": { "type": "object", "properties": { "entries": { "type": "array", "items": { "type": "object", "properties": { "id": { "type": "string" }, "name": { "type": "string" }, "keyword": { "type": "string" }, "value": { "type": "string" } }, "required": ["id", "name", "keyword", "value"], "additionalProperties": false } } }, "required": ["entries"], "additionalProperties": false } }
+      }
+    }
+  },
+  "settings": { "entries": { "title": "Snippet values", "type": "secret", "scope": "global", "visible": false } },
+  "contributes": [{ "id": "settings", "slot": "settings", "title": "Configure Snippets", "view": "views/settings.html", "when": "always" }]
+}

@@ -1,0 +1,100 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Sage — Flat Material Design Theme (inspired by Cherry Studio)
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root,
+[data-theme="dark"] {
+  --bg-0: #141b18;
+  --bg-1: #1c2721;
+  --bg-2: #26332c;
+  --bg-3: #314338;
+  --border: rgba(237,243,239,0.16);
+  --text: #edf3ef;
+  --text-dim: #bac9bf;
+  --text-mute: #91a99a;
+  --accent: #79c99a;
+  --accent-2: #60b582;
+  --accent-soft: rgba(121,201,154,0.12);
+  /* 聚焦环：默认跟随主色，外观设置可单独覆盖 */
+  --ring: var(--accent);
+  --ok: #5fe08f;
+  --warn: #e0b34c;
+  --err: #ef6e62;
+  --info: #5bb8d4;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.25);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.35);
+  --field-border: rgba(237,243,239,0.24);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --transition: 200ms ease-out;
+}
+
+[data-theme="light"] {
+  --bg-0: #fafafa;
+  --bg-1: #ffffff;
+  --bg-2: #f1f3f5;
+  --bg-3: #e6e9ee;
+  --border: rgba(32,36,44,0.12);
+  --text: #20242c;
+  --text-dim: #515966;
+  --text-mute: #697382;
+  --accent: #5267c8;
+  --accent-2: #4053ad;
+  --accent-soft: rgba(82,103,200,0.08);
+  --ok: #15703b;
+  --warn: #9a5808;
+  --err: #dc2626;
+  --info: #0284c7;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 12px rgba(32,36,44,0.12);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
+  --field-border: rgba(26,26,46,0.18);
+}
+
+/* ── 兼容别名层 ──
+ * 历史样式中引用了一批从未定义的变量（--text-muted、--danger、--bg-input 等）：
+ * 未定义时浏览器回退到 inherit/initial 或写死的浅色 fallback，深色背景下会渲染成黑字/白块（"漏网之鱼"）。
+ * 这里统一挂进调色板体系，让外观设置的主题色能集中管住这些颜色，无需新增配置项。 */
+:root {
+  --text-primary: var(--text);
+  --text-secondary: var(--text-dim);
+  --text-muted: var(--text-mute);
+  --text-0: var(--text);
+  --text-2: var(--text-dim);
+  --muted: var(--text-mute);
+  --bg: var(--bg-0);
+  --bg-primary: var(--bg-1);
+  --bg-secondary: var(--bg-2);
+  --bg-tertiary: var(--bg-3);
+  --bg-input: var(--bg-2);
+  --bg-hover: var(--bg-2);
+  --bg-active: var(--bg-3);
+  --hover-bg: var(--bg-2);
+  --panel: var(--bg-2);
+  --border-soft: var(--border);
+  --border-subtle: var(--border);
+  --border-strong: var(--field-border);
+  --color-primary: var(--accent);
+  --danger: var(--err);
+  --danger-bg: color-mix(in srgb, var(--err) 12%, transparent);
+  --danger-hover: color-mix(in srgb, var(--err) 85%, #000);
+  --err-soft: color-mix(in srgb, var(--err) 12%, transparent);
+  --ok-soft: color-mix(in srgb, var(--ok) 12%, transparent);
+  --success: var(--ok);
+  --color-success: var(--ok);
+  --warning: var(--warn);
+  --color-warning: var(--warn);
+  --color-danger: var(--err);
+  --green: var(--ok);
+  --orange: var(--warn);
+  --red: var(--err);
+  --purple: var(--accent);
+  --teal: var(--info);
+  --font-mono: 'JetBrains Mono', Menlo, Consolas, monospace;
+  --mono: var(--font-mono);
+  --mono-font: var(--font-mono);
+  --radius: var(--radius-sm);
+}
+

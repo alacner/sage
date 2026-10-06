@@ -1,0 +1,10 @@
+import {useState} from 'react';
+import type {ScheduledRun} from '../../shared/types';
+import {toolDisplayName} from '../../shared/tool-display-name';
+export function ScheduledApprovalNotice({run,en}:{run:ScheduledRun;en:boolean}){
+ const [busy,setBusy]=useState<string>(),[error,setError]=useState('');
+ const respond=async(requestId:string,decision:'allow'|'deny')=>{setBusy(requestId);setError('');try{await window.api.respondScheduledApproval(run.projectPath,run.id,requestId,decision);}catch(e:any){setError(e.message??String(e));}finally{setBusy(undefined);}};
+ const history=run.approvalHistory?.length?<details><summary>{en?'Authorization history':'审批记录'} ({run.approvalHistory.length})</summary>{run.approvalHistory.map((item,i)=><p key={i}><span title={item.toolName}>{toolDisplayName(item.toolName,en?'en':'zh')}</span> · {item.decision==='allow'?(en?'Allowed once':'同意本次'):item.decision==='expired'?(en?'Expired':'已失效'):(en?'Denied':'已拒绝')} · {new Date(item.decidedAt).toLocaleString()}</p>)}</details>:null;
+ if(run.status!=='running'||!run.pendingApprovals?.length)return history;
+ return <div className="scheduled-error-notice scheduled-approval-notice" role="status"><strong>{en?'Waiting for authorization':'等待授权'}</strong><p className="muted small">{en?'Approve only this operation. Waiting counts toward the task timeout.':'仅批准当前操作；等待时间计入任务超时。'}</p>{run.pendingApprovals.map(req=><div key={req.requestId}><strong title={req.toolName}>{toolDisplayName({name:req.toolName,displayName:req.displayName},en?'en':'zh')}</strong>{req.expiresAt&&<p className="muted small">{en?'Expires: ':'到期时间：'}{new Date(req.expiresAt).toLocaleString()}</p>}{req.description&&<p>{req.description}</p>}<pre style={{whiteSpace:'pre-wrap',overflowWrap:'anywhere',maxHeight:240,overflow:'auto'}}>{JSON.stringify(req.input,null,2)}</pre><div className="scheduled-approval-actions"><button disabled={!!busy} onClick={()=>void respond(req.requestId,'allow')}>{en?'Allow once and continue':'同意本次并继续'}</button><button disabled={!!busy} onClick={()=>void respond(req.requestId,'deny')}>{en?'Deny':'拒绝'}</button></div></div>)}{history}{error&&<p role="alert">{error}</p>}</div>;
+}

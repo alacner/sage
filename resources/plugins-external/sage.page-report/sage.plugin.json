@@ -1,0 +1,52 @@
+{
+  "format": 1,
+  "id": "sage.page-report",
+  "name": "Page Report",
+  "version": "1.0.0",
+  "sdk": "^1.0.0",
+  "entry": "plugin.js",
+  "description": "Example consumer: read a web page through the browser plugin and return a report.",
+  "permissions": [
+    "browser.control"
+  ],
+  "dependencies": {
+    "sage.browser": "^1.0.0"
+  },
+  "consumes": [
+    {
+      "plugin": "sage.browser",
+      "service": "automation",
+      "version": "^1.0.0"
+    }
+  ],
+  "services": {
+    "report": {
+      "version": "1.0.0",
+      "methods": {
+        "read": {
+          "description": "Read a webpage via the browser plugin, returning its title and text.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "url"
+            ]
+          },
+          "tool": true
+        }
+      }
+    }
+  },
+  "contributes": [
+    {
+      "id": "report",
+      "slot": "sidebar.bottom",
+      "title": "Page Report",
+      "view": "views/report.html"
+    }
+  ]
+}

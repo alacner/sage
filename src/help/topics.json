@@ -1,0 +1,930 @@
+[
+  {
+    "id": "overview",
+    "keywords": "入门 新手 项目 工作空间 界面 布局 帮助 搜索 workspace getting started intro",
+    "zh": {
+      "group": "快速开始",
+      "title": "Sage 是什么",
+      "summary": "Sage 是面向项目的桌面 AI 工作空间，支持对话、文件编辑、工具调用及插件扩展。",
+      "content": "# Sage 是什么\n\nSage 是面向项目的桌面 AI 工作空间：以项目目录为边界，把对话、文件编辑、工具调用和插件扩展放在一起。数据默认保存在项目 `.sage/` 目录，便于备份与迁移。\n\n## 开始使用\n1. 添加项目目录，侧栏即出现项目与对话列表。\n2. 在设置中配置模型提供商或 CLI 引擎插件（见「模型与后端」「CLI 引擎插件」）。\n3. 创建对话，输入需求即可开始；默认仅内置 API 直连引擎。\n\n## 界面布局\n左侧边栏管理项目、对话与插件入口；顶部标签页打开对话、文件与插件页面；底部状态栏显示运行模式与用量。随时通过 设置 → 关于 → Sage 帮助 打开本帮助，按功能名或问题搜索。\n\n## 相关主题\n- 首次配置引导\n- 模型与后端\n- 插件列表与启用范围"
+    },
+    "en": {
+      "group": "Getting started",
+      "title": "What is Sage",
+      "summary": "Sage is a project-based desktop AI workspace with chat, file editing, tools and plugins.",
+      "content": "# What is Sage\n\nSage is a project-based desktop AI workspace: chat, file editing, tool calls and plugins are organized around a project folder. Data is stored in the project's `.sage/` directory by default, which keeps backup and migration simple.\n\n## Getting started\n1. Add a project folder; it appears in the sidebar with its conversations.\n2. Configure a model provider or a CLI engine plugin in Settings (see \"Models and backends\" and \"CLI engine plugins\").\n3. Start a conversation and describe your goal. Direct API is the only built-in engine.\n\n## Layout\nThe sidebar manages projects, conversations and plugin entries; tabs open conversations, files and plugin pages; the status bar shows the run mode and usage. Open this help any time via Settings → About → Sage Help and search by feature name or question.\n\n## Related topics\n- First-run setup\n- Models and backends\n- Plugin list and activation scope"
+    }
+  },
+  {
+    "id": "onboarding",
+    "keywords": "首次 安装 新版引导 新手 配置 中继 Token 申请 API Host 协议 密钥 模型列表 手工填写 能力验证 默认模型 视觉模型 CLI onboarding setup",
+    "zh": {
+      "group": "快速开始",
+      "title": "首次配置引导",
+      "summary": "新版引导按中继、API 提供商或 CLI 插件分支，带你完成连接、能力验证、全局模型和首次对话。",
+      "content": "# 首次配置引导\n\n新版配置引导先询问连接方式。Sage 需要 API 直连或已安装、启用并配置的 CLI 引擎插件。中继属于 API 连接方式，可以统一提供授权模型。引导不会代填密钥、自动申请 Token 或发送对话。\n\n## 使用中继\n1. 选择「是，使用中继」，进入中继连接设置，填写服务商给出的完整连接地址。\n2. 回答是否有 Token。有则粘贴到 Token 输入框；没有则点击旁边的「申请」，在中继站点申请后返回填写。申请按钮只在地址对应的申请页可访问且 Token 为空时出现；没有入口时检查地址或向中继服务商索取 Token。\n3. 点击「连接」，等待「已连接」。填完后若已自动连接，可直接继续。\n4. 进入模型设置，等待中继提供商和授权模型自动出现，首次同步可能需要一会儿。连接成功不等于模型同步完成；一直没有模型时检查 Token 的模型权限，不要手动重复添加中继提供商。\n5. 中继复用已有的模型能力数据，通常不需要本机重复验证，接着选择全局模型。没有已确认的视觉能力时可暂时跳过视觉模型。\n\n## 自定义提供商\n1. 不使用中继时，选择配置模型提供商，点击「添加提供商」，或选中已有的普通 API 提供商。\n2. 依次填写名称、API Host，确认 API 协议（OpenAI Chat Completions 或 Anthropic Messages），填写 API Key。API Host 使用厂商文档中的完整 API 基础地址，按文档保留 /v1 等路径，不是官网首页。没有密钥输入行时点击「+」。\n3. 点击「测试连接」。如果取得模型列表，会自动保存并提示提供商配置完成。如果接口不支持获取列表，引导明确要求手工填写准确模型 ID：在模型列表点击「编辑」，输入 ID、按 Enter 添加，再点击「完成」。\n4. 空列表与连接失败不同：空列表时检查账号模型权限或手工填写；鉴权、网络等失败时先根据错误修改配置并重试。不要把失败当成配置成功。\n5. 点击「查看模型能力验证」，再点击「重试所有未验证项」。验证会实际调用提供商，等待本轮完成。未验证项为 0 时可直接继续；仍有未知项时查看原因并重试，或先选择能力已确认的模型。未知不表示支持。\n\n## 选择全局模型\n- 全局默认模型：日常对话、推理和工具执行的主模型；项目或对话未指定其他模型时继承它。选择支持对话和工具调用的模型。\n- 全局视觉模型：用于读取图片、截图并提取信息，主模型不能直接看图时可用于视觉处理。选择器只列出已确认支持视觉的模型。同一模型可以同时承担两种角色；没有视觉模型时可暂时跳过。\n- 等待自动保存成功后继续。保存失败时先在设置页重试，不能把未保存的配置当成完成。\n\n## CLI 与自行探索\n选择「使用 CLI 插件」后，到插件市场安装所需引擎并全局启用，按插件说明安装 CLI 并完成登录或 API 配置。确认 CLI 检测和认证状态后，到「通用」选择该引擎。CLI 的模型与认证由对应插件管理，不要求先配置 API 全局模型。也可选择「自己探索」结束引导。\n\n## 对话与帮助\n配置后选择项目文件夹，点击侧栏「对话」旁的「+」新建对话，也可点击引导中的「新建对话」。输入需求后自己发送。点击左下角「?」打开帮助，直接在搜索框描述问题，例如「如何添加模型」「中继连不上怎么办」；帮助检索本地操作文档，不需要调用模型。\n\n## 展示与恢复\n这是新的第 2 版引导。首次使用或此前只看过旧版引导的用户会自动看到一次；看过新版后，普通安装包升级不再重复显示。在「设置 → 通用 → 新手引导 · 新版」可以随时重新打开。引导可随时结束、返回上一步，或用「定位当前操作」回到对应设置控件；已有配置不会被清空。明确选择 API 连接方式时会把后端切换为 API 直连。\n\n## 相关主题\n- Sage 是什么\n- 中继连接与部署\n- 模型与后端\n- CLI 引擎插件"
+    },
+    "en": {
+      "group": "Getting started",
+      "title": "First-run setup",
+      "summary": "The new guide branches into relay, direct API or CLI setup, then walks through capabilities, global models, conversations and Help.",
+      "content": "# First-run setup\n\nThe new setup guide starts by asking how you want to connect. Sage requires a direct API connection or an installed, enabled and configured CLI engine plugin. A relay supplies authorized models through the API engine. The guide never fills credentials, submits token applications or sends chat messages for you.\n\n## Connect a relay\n1. Choose Yes, use a relay. Enter the full connection address supplied by its operator.\n2. Answer whether you have a token. Paste an existing token, or click Apply beside the Token field, apply on the relay website, and return with your token. Apply appears only when the application page is reachable and Token is empty; otherwise check the address or contact the operator.\n3. Click Connect and wait for Connected. If the completed fields connected automatically, continue.\n4. In model settings, wait for the relay provider and authorized models to appear automatically. Initial synchronization can take a little while. Connected does not mean synchronized. If no models appear, check the token’s model permissions instead of adding a duplicate relay provider.\n5. Relay capability data is reused, so local verification is usually unnecessary. Continue to global models. Skip vision for now if no confirmed vision model is available.\n\n## Configure a direct provider\n1. Decline relay setup and choose to configure a model provider. Click Add provider or select an existing regular API provider.\n2. Enter its name and API Host, confirm the API protocol (OpenAI Chat Completions or Anthropic Messages), then enter the API Key. Use the full API base URL from the vendor’s documentation, retaining /v1 or other required paths. Do not use the website homepage. Click + if no key input row exists.\n3. Click Test connection. Returned model IDs are saved automatically. If model enumeration is unsupported, enter exact IDs manually: click Edit in the model list, type each ID and press Enter, then click Done.\n4. An empty list differs from a failed connection. For an empty list, check account model permissions or enter IDs manually. For authentication or network errors, correct the configuration and retry; failure is not successful setup.\n5. Click View model capability verification, then Retry all unverified capabilities. Verification sends real requests to the provider; wait for this run to finish. Continue immediately if none remain. If some stay unknown, review and retry them or choose models with confirmed capabilities. Unknown does not mean supported.\n\n## Choose global models\n- Global default model: the main model for conversations, reasoning and tools. Projects and chats inherit it unless they override it. Choose one that supports chat and tool use.\n- Global vision model: reads images and screenshots, including when the main model cannot handle images directly. Only confirmed vision models appear in the selector. One model can serve both roles; vision setup can be skipped for now.\n- Wait for autosave before continuing. If saving fails, retry in Settings before treating setup as complete.\n\n## CLI or independent exploration\nChoose Use a CLI plugin to install an engine from the plugin marketplace and enable it globally. Follow its instructions to install the CLI and sign in or configure its API. Confirm CLI detection and authentication, then select the engine in General. The plugin manages its models and credentials; API global models are not required for this route. Explore on my own closes the guide.\n\n## Conversations and Help\nChoose a project folder and click + beside Conversations, or use New conversation in the guide. Compose your request and send it yourself. Open Help using the ? button at the bottom-left. Describe a question directly in the search field, such as “How do I add a model?” Help searches local documentation without making a model call.\n\n## Display and recovery\nThis is guide version 2. New users and users who only saw the old guide see it automatically once. Afterward, ordinary app upgrades do not repeat it. Reopen it in Settings → General → Getting started · New. Close at any time, go back, or use Show this step to return to its setting. Existing configuration is preserved. Explicitly choosing an API route switches the backend to Direct API.\n\n## Related topics\n- What is Sage\n- Relay connection and deployment\n- Models and backends\n- CLI engine plugins"
+    }
+  },
+  {
+    "id": "chat-intro",
+    "keywords": "对话 发送 换行 插话 队列 排队 重新发送 失败 图片 附件 resend queue interject",
+    "zh": {
+      "group": "对话与模型",
+      "title": "对话、队列与重新发送",
+      "summary": "对话支持文字、图片和附件，执行中发送的新消息可进入队列。",
+      "content": "# 对话、队列与重新发送\n\n对话支持文字、图片和附件，执行中发送的新消息可进入队列。\n\n## 发送与插话\n输入框提示当前使用的发送、换行和插话快捷键。插话与排队不同：插话可在工具调用间隙补充当前任务要求，排队消息等当前轮结束后按序处理。\n\n## 重新发送\n失败回复上的重新发送会替换该轮的用户问题与失败回复，避免重复气泡。运行中不能重复启动同一轮。\n\n## 附件上限\n设置 → 对话可配置单张图片上限（默认 5 MB）和文本文件内联上限（默认 1 MB）；超限图片被拒绝，超限文本退化为仅附路径。\n\n\n## 边界与注意\n已完成的外部操作（命令、写入、网络请求）不保证可以安全重放，重新发送前先核对实际结果。\n\n\n## 发送前确认\n检查当前项目、对话、模型与安全方案。输入文字，可添加图片、文件引用或能力标识。普通输入与语音转写都先进入草稿；发送前可编辑。正在执行时追加消息按界面的队列/插话操作处理，避免把多次点击当成独立执行确认。\n\n## 修改和重新发送\n编辑历史用户消息前先确认将从哪一轮继续；重新发送可能重新调用模型和工具。之前已写入文件或外部系统的结果不会因为修改消息自动撤销。先检查已有结果，必要时在新指令中说明哪些工作已完成。\n\n## 草稿与附件\n切换对话时草稿按对话保存；删除附件只移除待发送内容。发送失败时先检查错误与当前消息状态，避免盲目重复执行具有外部副作用的请求。\n\n## 相关主题\n- 工具调用与审批\n- 退出后的恢复执行\n- 上下文窗口与压缩策略"
+    },
+    "en": {
+      "group": "Chat & models",
+      "title": "Chat, queue and resend",
+      "summary": "Chats accept text, images and attachments; new messages can queue while execution is running.",
+      "content": "# Chat, queue and resend\n\nChats accept text, images and attachments; new messages can queue while execution is running.\n\n## Send and interject\nThe composer shows send, newline and interjection shortcuts. An interjection can add instructions between tool calls, while a queued message waits for its turn.\n\n## Resend\nResending a failed reply replaces that turn's question and failed response to avoid duplicate bubbles. A running turn cannot start twice.\n\n## Attachment limits\nSettings → Conversations configures the per-image limit (default 5 MB) and text-file inline limit (default 1 MB). Oversized images are rejected; oversized text files fall back to path-only.\n\n\n## Limits\nCompleted side effects (commands, writes, network requests) are not guaranteed to replay safely. Check actual results before resending.\n\n\n## Before sending\nCheck project, conversation, model and policy. Compose text and optionally attach images, file references or capability selectors. Typed and dictated text remain drafts until sent. During execution use the displayed queue/interjection controls instead of assuming repeated clicks confirm distinct runs.\n\n## Editing and resending\nConfirm where execution will resume before editing a historical user message. Resending may repeat model and tool calls. Changes already written to files or external services are not automatically undone by message editing. Inspect existing results and state what is already complete.\n\n## Drafts and attachments\nDrafts follow their conversations when switching. Removing an attachment removes pending content. After send failure inspect both the error and message state before retrying work with external side effects.\n\n## Related topics\n- Tools and approval\n- Resume after interruption\n- Context Window & Compaction Strategy"
+    }
+  },
+  {
+    "id": "chat-search",
+    "keywords": "搜索 查找 对话 标题 消息 记忆 全文 归档 search find conversation",
+    "zh": {
+      "group": "对话与模型",
+      "title": "对话全文搜索",
+      "summary": "设置 → 对话里可按标题、消息内容或对话记忆全文搜索全部对话。",
+      "content": "# 对话全文搜索\n\n对话变多后，在 设置 → 对话（对话管理页）顶部的搜索框输入关键词，即可跨全部对话全文检索，活跃与归档分组都会匹配。\n\n## 搜索范围\n支持三层：对话标题、消息内容、对话记忆。结果行用徽章标出命中的是哪一层，便于判断要不要打开。\n\n## 后续操作\n搜索结果中可直接对对话执行常用操作：配置对话记忆、复制对话 ID、归档/解档、删除。\n\n## 相关主题\n- 对话、队列与重新发送\n- 长期记忆与自动融合\n- 历史与日志清理"
+    },
+    "en": {
+      "group": "Chat & models",
+      "title": "Conversation full-text search",
+      "summary": "Settings → Conversations searches across titles, message bodies and conversation memories.",
+      "content": "# Conversation full-text search\n\nAs conversations accumulate, use the search box at the top of Settings → Conversations to search across all of them; both active and archived groups match.\n\n## Search scope\nThree layers are covered: conversation titles, message bodies and conversation memories. Result rows badge which layer matched so you can judge whether to open them.\n\n## Follow-up actions\nFrom the results you can configure conversation memory, copy a conversation ID, archive or unarchive, and delete.\n\n## Related topics\n- Chat, queue and resend\n- Long-term memory and auto-merge\n- History and log cleanup"
+    }
+  },
+  {
+    "id": "chat-experts",
+    "keywords": "专家团 专家 执行计划 项目经理 任务 拆分 调度 自动 智能体 模式 experts team plan",
+    "zh": {
+      "group": "对话与模型",
+      "title": "专家团与执行计划",
+      "summary": "专家团由项目经理拆分任务，按依赖关系调度专家执行；执行模式含自动档。",
+      "content": "# 专家团与执行计划\n\n专家团由项目经理拆分任务，按依赖关系调度专家执行。\n\n## 执行模式\n输入框左下角可选择执行模式：自动、智能体、专家团。自动档在提交第一句话时按复杂度选择：含专家团/团队协作等词、安排人/派人/分工/召集等委派词，或点名专家成员/角色（项目经理等，含自定义名）走专家团；一句话里包含多个工程动作（实现、重构、修复、设计等）的复杂需求走专家团；提问和单点小任务走智能体。\n\n## 模式锁定\n提交后选择器回显并锁定实际使用的模式，重进对话也恢复为该模式。模式仅在第一句话生效。\n\n## 查看计划与完成\n输入框上方的执行计划按钮展示完成数量和状态；悬停任务名称查看详情，其余详情收起；停止的任务显示待继续，只有实际运行才显示转圈。全部任务完成后浮窗经过短暂缓冲再消失；重新打开已完成对话不会重新弹出完成浮窗。\n\n## 自定义专家与并行度\n设置 → 对话的专家定义区可新建、编辑或删除专家角色：名称、图标和系统提示均可自定义，也可让 AI 辅助生成。内置角色可一键恢复。并行度控制同时执行的专家数量，默认按提供商类型自动选择（官方 API 3、第三方 2），也可手动指定 1–8。\n\n\n## 相关主题\n- 对话、队列与重新发送\n- 退出后的恢复执行\n- 工具调用与审批"
+    },
+    "en": {
+      "group": "Chat & models",
+      "title": "Experts and execution plans",
+      "summary": "The project manager decomposes work and schedules experts according to task dependencies; execution modes include Auto.",
+      "content": "# Experts and execution plans\n\nThe project manager decomposes work and schedules experts according to task dependencies.\n\n## Execution modes\nThe picker at the bottom-left of the composer offers Auto, Agent and Expert team. Auto decides when you send the first message: requests mentioning the expert team or team collaboration, delegation cues (assign people, dispatch, divide work, convene), or naming an expert member or role (project manager, including custom names) go to the Expert team; so do requests packing several engineering actions (implement, refactor, fix, design) into one sentence; questions and small single tasks stay with the Agent.\n\n## Mode locking\nAfter sending, the picker shows and locks the mode actually used, and reopening the chat restores that mode. The mode only applies to the first message.\n\n## Plan view and completion\nThe execution-plan button above the composer shows progress and status. Hover a task name to expand its details and collapse others. Interrupted work is shown as resumable; only running work spins. After all tasks finish, the floating plan closes after a short grace period; reopening a completed chat does not replay the completion popup.\n\n## Custom experts and parallelism\nSettings → Conversations lets you create, edit or delete expert roles: name, icon and system prompt are all customizable, and AI can assist generation. Built-in roles restore with one click. Parallelism controls how many experts run concurrently; the default adapts to provider type (official API 3, third-party 2), or set 1–8 manually.\n\n\n## Related topics\n- Chat, queue and resend\n- Resume after interruption\n- Tools and approval"
+    }
+  },
+  {
+    "id": "chat-resume",
+    "keywords": "重启 断点 中断 续跑 恢复执行 继续执行 resume restart interrupted checkpoint continue",
+    "zh": {
+      "group": "对话与模型",
+      "title": "退出后的恢复执行",
+      "summary": "重新打开程序后，未完成计划可通过“继续执行”恢复。",
+      "content": "# 退出后的恢复执行\n\n重新打开程序后，未完成计划可通过“继续执行”恢复。\n\n## 尽量避免重做\n保留已完成子任务，核对中断前结果，再继续剩余任务。恢复的同一子任务会替换旧执行卡片。\n\n## 边界\n程序退出后不会继续运行。恢复不是进程级断点恢复：正在执行的命令可能已经部分完成，需核查文件与外部结果，避免重复操作。\n\n## 相关主题\n- 专家团与执行计划\n- 对话、队列与重新发送\n- 定时任务"
+    },
+    "en": {
+      "group": "Chat & models",
+      "title": "Resume after interruption",
+      "summary": "Reopen the app and use Continue execution for an unfinished plan.",
+      "content": "# Resume after interruption\n\nReopen the app and use Continue execution for an unfinished plan.\n\n## Avoid unnecessary repetition\nCompleted tasks are preserved. Verify interrupted results and continue the remaining tasks. A resumed task replaces its earlier execution card.\n\n## Limits\nExecution does not continue after the app exits. This is not process-level checkpoint restoration: an interrupted command may have partially completed, so inspect files and external effects before retrying.\n\n## Related topics\n- Experts and execution plans\n- Chat, queue and resend\n- Scheduled tasks"
+    }
+  },
+  {
+    "id": "chat-tools",
+    "keywords": "工具 审批 批准 授权 预审 决策记录 安全规则 approval permission tool decision",
+    "zh": {
+      "group": "对话与模型",
+      "title": "工具调用与审批",
+      "summary": "工具调用先经过安全规则，再根据策略进行 AI 预审或人工确认。",
+      "content": "# 工具调用与审批\n\n模型读写文件、执行命令前，工具调用先经过安全规则，再根据策略进行 AI 预审或人工确认。\n\n## 决策顺序\n明确拒绝规则优先；直接允许规则可跳过普通审批。AI 预审失败、超时或证据不足时转人工。完整访问模式具有更广权限，需要单独选择。\n\n## 查看原因\n决策记录可按项目、对话、方案和层级过滤，查看具体规则与理由（日志保留见「历史与日志清理」）。\n\n## 边界与注意\n审批成功不表示命令一定成功：执行环境仍可能拒绝文件访问或其他操作。\n\n## 相关主题\n- 安全方案与文件沙箱\n- 保留沙箱，联网单独审批\n- 历史与日志清理"
+    },
+    "en": {
+      "group": "Chat & models",
+      "title": "Tools and approval",
+      "summary": "Tools pass through security rules and, depending on policy, AI or human review.",
+      "content": "# Tools and approval\n\nBefore the model reads or writes files or runs commands, each tool call passes through security rules and then, depending on policy, AI or human review.\n\n## Decision order\nExplicit denials take precedence; direct-allow rules may skip ordinary approval. Failed, timed-out or uncertain AI reviews fall back to a person. Full access is a separate, broader mode.\n\n## Inspect reasons\nFilter decision history by project, chat, policy and stage to see matched rules and reasons (see \"History and log cleanup\" for retention).\n\n## Limits\nApproval does not guarantee successful execution: runtime restrictions can still reject an operation.\n\n## Related topics\n- Security policies and filesystem sandbox\n- Keep sandbox, approve networking separately\n- History and log cleanup"
+    }
+  },
+  {
+    "id": "chat-capabilities",
+    "keywords": "能力选择器 搜索 工具 插件 skill plugin MCP capability picker tool discovery",
+    "zh": {
+      "group": "对话与模型",
+      "title": "在对话中选择技能、插件和 MCP",
+      "summary": "搜索可用能力、插入草稿、理解调用与授权。",
+      "content": "# 在对话中选择技能、插件和 MCP\n\n对话输入区的“技能、插件与 MCP”按钮汇总当前项目能使用的能力，不需要背诵工具名称。\n\n## 操作步骤\n1. 打开选择器，按全部、技能、插件、MCP 分类筛选。\n2. 搜索名称、描述或来源；来源帮助区分同名工具。\n3. 选择一项，调用标识插入光标处；已有草稿和附件保留。\n4. 在草稿中补充目标、范围、输入和预期结果，再发送。\n\n例如：选择一个报告技能后，补充“只检查本项目本周提交，生成 Markdown 报告”。选择器不会自动调用、发送消息或增加权限。\n\n## 三类能力的区别\n技能是模型按需读取的操作手册；插件工具是清单中 tool:true 的服务方法；MCP 工具来自已启用服务器的工具发现结果。仅安装的插件、停用服务器、未标记为工具的方法不会出现在这里。\n\n## 列表为空或不完整\n确认当前项目、技能作用域、插件有效启用状态和 MCP 测试结果。点击刷新可重新发现 MCP 工具。部分服务器失败时，其他可用能力仍然显示，并列出暂不可用来源。列表刷新不会提交草稿。\n\n## 引擎与授权\n此目录与 Sage API 对话工具链一致；CLI 引擎能否调用这些工具取决于该引擎桥接支持。发送后仍执行对话的文件、网络、插件权限与审批检查。选中能力不是批准它的所有未来操作。\n"
+    },
+    "en": {
+      "group": "Chat & models",
+      "title": "Choose skills, plugins and MCP in chat",
+      "summary": "Search available capabilities, compose requests and understand approval.",
+      "content": "# Choose skills, plugins and MCP in chat\n\nThe Skills, plugins & MCP button lists capabilities available to the current project without requiring you to memorize tool names.\n\n## Steps\n1. Open the picker and filter All, Skills, Plugins or MCP.\n2. Search names, descriptions or sources. Sources distinguish similarly named tools.\n3. Select an item to insert its selector at the cursor. Existing draft text and attachments remain.\n4. Add the objective, scope, inputs and desired result, then send.\n\nFor example, choose a reporting skill and add “Review only this project's commits from this week and produce Markdown.” Selection does not call a tool, send a message or grant permission.\n\n## Capability types\nA skill is an on-demand instruction document. A plugin tool is a service method declared tool:true. MCP tools are discovered from enabled servers. Disabled packages/servers and plugin methods not exposed as tools are excluded.\n\n## Empty or incomplete lists\nCheck the project, skill scope, effective plugin activation and MCP connection test. Refresh re-discovers MCP tools. A failed server does not hide working sources; unavailable sources are listed separately. Refresh never submits the draft.\n\n## Engines and approvals\nThis catalogue follows Sage's API conversation toolchain. CLI availability depends on the engine bridge. Sending still applies file, network, plugin and approval checks. Selecting a capability does not authorize every future action.\n"
+    }
+  },
+  {
+    "id": "context-strategy",
+    "keywords": "上下文 窗口 压缩 摘要 策略 token 整理 context window compaction summary strategy",
+    "zh": {
+      "group": "对话与模型",
+      "title": "上下文窗口与压缩策略",
+      "summary": "压缩模式决定保留多少历史与触发时机，摘要策略决定被驱逐内容的浓缩质量；两者均有自动档。",
+      "content": "# 上下文窗口与压缩策略\n\n对话变长后会超出模型的上下文窗口。Sage 会在每次发送前自动「整理上下文」：驱逐过旧的轮次、必要时把被驱逐内容浓缩成摘要，保证请求不超窗。两个开关分别决定「整理力度」和「摘要质量」。\n\n## 上下文压缩模式（整理力度）\n\n决定保留多少近期历史、多早触发压缩。\n\n- 自动（默认）：按本轮内容体量与工具调用数自动选择下面三档，无需手工调。内容偏短或偏写作时保守，内容较长时均衡，很长或工具调用很多时激进。\n- 保守：上限约 160k tokens，保留最近 5 轮。适合大窗口模型、需要完整回溯的长讨论；代价是请求更大、更费 token、更慢。\n- 均衡：上限约 120k tokens，保留最近 3 轮。大多数日常对话的平衡点（未选择时的缺省档）。\n- 激进：上限约 80k tokens，保留最近 2 轮。适合超长对话、小窗口或低预算模型；代价是较早丢失早期细节。\n\n显式限制优先：若在对话的上下文面板或设置中指定了固定窗口（如 200K tokens），以显式值为准，模式只影响保留轮数与触发时机。\n\n## 摘要生成策略（摘要质量）\n\n决定被驱逐的旧轮次如何浓缩。\n\n- 自动（默认）：单轮内容超过 4,000 字符时调用已配置模型生成摘要，其余直接截断；模型调用失败自动回退截断。兼顾质量与成本。\n- 简单截断（快速）：只保留开头片段。速度最快、不消耗模型 token；代价是丢失被截部分的语义。\n- LLM 智能摘要（更准确）：每次都调用模型浓缩被驱逐内容。语义保留最好；代价是每次整理都额外消耗 token 与时间。\n\n## 怎么选（适用场景）\n\n- 追求省心：两个都保持「自动」，覆盖绝大多数场景。\n- 长代码 / 多工具任务、怕丢细节：压缩模式「保守」+ 摘要「LLM 智能摘要」。\n- 小模型 / 省 token / 要快：压缩模式「激进」+ 摘要「简单截断」。\n- 写作 / 长文讨论类对话：压缩模式「保守」或「自动」，摘要「自动」即可。\n\n## 查看整理记录\n\n上下文面板（输入区九宫格图标）与 设置 → 上下文窗口 都可打开「整理记录」，记录每次整理的触发方式（自动/手动）、压缩模式、摘要策略、整理前后 token 数，便于评估当前配置是否合适。\n\n## 相关主题\n- 对话、队列与重新发送\n- 长期记忆与自动融合\n- 请求监控与 debug 定位"
+    },
+    "en": {
+      "group": "Chat & models",
+      "title": "Context Window & Compaction Strategy",
+      "summary": "Compression mode sets how much history is kept and when compaction triggers; summary strategy sets how evicted content is condensed. Both have an Auto option.",
+      "content": "# Context Window & Compaction Strategy\n\nLong conversations exceed the model's context window. Before each send, Sage automatically \"compacts\" the context: it evicts old turns and, when needed, condenses the evicted content into a summary so the request stays within the window. Two switches control the compaction strength and the summary quality.\n\n## Context Compression Mode (strength)\n\nControls how much recent history is kept and how early compaction triggers.\n\n- Auto (default): picks one of the three presets below from the current turn's size and tool-call count. Short or writing-heavy content leans conservative; long content leans balanced; very long or tool-heavy content leans aggressive.\n- Conservative: cap ~160k tokens, keeps the last 5 turns. Best for large-window models and long discussions needing full recall; costs bigger, pricier, slower requests.\n- Balanced: cap ~120k tokens, keeps the last 3 turns. The everyday sweet spot (fallback when unset).\n- Aggressive: cap ~80k tokens, keeps the last 2 turns. For very long conversations or small-window / low-budget models; loses early detail sooner.\n\nExplicit limits win: if a fixed window (e.g. 200K tokens) is set in the conversation context panel or settings, that value takes precedence; the mode only affects kept turns and trigger timing.\n\n## Summary Generation Strategy (quality)\n\nControls how evicted old turns are condensed.\n\n- Auto (default): uses the configured model to summarize a turn only when it exceeds 4,000 characters; otherwise truncates. Falls back to truncation if the model call fails. Balances quality and cost.\n- Simple Truncation (fast): keeps only the head snippet. Fastest and spends no model tokens; loses the semantics of the truncated part.\n- LLM Smart Summary (more accurate): always condenses evicted content with the model. Best semantic retention; spends extra tokens and time on every compaction.\n\n## How to choose\n\n- Want zero fuss: keep both on Auto; covers most scenarios.\n- Long coding / tool-heavy work, afraid of losing detail: Conservative + LLM Smart Summary.\n- Small model / save tokens / want speed: Aggressive + Simple Truncation.\n- Writing / long-form discussion: Conservative or Auto mode with Auto summary.\n\n## Reviewing compaction records\n\nBoth the context panel (grid icon in the composer) and Settings → Context Window open \"Compaction Records\", listing each compaction's trigger (automatic/manual), mode, summary strategy and before/after token counts, so you can judge whether the current configuration fits.\n\n## Related topics\n- Chat, queue and resend\n- Long-term memory and auto-merge\n- Request monitor and debug links"
+    }
+  },
+  {
+    "id": "model-providers",
+    "keywords": "模型 提供商 API key 地址 测试连接 视觉模型 后端 provider api key vision",
+    "zh": {
+      "group": "模型与提供商",
+      "title": "模型与后端",
+      "summary": "在设置中添加 Anthropic 或 OpenAI 兼容提供商，填写地址、凭据与模型。",
+      "content": "# 模型与后端\n\n在设置中添加 Anthropic 或 OpenAI 兼容提供商，填写地址、凭据与模型。\n\n## 选择模型\n可以设置全局默认模型，也可以按项目和对话选择。视觉模型用于不支持图片的主模型的图片预处理；预处理失败需要检查请求监控器。\n\n## 测试连接\n填了模型时，「测试连接」会真实调用模型列表里的第一个模型（一次最小补全请求），通过与否以这次调用为准；没填模型时只能测接口连通性，不代表任何模型可用。服务不支持模型枚举（清单接口 404）不影响真实调用测试。\n\n## CLI 引擎\nCLI 后端通过插件接入：在设置 → 全局 → 插件配置安装对应 CLI 引擎插件并全局启用，然后在通用设置中选择引擎。CLI 需要本机安装和相应登录环境；详见「CLI 引擎插件」。\n\n## 模型能力验证\n设置中双击模型可触发能力探测，验证视觉、联网搜索、推理、工具调用等能力是否可用。自动探测在空闲时运行；手动探测立即执行。验证结果按模型汇总，展示各能力的支持状态和历史记录，并附带价格图表。\n\n\n\n## 配置不生效的检查顺序\n先确认对话是否覆盖了项目默认值，项目是否覆盖全局默认值，再看实际执行引擎。模型名称应与提供商支持的 ID 一致。连接测试成功不保证所有模型、所有工具和图片能力都可用，按实际所需能力验证。\n\n## 无输出或限流\n在请求监控中检查状态码、模型、阶段和错误：401/403 通常检查凭据与权限，429 检查额度或速率，超时检查网络与服务。不要在公开帮助请求中粘贴 API Key。CLI 登录状态与 API 提供商凭据是两套配置。\n\n## 手机对话中的模型与设置\n\n在手机对话的「＋ → 模型与思考强度」中，「跟随项目 / 全局」显示将继承的提供商、模型名称及来源，恢复默认时不会固定当前父级模型。复合和路由提供商显示配置的公开模型名，下游成员仍按请求路由。\n\n配套桌面与手机 0.6.849 支持执行中修改模型、思考强度及对话安全方案。保存后从下一轮（包括下一条排队消息）生效，当前回复、工具、插话续轮和专家任务保持启动时设置。完全访问仍需确认。旧桌面缺少能力时保持只读，并提示升级；中继透传已有操作，无需同步升级。\n\n## 相关主题\n- 复合提供商与模型映射\n- CLI 引擎插件\n- 请求监控与 debug 定位"
+    },
+    "en": {
+      "group": "Models & providers",
+      "title": "Models and backends",
+      "summary": "Add Anthropic or OpenAI-compatible providers with an endpoint, credentials and models.",
+      "content": "# Models and backends\n\nAdd Anthropic or OpenAI-compatible providers with an endpoint, credentials and models.\n\n## Model selection\nChoose global defaults or project/chat-specific models. A vision model can preprocess images for a text-only model; inspect the request monitor if preprocessing fails.\n\n## Test connection\nWhen models are configured, \"Test connection\" really calls the first model in the list (one minimal completion request) and the verdict is based on that call. With no model configured it can only check endpoint connectivity, which does not prove any model works. A service without model enumeration (404 from the list endpoint) does not affect the real call test.\n\n## CLI engines\nCLIs connect through plugins: install the CLI engine plugin under Settings → Global → Plugins, enable it globally, then select the engine in General settings. A CLI needs a local installation and login; see \"CLI engine plugins\".\n\n## Model capability verification\nDouble-click a model in settings to probe capabilities such as vision, web search, reasoning and tool use. Automatic probes run when idle; manual probes run immediately. Results are summarized per model with per-capability status, history and a price chart.\n\n\n\n## Configuration appears ineffective\nCheck conversation overrides, then project overrides, then the global default and actual execution engine. Use the provider's exact model ID. Connection success does not prove every model, tool or image capability works; test the capabilities you need.\n\n## No output or rate limiting\nInspect status, model, stage and error in the request monitor. For 401/403 check credentials and permissions; for 429 check quota/rate limits; for timeouts check connectivity and service health. Do not paste API keys into public help requests. CLI login and API provider credentials are separate configurations.\n\n## Models and settings in mobile conversations\n\nIn the mobile conversation's “+ → Model and reasoning effort”, “Use project / global default” shows the inherited provider, model name and source. Restoring the default keeps inheritance instead of pinning the parent's current model. Composite and routed providers show their configured public model name; downstream members are still selected per request.\n\nMatching desktop and mobile version 0.6.849 lets you change the model, reasoning effort and conversation security profile while a reply runs. Saved changes apply to the next turn, including the next queued message. The current reply, tools, interjection continuations and expert tasks keep their starting settings. Full access still requires confirmation. Older desktops remain read-only during execution and explain the upgrade; the relay forwards existing operations and does not need a simultaneous upgrade.\n\n## Related topics\n- Composite providers and model mappings\n- CLI engine plugins\n- Request monitor and debug links"
+    }
+  },
+  {
+    "id": "model-composite",
+    "keywords": "复合 提供商 映射 路由 模型别名 composite mapping router alias",
+    "zh": {
+      "group": "模型与提供商",
+      "title": "复合提供商与模型映射",
+      "summary": "复合提供商将可用模型映射到不同的实际提供商，便于统一选择。",
+      "content": "# 复合提供商与模型映射\n\n复合提供商将可用模型映射到不同的实际提供商，便于统一选择。\n\n## 按时间切换模型\n映射支持 `公开模型=成员模型|生效时段|替代模型`，例如 `qwen3.8-flash=qwen3.8-flash|22:00-08:00|qwen3.7-plus`。在生效时段内使用成员模型；其他时间改用已启用提供商中支持的替代模型。替代模型可属于另一提供商。省略第三段时，原映射仍只在配置的时段内可用。多个时段用逗号分隔，时间按本机时钟计算。\n\n## 检查映射\n先确认目标提供商已启用、模型可用，再保存映射。调用异常时查看请求监控器中的实际模型与错误。不要把界面展示名称当成服务端模型标识。\n\n## 相关主题\n- 模型与后端\n- 请求监控与 debug 定位"
+    },
+    "en": {
+      "group": "Models & providers",
+      "title": "Composite providers and model mappings",
+      "summary": "Composite providers map available models to underlying providers for unified selection.",
+      "content": "# Composite providers and model mappings\n\nComposite providers map available models to underlying providers for unified selection.\n\n## Time-based model switching\nA mapping can use `public-model=member-model|active windows|fallback-model`, for example `qwen3.8-flash=qwen3.8-flash|22:00-08:00|qwen3.7-plus`. The member model is used during the configured windows; at other times Sage routes to the fallback model from any enabled provider that supports it. Without the third field, the mapping remains unavailable outside its configured windows. Multiple windows are comma-separated and use the local clock.\n\n## Check mappings\nEnable the destination provider and verify its model before saving a mapping. Inspect the actual model and errors in the request monitor when calls fail. A display name is not necessarily a server model identifier.\n\n## Related topics\n- Models and backends\n- Request monitor and debug links"
+    }
+  },
+  {
+    "id": "editor-intro",
+    "keywords": "文件 编辑 预览 保存 只读 网页 打开 tab editor preview readonly",
+    "zh": {
+      "group": "编辑器与文件",
+      "title": "文件编辑与程序内打开",
+      "summary": "Markdown、HTML 等支持的文件优先在程序内标签页打开。",
+      "content": "# 文件编辑与程序内打开\n\nMarkdown、HTML 等支持的文件优先在程序内标签页打开。\n\n## 编辑与预览\n文件编辑器提供源代码和适用的预览方式；只读文档不能直接保存修改。保存前确认文件路径。\n\n## 网页链接\n浏览器插件已安装并在当前项目启用时，受支持的网页链接优先打开浏览器插件标签页，否则交给系统浏览器。\n\n## 默认视图与行号\n设置 → 外观的编辑器区可选择 Markdown 默认打开源码还是预览（也可逐文件切换），以及是否显示行号。\n\n\n\n## 保存与冲突\n编辑后用 Cmd/Ctrl + S 保存，确认标签上的未保存状态已消失。历史 Git 文件、生成的只读内容不能直接覆盖项目文件；需要修改时打开对应工作区文件。外部进程同时改动文件时先比较磁盘内容，避免无意覆盖。\n\n## 找不到文件\n检查当前项目和目录过滤设置。文件树隐藏规则仅影响展示与搜索，不删除文件，也不等于禁止模型访问。绝对路径超出项目范围时，实际读取仍按安全方案处理。\n\n## 相关主题\n- 文件语法检查\n- 选中文字与上下文操作\n- 内置浏览器"
+    },
+    "en": {
+      "group": "Editor & files",
+      "title": "File editing and opening inside Sage",
+      "summary": "Supported files such as Markdown and HTML open in app tabs.",
+      "content": "# File editing and opening inside Sage\n\nSupported files such as Markdown and HTML open in app tabs.\n\n## Edit and preview\nThe editor offers source and supported previews; read-only documents cannot be saved as edits. Verify the file path before saving.\n\n## Web links\nWhen the browser plugin is installed and enabled for the project, supported web links prefer its browser tab; otherwise they use the system browser.\n\n## Default view and line numbers\nSettings → Appearance → Editor chooses whether Markdown opens as source or preview (also switchable per file) and whether line numbers are shown.\n\n\n\n## Saving and conflicts\nSave with Cmd/Ctrl + S and confirm the unsaved indicator clears. Historical Git blobs and read-only generated content cannot directly overwrite project files; open the working file to edit it. Compare disk changes before saving when another process edited the file.\n\n## Missing files\nCheck project and directory filters. Hiding a directory affects display and search, not deletion or model authorization. Reads outside the project remain subject to the security policy.\n\n## Related topics\n- File syntax checking\n- Selected text and context actions\n- Built-in browser"
+    }
+  },
+  {
+    "id": "editor-syntax",
+    "keywords": "语法 检查 错误 告警 跳转 JSON YAML XML SVG TypeScript lint syntax error warning jump",
+    "zh": {
+      "group": "编辑器与文件",
+      "title": "文件语法检查",
+      "summary": "打开文件自动做语法检查，信息条上的告警悬浮列出错误，点击可跳到出错行。",
+      "content": "# 文件语法检查\n\n打开文件时自动检查语法，结果以信息条上文件名旁的告警图标显示（数字为错误条数）。悬停或键盘聚焦展开错误列表，点击任一条即跳到出错行；编辑后自动防抖重新检查。\n\n## 检查范围\n支持 JSON/JSONC、YAML、XML/SVG 以及 JS/TS（含 JSX/TSX）。超大文件（约 2MB 以上）跳过检查；每种格式最多报告 20 条。\n\n## 边界与注意\n检查只看语法能否解析，不等于类型检查或代码风格校验；不支持的格式（如 PHP、Java）没有告警不代表内容合法。\n\n## 相关主题\n- 文件编辑与程序内打开\n- 选中文字与上下文操作"
+    },
+    "en": {
+      "group": "Editor & files",
+      "title": "File syntax checking",
+      "summary": "Files are checked on open; the warning badge in the info bar lists errors and jumps to the line on click.",
+      "content": "# File syntax checking\n\nFiles are checked automatically when opened. The result appears as a warning badge next to the file name in the info bar (the number is the error count). Hover or keyboard-focus the badge to expand the error list; click an entry to jump to that line. Editing re-checks after a short debounce.\n\n## Coverage\nJSON/JSONC, YAML, XML/SVG and JS/TS (including JSX/TSX) are supported. Very large files (around 2MB and above) are skipped; each format reports at most 20 issues.\n\n## Limits\nThis checks only whether the content parses; it is not type checking or linting. Unsupported formats (such as PHP or Java) show no badge, which does not make them valid.\n\n## Related topics\n- File editing and opening inside Sage\n- Selected text and context actions"
+    }
+  },
+  {
+    "id": "editor-ctxmenu",
+    "keywords": "选中 文字 右键 菜单 复制 翻译 对话 上下文 selection context menu",
+    "zh": {
+      "group": "编辑器与文件",
+      "title": "选中文字与上下文操作",
+      "summary": "选中文字后可使用右键菜单中的复制、翻译或对话相关操作。",
+      "content": "# 选中文字与上下文操作\n\n选中文字后可使用右键菜单中的复制、翻译或对话相关操作。\n\n## 使用范围\n可用菜单随编辑器、预览或对话位置变化。发送选中内容给模型时，它会成为请求上下文；避免把不需要的敏感内容加入问题。\n\n## 相关主题\n- 文件编辑与程序内打开\n- 文件语法检查"
+    },
+    "en": {
+      "group": "Editor & files",
+      "title": "Selected text and context actions",
+      "summary": "Select text and use available context-menu actions such as copy, translation or chat operations.",
+      "content": "# Selected text and context actions\n\nSelect text and use available context-menu actions such as copy, translation or chat operations.\n\n## Scope\nActions depend on the editor, preview or conversation surface. Text sent to a model becomes request context; avoid including unnecessary sensitive material.\n\n## Related topics\n- File editing and opening inside Sage\n- File syntax checking"
+    }
+  },
+  {
+    "id": "plugins",
+    "keywords": "插件 开发 加载 清单 manifest 服务 权限 scope 分类 plugin development",
+    "zh": {
+      "group": "插件与扩展",
+      "title": "插件开发与加载",
+      "summary": "在项目的插件配置中导入插件包、创建工程或加载开发目录。",
+      "content": "# 插件开发与加载\n\n插件把工具、界面、技能和自动化处理器组合成可安装的软件包。先区分“已安装”与“在当前项目启用”：安装成功不代表所有项目都会运行它。\n\n## 安装与使用\n1. 打开设置 → 插件 → 插件包，选择离线包、市场安装或开发目录。\n2. 查看插件身份、版本、依赖与申请权限；确认安装计划。\n3. 根据需要打开全局启用，或只在项目配置中启用。\n4. 打开“配置”填写必需字段；秘密字段只在全局配置中保存。\n5. 在插件声明的侧栏、工具栏或标签页找到入口；对话内可用“技能、插件与 MCP”搜索工具。\n\n## 开发目录\n开发目录必须包含 sage.plugin.json 和清单指定的入口文件。加载后使用开发模式的启动、停止、重新加载更新服务。修改清单后重新加载并核对权限；旧安装的权限不会因为源码新增声明而自动增加。不要修改安装缓存作为长期源码。\n\n## 内置与外置\nGit、Browser 是始终可用的宿主模块，不能卸载或停用，也不再提供“左栏快捷按钮”开关。侧栏分区的展开与收起仍由工作区布局管理。Specs、Docs 和 CLI 引擎是独立插件，按安装状态与启用范围运行。\n\n## 调用失败排查\n入口不存在：检查当前项目、有效启用状态、依赖、贡献的 visible/when 与 slot 拼写。\n方法不存在：服务与方法名必须同时出现在清单和 globalThis.sagePlugin.services 中。\n权限拒绝：检查已授予权限，不只看清单声明；按正常安装流程重新审核。\n服务报错：查看插件日志中的服务、方法、耗时和错误，再检查输入/输出是否符合 schema。\n\n## 相关主题\n- 插件列表与启用范围\n- 二次开发：最小插件\n- 二次开发：服务与宿主权限\n- 扩展点与技能包\n\n## 运行环境与持久状态\n空闲插件运行窗口可能被回收，下次调用自动重建。执行中的调用和开发会话受保护。不要依赖全局变量永久保留状态，需要持久保存的配置使用 sdk.settings。并发环境达到上限时，请等待正在执行的调用结束再重试。\n"
+    },
+    "en": {
+      "group": "Plugins & extensions",
+      "title": "Plugin development and loading",
+      "summary": "Import packages, create projects or load development folders in project plugin settings.",
+      "content": "# Plugin development and loading\n\nPlugins package tools, views, skills and lifecycle handlers. Installation and effective activation are separate: an installed package is not necessarily running in the current project.\n\n## Install and use\n1. Open Settings → Plugins → Plugin packages and choose an offline bundle, marketplace entry or development directory.\n2. Review package identity, version, dependencies and permissions in the installation plan.\n3. Enable globally or only for the current project.\n4. Open Configure and fill required fields. Secret settings are global only.\n5. Use contributed sidebar, toolbar or tab entries. Search conversational tools through Skills, plugins & MCP in the composer.\n\n## Development directories\nA directory needs sage.plugin.json and its declared entry file. Start, stop and reload development mode as code changes. Reload after manifest changes and review permissions again: adding a declaration does not silently grant a previously installed package new permissions. Keep source outside the installation cache.\n\n## Built-in and external modules\nGit and Browser are always available host modules. They cannot be disabled or uninstalled and no longer have a sidebar quick-button setting. Workspace sections still support collapse/expand. Specs, Docs and CLI engines are separate packages governed by installation and activation.\n\n## Troubleshooting\nMissing entry: check project, effective activation, dependencies, visible/when and the exact slot name.\nMissing method: names must exist in both the manifest and globalThis.sagePlugin.services.\nPermission denied: inspect granted permissions, not only declarations, and review through installation again.\nService failure: inspect service, method, duration and error in plugin logs; validate both input and output schemas.\n\n## Related topics\n- Plugin list and activation scope\n- Extension development: a minimal plugin\n- Extension development: services and permissions\n- Extension Points and Skill Packages\n\n## Runtime and persistent state\nIdle plugin runtimes may be reclaimed and recreated on the next call. Active calls and development sessions are protected. Use sdk.settings for durable state rather than relying on globals. If the runtime limit is reached, retry after active calls finish.\n"
+    }
+  },
+  {
+    "id": "plugin-activation",
+    "keywords": "插件 启用 禁用 全局 项目 继承 override activation",
+    "zh": {
+      "group": "插件与扩展",
+      "title": "插件列表与启用范围",
+      "summary": "全局启用，项目默认继承并可单独关闭。",
+      "content": "# 插件列表与启用范围\n\n全局启用是所有项目的默认值，项目覆盖只影响当前项目；“跟随全局”会移除项目覆盖。\n\n## 三层状态\n| 层级 | 含义 | 操作入口 |\n| --- | --- | --- |\n| 安装 | 本机已有经过校验的包 | 设置 → 插件 → 插件包 |\n| 全局启用 | 项目默认是否使用 | 插件列表的全局启用 |\n| 项目覆盖 | 当前项目单独启用或关闭 | 项目配置，恢复时选跟随全局 |\n\n清单 scope 为 global、project 或 both，决定可配置的范围。Git、Browser 始终启用，不受旧版停用配置影响。\n\n## 配置如何覆盖\n全局字段作用于所有项目，项目字段只作用于当前项目，两种范围字段优先取项目覆盖。恢复继承与把值设为空字符串不是一回事：前者回退默认来源，后者可能是明确的空值。修改后观察保存错误提示；保存失败不能视为已生效。\n\n## 为什么无法启用\n检查缺少的依赖包、版本范围、宿主依赖和插件权限。先安装、启用依赖，再启用使用方。插件停用后，其服务、技能和订阅不应再进入当前项目的可用能力列表；对话选择器可手动刷新。\n\n## 删除与恢复\n卸载前先停用需要它的工作流。重新安装不等于恢复所有项目的启用覆盖；再次检查有效状态和配置。仅想临时停止功能时先停用即可。\n"
+    },
+    "en": {
+      "group": "Plugins & extensions",
+      "title": "Plugin list and activation scope",
+      "summary": "Projects inherit global activation and can override it.",
+      "content": "# Plugin list and activation scope\n\nGlobal activation is the default for projects. A project override applies only to that project; Follow global removes the override.\n\n## Three states\n| Layer | Meaning | Where |\n| --- | --- | --- |\n| Installed | A validated package is stored locally | Settings → Plugins → Plugin packages |\n| Global activation | Default availability across projects | Global enable control |\n| Project override | Explicit enable or disable here | Project configuration; Follow global restores inheritance |\n\nThe manifest scope (global, project or both) determines configurable scopes. Git and Browser remain enabled regardless of legacy disabling settings.\n\n## Configuration precedence\nGlobal fields affect all projects. Project fields affect the current project. Fields supporting both prefer a project override. Restoring inheritance is different from saving an empty string: the former falls back, while the latter can be an explicit empty value. A save error means persistence is not confirmed.\n\n## Cannot enable a package\nCheck missing dependencies, required versions, host dependencies and granted permissions. Install and activate dependencies first. Disabling removes the package's services, skills and subscriptions from effective project capabilities; refresh the conversation picker when necessary.\n\n## Remove and restore\nStop dependent workflows before uninstalling. Reinstallation does not prove every previous project override was restored; inspect effective activation and configuration again. Disable temporarily when removal is unnecessary.\n"
+    }
+  },
+  {
+    "id": "plugin-market",
+    "keywords": "市场 在线安装 分类 筛选 搜索 插件包 marketplace market install category",
+    "zh": {
+      "group": "插件与扩展",
+      "title": "插件市场",
+      "summary": "配置市场地址或中继后，可在插件安装页浏览市场、按分类筛选并在线安装。",
+      "content": "# 插件市场\n\n在设置 → 插件中配置市场地址（或使用中继连接）后，插件工作台的安装区会出现市场列表，支持按分类筛选和关键词搜索，一键在线安装；未配置市场时仍可离线安装插件包。\n\n## 使用\n1. 打开 设置 → 插件，配置市场地址或中继连接（见「中继连接与部署」）。\n2. 进入插件工作台，在市场区按分类浏览或搜索插件。\n3. 点击安装；安装后的插件按「插件列表与启用范围」管理启用。\n\n## 边界与注意\n市场只是分发渠道：插件的启用范围、权限约束与离线安装的插件完全一致；市场不可达时不显示市场区，不影响离线安装。\n\n## 相关主题\n- 插件开发与加载\n- 插件列表与启用范围\n- 中继连接与部署"
+    },
+    "en": {
+      "group": "Plugins & extensions",
+      "title": "Plugin marketplace",
+      "summary": "With a marketplace URL or relay configured, browse, filter and install plugins online from the workbench.",
+      "content": "# Plugin marketplace\n\nAfter configuring a marketplace URL (or using a relay connection) in Settings → Plugins, the install section of the plugin workbench shows the marketplace list with category filters and keyword search for one-click online installation. Offline package installation remains available without a marketplace.\n\n## Using it\n1. Open Settings → Plugins and configure the marketplace URL or relay connection (see \"Relay connection and deployment\").\n2. Open the plugin workbench and browse or search the marketplace section.\n3. Click Install; manage activation under \"Plugin list and activation scope\".\n\n## Limits\nThe marketplace is only a distribution channel: activation scope and permission constraints are identical to offline-installed plugins. When the marketplace is unreachable its section is hidden; offline installation is unaffected.\n\n## Related topics\n- Plugin development and loading\n- Plugin list and activation scope\n- Relay connection and deployment"
+    }
+  },
+  {
+    "id": "extension-platform",
+    "keywords": "插件 插槽 hooks events skills MCP 动态选模 压缩 浏览器 验收 extension slots marketplace",
+    "zh": {
+      "group": "插件与扩展",
+      "title": "扩展点与技能包",
+      "summary": "插件可贡献界面入口、压缩策略、模型路由和自定义扩展点。",
+      "content": "# 扩展点与技能包\n\n在插件开发中加载工程后，声明的界面入口自动出现。压缩扩展可在对话与上下文设置的压缩模式中选择；模型路由可在模型设置的提供商扩展中添加。Git 配色随 Git 模块启用状态显示。\n\n## 技能\n设置 → 技能支持 Markdown/技能包离线安装、在线安装、创建工程、开发加载、含依赖导出与市场提交。普通技能目录继续可用。在线市场需要配置市场地址或中继。\n\n## 浏览器验收\n从技能市场或离线技能包安装外置浏览器验收技能，启用 Browser 模块和技能包，并配置视觉模型。技能使用真实截图和 DOM 检查，支持桌面/移动视口以及当前项目的内置浏览器标签。未配置视觉模型时不能完成视觉验收。\n\n## MCP\n支持 STDIO 和 Streamable HTTP、JSON 导入预览、连接测试及已配置服务器的插件调用。导入的服务器默认停用。完整开发契约见插件 SDK 的 EXTENSIBILITY.md。\n\n## 相关主题\n- 技能\n- 插件市场\n- Hooks（钩子插槽）\n- CLI 引擎插件"
+    },
+    "en": {
+      "group": "Plugins & extensions",
+      "title": "Extension Points and Skill Packages",
+      "summary": "Contribute UI commands, context strategies, model routers and custom extension points.",
+      "content": "# Extension Points and Skill Packages\n\nLoad an extension project under plugin development. Context strategies appear in the compression-mode selector; model routers can be added under Models. Git colors follow Git activation.\n\n## Skills\nSkills support offline Markdown/packages, marketplace installation, scaffolds, development reload, export with dependencies and marketplace submission. Existing skill directories remain supported. The online marketplace needs a marketplace URL or relay.\n\n## Browser acceptance\nInstall the bundled browser acceptance skill, enable Browser and the skill package, and configure a vision model. It uses actual screenshots, DOM checks, desktop/mobile viewports and integrated project tabs. A missing vision model cannot produce a visual pass.\n\n## MCP\nSTDIO and Streamable HTTP support JSON import previews, connection tests and configured-server plugin APIs. Imported servers start disabled. Full contracts are documented in the SDK EXTENSIBILITY.md.\n\n## Related topics\n- Skills\n- Plugin marketplace\n- Hooks (hook slots)\n- CLI engine plugins"
+    }
+  },
+  {
+    "id": "dev-quickstart",
+    "keywords": "二次开发 插件开发 入门 manifest sdk scaffold sage.plugin.json plugin.js development quickstart",
+    "zh": {
+      "group": "插件与扩展",
+      "title": "二次开发：最小插件",
+      "summary": "从空目录到可加载、可调用、可导出的插件。",
+      "content": "# 二次开发：最小插件\n\n适用插件格式 1、SDK 1.4 系列。普通插件运行在隔离服务中，不直接访问 Electron、Node 文件系统或宿主页面 DOM。\n\n## 创建工程\n1. 在设置 → 插件的开发区创建工程或选择独立开发目录。\n2. 根目录放 sage.plugin.json，入口放 plugin.js；页面放 views/，技能放 skills/。\n3. 清单 id 使用唯一的命名空间名称（例如 local.hello）；版本是 x.y.z。\n4. 加载开发目录，核对校验结果与权限，启动并在当前项目启用。\n\n## 最小可运行文件\n下例不申请额外权限，提供对话工具和工具栏入口。工具栏点击显示完成状态；想查看返回字符串，可在对话中调用 hello.greet。\n\n```json\n{\n  \"format\": 1,\n  \"id\": \"local.hello\",\n  \"name\": \"Hello\",\n  \"version\": \"1.0.0\",\n  \"sdk\": \"^1.4.0\",\n  \"entry\": \"plugin.js\",\n  \"permissions\": [],\n  \"services\": {\n    \"hello\": {\n      \"version\": \"1.0.0\",\n      \"methods\": {\n        \"greet\": {\n          \"description\": \"Return a greeting\",\n          \"input\": {\n            \"type\": \"object\",\n            \"properties\": {},\n            \"additionalProperties\": false\n          },\n          \"output\": {\n            \"type\": \"string\"\n          },\n          \"tool\": true\n        }\n      }\n    }\n  },\n  \"contributes\": [\n    {\n      \"id\": \"hello\",\n      \"slot\": \"toolbar\",\n      \"title\": \"Hello\",\n      \"service\": \"hello\",\n      \"method\": \"greet\"\n    }\n  ]\n}\n```\n\nplugin.js:\n```javascript\nglobalThis.sagePlugin = {\n  services: {\n    hello: { greet: async () => 'Hello from Sage' }\n  }\n};\n```\n\n## 逐步验证\n先验证能加载，再在对话能力选择器搜索 local.hello，补充“调用并展示返回结果”。更改返回文字后重新加载，确认新结果生效。最后停止开发模式，导出 .sageplugin，在没有开发目录的环境导入验证。\n\n## 常见错误\n清单不是合法 JSON、入口路径错误、服务方法未实现、返回值不符合 output 都会导致校验或调用失败。描述文字不能代替正式 schema；增加功能时一次添加一个方法并验证。\n\n## 资料位置\n仓库 docs/plugin-examples/local.notes 提供含设置与页面的样例，resources/plugin-sdk/sage-sdk.d.ts 提供类型提示。docs/PLUGIN_MANUAL.md、EXTENSION_COOKBOOK.md 和 PLUGIN_EXTENSION_CATALOG.md 是进一步查询入口。\n"
+    },
+    "en": {
+      "group": "Plugins & extensions",
+      "title": "Extension development: a minimal plugin",
+      "summary": "Build, load, call and export a minimal package.",
+      "content": "# Extension development: a minimal plugin\n\nThis guide targets package format 1 and SDK 1.4. Ordinary plugins run as isolated services, without direct Electron, Node filesystem or host-page DOM access.\n\n## Create a project\n1. Use the plugin development area to scaffold or select an independent directory.\n2. Put sage.plugin.json at its root, plugin.js as the entry, views under views/ and skills under skills/.\n3. Choose a unique namespaced id such as local.hello and an x.y.z package version.\n4. Load, review validation and permissions, start development mode and enable for the project.\n\n## Minimal runnable files\nThis example requests no extra permissions and exposes a chat tool and toolbar action. The toolbar reports completion; call hello.greet in chat to display the returned string.\n\n```json\n{\n  \"format\": 1,\n  \"id\": \"local.hello\",\n  \"name\": \"Hello\",\n  \"version\": \"1.0.0\",\n  \"sdk\": \"^1.4.0\",\n  \"entry\": \"plugin.js\",\n  \"permissions\": [],\n  \"services\": {\n    \"hello\": {\n      \"version\": \"1.0.0\",\n      \"methods\": {\n        \"greet\": {\n          \"description\": \"Return a greeting\",\n          \"input\": {\n            \"type\": \"object\",\n            \"properties\": {},\n            \"additionalProperties\": false\n          },\n          \"output\": {\n            \"type\": \"string\"\n          },\n          \"tool\": true\n        }\n      }\n    }\n  },\n  \"contributes\": [\n    {\n      \"id\": \"hello\",\n      \"slot\": \"toolbar\",\n      \"title\": \"Hello\",\n      \"service\": \"hello\",\n      \"method\": \"greet\"\n    }\n  ]\n}\n```\n\nplugin.js:\n```javascript\nglobalThis.sagePlugin = {\n  services: {\n    hello: { greet: async () => 'Hello from Sage' }\n  }\n};\n```\n\n## Verify incrementally\nFirst load successfully. Search local.hello in the conversation picker and ask to call it and show the result. Change the string, reload and verify the new result. Stop development mode, export a .sageplugin and test import without the development directory.\n\n## Common errors\nInvalid JSON, wrong entry paths, missing method implementations and mismatched output schemas cause validation or invocation failures. A description is not a schema. Add and verify one method at a time.\n\n## Reference files\nThe repository's docs/plugin-examples/local.notes includes settings and a view. resources/plugin-sdk/sage-sdk.d.ts provides types. Continue with docs/PLUGIN_MANUAL.md, EXTENSION_COOKBOOK.md and PLUGIN_EXTENSION_CATALOG.md.\n"
+    }
+  },
+  {
+    "id": "dev-services",
+    "keywords": "service schema permission host sdk.call consumes tool true workspace read write secrets 服务 权限 参数",
+    "zh": {
+      "group": "插件与扩展",
+      "title": "二次开发：服务与宿主权限",
+      "summary": "输入输出契约、宿主服务、依赖及凭据边界。",
+      "content": "# 二次开发：服务与宿主权限\n\n插件的稳定接口由清单中的 services 定义，JavaScript 必须实现同名服务与方法。对话工具、UI 按钮、hooks 都复用这层接口。\n\n## 输入与输出\n每个方法写 description、input、output；需要在对话暴露时设 tool:true。schema 支持 object、array、string、number、integer、boolean、null 及 properties、required、additionalProperties、items、enum、长度和数值边界。不要假定支持完整 JSON Schema；不支持的关键字会在包校验时报错。\n\n推荐对对象设置 additionalProperties:false，明确必填项和长度。方法返回前等待写入完成；抛出错误表示失败，不应在 catch 后无条件返回成功。\n\n## 调用宿主\n使用 sdk.host(service, method, args)，并在 permissions 声明所需权限。举例：workspace.read/write、git.status/commit、browser.list/open、channels.list/send 等由宿主校验。具体参数以随包类型与当前 API 手册为准，不可自造服务名。\n\n普通插件没有直接 require('fs') 或任意 shell 能力。需要执行命令时使用受控的 tools.Bash 宿主服务，仍会经过标准审批与运行时沙箱。插件安装权限不是操作系统完全访问权限。\n\n## 跨插件依赖\n调用其他插件使用 sdk.call，并声明 consumes 与相应依赖版本。必需依赖安装/启用失败时，应给出可修复的错误；可选依赖缺失时保留主要功能。宿主 Git/Browser 使用 hostDependencies，不是可安装包的 dependencies。\n\n## 配置与秘密\n使用 sdk.settings.get/set 读写声明的配置；project、global、both 的覆盖规则与客户端一致。secret 仅支持 global。不要把密钥硬编码到清单、技能、HTML 或日志中。模型路由扩展返回提供商/模型引用，不返回 API Key。\n\n## 验收\n验证有效输入、缺少字段、额外字段、超长内容、类型错误、权限缺失、依赖停用、服务抛错及重新启用。对于真实写入或发送，只在已授权的测试目标验证结果。\n"
+    },
+    "en": {
+      "group": "Plugins & extensions",
+      "title": "Extension development: services and permissions",
+      "summary": "Define schemas, host calls, dependencies and credential boundaries.",
+      "content": "# Extension development: services and permissions\n\nThe services manifest is the stable interface, and JavaScript implements matching names. Chat tools, buttons and hooks reuse these methods.\n\n## Input and output\nDeclare description, input and output; set tool:true for conversational exposure. Supported schema types are object, array, string, number, integer, boolean and null, with properties, required, additionalProperties, items, enum, length and numeric bounds. This is a bounded subset, not full JSON Schema; unsupported keywords fail package validation.\n\nPrefer additionalProperties:false and explicit required fields/limits. Await persistence before returning. Throw on failure rather than returning success unconditionally from a catch block.\n\n## Host services\nUse sdk.host(service, method, args) and declare required permissions. Host-validated examples include workspace.read/write, git.status/commit, browser.list/open and channels.list/send. Consult packaged types and the current API reference for exact arguments; do not invent service names.\n\nOrdinary packages cannot directly require('fs') or run arbitrary shell code. The controlled tools.Bash host service retains standard approval and runtime sandbox checks. Package permission is not unrestricted operating-system access.\n\n## Cross-plugin dependencies\nUse sdk.call with consumes and compatible dependency versions. Explain missing required dependencies; degrade gracefully for optional ones. Git/Browser belong in hostDependencies rather than installable-package dependencies.\n\n## Settings and secrets\nUse sdk.settings.get/set for declared settings. Scope precedence matches the client. Secrets support global scope only. Do not hardcode credentials in manifests, skills, HTML or logs. Routing extensions return provider/model references, not API keys.\n\n## Acceptance checks\nCover valid input, missing/extra fields, oversized values, wrong types, missing permissions, disabled dependencies, service exceptions and reactivation. Verify real writes/sends only against authorized test destinations.\n"
+    }
+  },
+  {
+    "id": "dev-ui",
+    "keywords": "插槽 UI contributes conversation header actions scheduled task toolbar context iframe plugin slots",
+    "zh": {
+      "group": "插件与扩展",
+      "title": "二次开发：界面插槽与上下文",
+      "summary": "选择真实插槽、设计对话与任务入口、处理异步结果。",
+      "content": "# 二次开发：界面插槽与上下文\n\ncontributes 声明入口，服务方法负责执行，view 可打开插件自己的沙箱页面。UI 插槽不会赋予读取对话正文或任意 DOM 的能力。\n\n## 可用插槽\n| 区域 | 名称 |\n| --- | --- |\n| 标题栏 | titlebar.left、titlebar.right |\n| 侧栏与页面 | sidebar.middle、sidebar.bottom、sidebar.tabs、tab、panel、menu |\n| 通用与状态 | toolbar、status |\n| 对话 | conversation、conversation.input、conversation.header、conversation.actions |\n| 定时任务 | scheduled.toolbar、scheduled.task |\n| 帮助 | help.toolbar |\n| 工具栏 | editor.toolbar、git.toolbar、browser.toolbar |\n| 设置 | settings、settings.navigation、settings.models、settings.context、settings.appearance、settings.appearance.colors、settings.skills、settings.mcp |\n\n## 新增上下文插槽\nconversation.header 位于输入区域上方，conversation.actions 位于对话操作栏，两者服务参数为 {context:{conversationId}}。scheduled.task 传 {context:{taskId}}，help.toolbar 传 {context:{topicId}}。scheduled.toolbar 是任务页通用入口，参数仍是空对象。旧插槽保持原参数协议。\n\n这些字段只是定位标识，不含消息正文、附件、密钥或任务配置，也不提供绕过权限的读取接口。view 入口仅打开已声明页面，不自动向 iframe 注入上述上下文；需要上下文的动作应声明 service/method。\n\n## 服务按钮示例\n```json\n{\n  \"id\": \"inspectTask\",\n  \"slot\": \"scheduled.task\",\n  \"title\": \"检查任务\",\n  \"service\": \"taskActions\",\n  \"method\": \"inspect\",\n  \"when\": \"project\",\n  \"order\": 100\n}\n```\n该方法 input 必须接收 context 对象中的 taskId 字符串，output 与实际返回值一致。不能在 input 中禁止 context 却又把方法挂到这个插槽。\n\n## 交互规范\n按钮执行期间禁用重复点击，失败显示原因，成功显示完成状态。写入结果由插件自己的页面、通知或返回内容呈现。标题应表达动作，badge 简短，order 决定同槽排序。项目切换后忽略旧请求的界面反馈；插件停用时入口随有效状态消失。\n\n## 页面安全\n页面通过桥接请求自身服务，不能直接操作宿主 DOM；不要依赖远程脚本、内联事件或不存在的 Node 全局。页面按宿主主题配色并支持窄窗口、键盘焦点和可读错误。查看完整 UI 桥接示例再添加交互。\n"
+    },
+    "en": {
+      "group": "Plugins & extensions",
+      "title": "Extension development: UI slots and context",
+      "summary": "Choose implemented slots and build context-aware conversation and task actions.",
+      "content": "# Extension development: UI slots and context\n\ncontributes declares an entry, service methods execute actions, and view opens a sandboxed plugin page. A slot does not grant access to conversation bodies or arbitrary DOM.\n\n## Supported slots\n| Area | Names |\n| --- | --- |\n| Title bar | titlebar.left, titlebar.right |\n| Sidebar and pages | sidebar.middle, sidebar.bottom, sidebar.tabs, tab, panel, menu |\n| Common/status | toolbar, status |\n| Conversation | conversation, conversation.input, conversation.header, conversation.actions |\n| Scheduled tasks | scheduled.toolbar, scheduled.task |\n| Help | help.toolbar |\n| Toolbars | editor.toolbar, git.toolbar, browser.toolbar |\n| Settings | settings, settings.navigation, settings.models, settings.context, settings.appearance, settings.appearance.colors, settings.skills, settings.mcp |\n\n## Context-aware slots\nconversation.header appears above the composer and conversation.actions in its action bar. Both pass {context:{conversationId}} to service actions. scheduled.task passes {context:{taskId}} and help.toolbar passes {context:{topicId}}. scheduled.toolbar passes an empty object. Existing slots retain their argument contract.\n\nThese are identifiers only: no message bodies, attachments, credentials or task configuration, and no permission bypass. A view entry opens its declared page without automatically injecting this context into the iframe. Use service/method for context-aware actions.\n\n## Service button example\n```json\n{\n  \"id\": \"inspectTask\",\n  \"slot\": \"scheduled.task\",\n  \"title\": \"Inspect task\",\n  \"service\": \"taskActions\",\n  \"method\": \"inspect\",\n  \"when\": \"project\",\n  \"order\": 100\n}\n```\nIts input schema must accept context.taskId as a string, and output must match the actual result. Do not reject context in the schema while targeting this slot.\n\n## Interaction behavior\nWhile running, duplicate clicks are disabled. Errors and completion are visible. Present detailed results through the plugin's own view, notification or returned content. Use action-oriented titles, short badges and order for sorting. Feedback from old project requests is ignored, and disabling removes the entry.\n\n## Page safety\nPages use the bridge to call their own services rather than manipulating host DOM. Do not depend on remote scripts, inline event attributes or Node globals. Follow theme colors and support narrow windows, keyboard focus and readable errors. Start from the complete UI bridge example.\n"
+    }
+  },
+  {
+    "id": "dev-lifecycle",
+    "keywords": "hooks events extensionPoints extensions context compact models route version timeout chain 生命周期 订阅",
+    "zh": {
+      "group": "插件与扩展",
+      "title": "二次开发：Hooks、事件与策略",
+      "summary": "选择合适的扩展机制，避免把通知当授权。",
+      "content": "# 二次开发：Hooks、事件与策略\n\n先确定扩展是在做决定、接收通知、提供算法还是添加界面，再选择对应声明。\n\n## 四种机制\n| 需求 | 声明 | 结果 |\n| --- | --- | --- |\n| 对执行流程作出决定 | hooks | 按钩子协议解释结果 |\n| 获知宿主事件 | events | 有界通知，不等同新授权 |\n| 提供可选择的功能实现 | extensions / extensionPoints | 按版本与输入输出 schema 分派 |\n| 展示用户操作入口 | contributes | 按钮或插件页面 |\n\n## Hooks\n在清单申请 hooks.respond，并把事件绑定到自己的服务方法。matcher 用于限定处理对象；order 控制顺序，timeoutMs 为有界等待。支持事件以随包类型和完整扩展清单为准。旧 hooks.json 不执行。不要让 hook 依赖长时间人工交互；超时、异常和无效结果应能够定位。\n\n## Events\n宿主事件包括 sage/workspace.opened、sage/settings.changed、sage/git.committed、sage/browser.created、sage/browser.navigated、sage/browser.closed、sage/engine.started、sage/engine.finished。订阅方法收到数据后仍受插件权限约束，不能把事件通知解释成用户授权发送或删除。\n\n## 策略扩展\nsage/context.compact 提供压缩摘要与保留轮数，需 context.transform；sage/models.route 返回 providerId/modelId，需 models.use。必须声明兼容版本、输入输出和服务方法，并在对应设置中选用。清单存在不意味着它会替换默认策略。\n\n## 调试与兼容\n分别验证无订阅、多个订阅、版本不兼容、权限缺失、停用、超时、异常和无效结果。检查调用链与依赖是否形成循环。兼容升级保留既有字段；需要破坏协议时使用新版本，别让旧调用方靠猜测适配。\n"
+    },
+    "en": {
+      "group": "Plugins & extensions",
+      "title": "Extension development: hooks, events and strategies",
+      "summary": "Select lifecycle mechanisms without confusing notifications and authorization.",
+      "content": "# Extension development: hooks, events and strategies\n\nDecide whether the extension makes a decision, receives a notification, supplies an algorithm or adds a UI entry before choosing its declaration.\n\n## Four mechanisms\n| Need | Declaration | Result |\n| --- | --- | --- |\n| Affect execution decisions | hooks | Interpreted by the hook protocol |\n| Receive host notifications | events | Bounded notification, not new authorization |\n| Supply selectable functionality | extensions / extensionPoints | Versioned schema-checked dispatch |\n| Add user controls | contributes | Buttons or plugin views |\n\n## Hooks\nRequest hooks.respond and bind an event to your own service method. matcher narrows handling, order controls ordering and timeoutMs bounds waiting. Use the packaged types and catalogue for supported events. Legacy hooks.json does not execute. Avoid long human interaction inside a hook; diagnose timeout, exception and invalid output separately.\n\n## Events\nHost events include sage/workspace.opened, sage/settings.changed, sage/git.committed, sage/browser.created, sage/browser.navigated, sage/browser.closed, sage/engine.started and sage/engine.finished. Subscribers remain permission-bound. A notification is not permission to send messages or delete data.\n\n## Strategies\nsage/context.compact returns a summary and retention count with context.transform permission. sage/models.route returns providerId/modelId with models.use. Declare a compatible version, schemas and service method, then select the implementation in the relevant settings. Merely declaring a strategy does not replace the default.\n\n## Debugging and compatibility\nTest absent/multiple subscribers, incompatible versions, missing permission, disabling, timeout, exceptions and invalid results. Inspect call chains for cycles. Preserve existing fields in compatible updates; version breaking protocols explicitly rather than expecting old callers to guess.\n"
+    }
+  },
+  {
+    "id": "dev-release",
+    "keywords": "debug package validate inspect dev-start dev-stop .sageplugin 打包 升级 测试 发布",
+    "zh": {
+      "group": "插件与扩展",
+      "title": "二次开发：调试、打包与升级",
+      "summary": "开发模式、测试矩阵、依赖导出、版本与迁移。",
+      "content": "# 二次开发：调试、打包与升级\n\n源码目录、运行中的开发实例、已安装包是不同状态。排查“修改没生效”时先确认当前运行的是哪一份。\n\n## 开发循环\n编辑源码 → 校验清单 → 加载/重新加载开发目录 → 在目标项目启用 → 调用 → 查日志。权限变化需要重新审核。多个窗口切换时确认项目配置相同；插件全局安装不代表各项目有效状态一致。\n\n## 对话辅助开发\nPlugin 工具提供 scaffold、inspect、dev-start、dev-stop、package、validate。让模型明确操作目录与插件 id，不要把源码直接写进宿主安装缓存。对话开发操作受当前项目范围限制。打包导出不执行第三方 package scripts；已存在的输出文件不会被无提示覆盖。\n\n## 打包验收\n1. 更新插件自身版本，检查清单、入口、页面、技能及类型引用。\n2. 导出包并检查必要依赖；在干净项目中安装。\n3. 验证配置持久化、停用/启用、卸载后入口消失、重新安装恢复流程。\n4. 验证空值、错误、超时、离线、窄窗口、浅深主题和中英文文案。\n5. 对写文件、发消息或网络请求使用明确的测试目标，核对实际结果。\n\n## 升级与权限\n新增权限不会被旧安装自动授予；用户应看到更新计划。包内容摘要变化时确认确实加载了新版本。依赖版本不满足时不要绕过校验，修正依赖或发布兼容版本。\n\n## 发布资料\n随包提供功能用途、安装/配置步骤、权限解释、已知限制、故障定位、变更记录和可复现示例。当前源码文档放在 docs/，生成到 SDK 的副本用于分发，避免维护两份相互冲突的说明。\n"
+    },
+    "en": {
+      "group": "Plugins & extensions",
+      "title": "Extension development: debug, package and upgrade",
+      "summary": "Development mode, acceptance coverage, dependency exports and migration.",
+      "content": "# Extension development: debug, package and upgrade\n\nSource directories, running development instances and installed packages are distinct. When a change appears ineffective, identify which copy is active first.\n\n## Development loop\nEdit → validate → load/reload → enable for the target project → invoke → inspect logs. Review changed permissions. Across windows, verify project configuration; global installation does not imply equal effective activation.\n\n## Conversational development\nThe Plugin tool supports scaffold, inspect, dev-start, dev-stop, package and validate. Specify the directory and id. Do not write source into host installation caches. Development operations remain within the current project. Export does not execute third-party package scripts and does not silently overwrite an existing output file.\n\n## Package acceptance\n1. Increment the plugin version and inspect manifest, entry, views, skills and type references.\n2. Export with required dependencies and install into a clean project.\n3. Verify persisted configuration, deactivate/reactivate, removal of entries on uninstall and reinstall behavior.\n4. Cover empty values, errors, timeout, offline behavior, narrow windows, light/dark themes and both languages.\n5. Use explicit test destinations for writes, messages and network requests, then verify actual results.\n\n## Upgrades and permissions\nOld installations do not silently acquire new permissions. Review the update plan. Confirm the active package digest/version after changing contents. Fix incompatible dependencies rather than bypassing validation.\n\n## Release documentation\nInclude purpose, install/configure steps, permission explanations, limitations, troubleshooting, changelog and reproducible examples. Maintain source documentation in docs/; SDK copies are distribution artifacts rather than competing sources.\n"
+    }
+  },
+  {
+    "id": "skills",
+    "keywords": "技能 Skills 知识包 markdown 全局 项目 作用域 启用依赖 Skill 工具 skill package scope",
+    "zh": {
+      "group": "插件与扩展",
+      "title": "技能（Skills）",
+      "summary": "技能是可复用的 Markdown 知识包，按全局/项目两级管理，对话中按需读取。",
+      "content": "# 技能（Skills）\n\n技能是可复用的 Markdown 知识包：模型在任务匹配时按需读取，相当于给对话加载一本手册。技能可独立安装，也可随插件包分发。\n\n## 安装与作用域\n设置 → 技能管理全局技能（对所有项目生效）；项目设置中的技能页管理项目级技能（仅当前项目）。同名时项目级优先。支持离线 Markdown/技能包安装、在线市场安装、创建工程与开发目录加载。\n\n## 启用依赖\n技能可以声明宿主依赖：例如外置浏览器验收技能需要先启用 Browser 宿主模块。有未满足的依赖时，复选框旁会提示「需先启用：…」并禁用勾选。\n\n## 对话内使用\n技能采用渐进式披露：名称与描述先进入对话上下文，正文由模型在需要时通过 Skill/Plugin 工具读取，不需要你手动粘贴。单个技能正文上限 128KB、描述 200 字。\n\n\n## 编写普通技能\n在项目 .sage/skills/ 下放置 Markdown 文件，或使用设置中的技能安装入口。文件前部可写 YAML 元数据：\n```markdown\n---\nname: review-release\ndescription: 检查当前项目发布内容并生成验收清单\n---\n# 发布检查\n先读取项目说明，确认范围，再核验构建与测试结果。\n```\n描述用于匹配任务，应说明何时使用；正文写清输入、步骤、产物和失败处理。同名项目技能覆盖全局技能，插件同名技能采用确定的首个可用项；用唯一名称避免歧义。选择器显示来源，便于确认读到的是哪份技能。\n\n## 技能不等于授权\n技能说明不会自动扩大文件、网络或插件权限。正文要求的外部服务仍需已配置；凭据应放在对应秘密配置中，不应写进 Markdown。修改技能后刷新能力列表并发起新的明确请求。\n\n## 相关主题\n- 扩展点与技能包\n- 插件列表与启用范围\n- 内置浏览器"
+    },
+    "en": {
+      "group": "Plugins & extensions",
+      "title": "Skills",
+      "summary": "Skills are reusable Markdown knowledge packages, managed at global/project scope and read on demand in chats.",
+      "content": "# Skills\n\nSkills are reusable Markdown knowledge packages: the model reads them when a task matches, like attaching a manual to a conversation. Skills install standalone or ship inside plugin packages.\n\n## Install and scope\nSettings → Skills manages global skills (all projects); the skills page in project settings manages project-level skills (current project only). A project skill of the same name wins. Offline Markdown/package installation, marketplace installation, scaffolds and development-folder loading are supported.\n\n## Activation dependencies\nA skill can declare host dependencies: the browser acceptance skill, for example, requires the Browser host module first. With an unmet dependency the checkbox shows \"Enable first: …\" and stays disabled.\n\n## In conversations\nSkills use progressive disclosure: the name and description enter the conversation context first; the body is read by the model through the Skill/Plugin tool when needed — nothing to paste manually. A skill body is capped at 128KB and its description at 200 characters.\n\n\n## Write a plain skill\nPlace a Markdown file in the project's .sage/skills/ directory or use skill installation in Settings. Start with YAML metadata:\n```markdown\n---\nname: review-release\ndescription: Review the current release and produce an acceptance checklist\n---\n# Release review\nRead project instructions, confirm scope, then verify build and test results.\n```\nThe description should state when to use it; the body should define inputs, steps, outputs and failure handling. A project skill overrides a global skill of the same name. Duplicate plugin names resolve deterministically to the first available entry; use unique names. The picker shows the source.\n\n## Instructions are not authorization\nSkills do not automatically expand file, network or plugin permissions. Required services must still be configured. Store credentials in secret settings, not Markdown. Refresh the catalogue after changes and send a clear new request.\n\n## Related topics\n- Extension Points and Skill Packages\n- Plugin list and activation scope\n- Built-in browser"
+    }
+  },
+  {
+    "id": "hooks",
+    "keywords": "hooks 钩子 拦截 PreToolUse PostToolUse UserPromptSubmit hooks.json 事件 hook matcher",
+    "zh": {
+      "group": "插件与扩展",
+      "title": "Hooks（钩子插槽）",
+      "summary": "钩子是插件扩展点，通过插件启用状态和权限控制。",
+      "content": "# Hooks（钩子插槽）\n\n钩子通过插件 manifest.hooks 声明，需要 hooks.respond 授权。旧 hooks.json 文件命令和独立钩子设置页已移除；旧文件不读取、不执行，也不会被删除。\n\n## 管理入口\n管理入口为设置 → 插件 → 插件包。停用插件即可停用其订阅。\n\n## 四种扩展约定\nhooks 用于流程决策，events 用于通知，extensions 用于功能策略，contributes 用于界面入口。开发清单见插件开发手册及 docs/PLUGIN_EXTENSION_CATALOG.md。\n\n## 相关主题\n- 扩展点与技能包\n- 插件开发与加载\n- 工具调用与审批"
+    },
+    "en": {
+      "group": "Plugins & extensions",
+      "title": "Hooks (hook slots)",
+      "summary": "Hooks are plugin extension points controlled by activation and permission.",
+      "content": "# Hooks (hook slots)\n\nDeclare hooks in manifest.hooks and grant hooks.respond. Legacy hooks.json execution and the separate hook settings page have been removed. Existing files are not read, executed or deleted.\n\n## Management\nManage activation in Settings → Plugins → Plugin packages. Disabling a plugin stops its subscriptions.\n\n## Four extension conventions\nHooks affect pipeline decisions; events are notifications; extensions provide strategies; contributes adds UI entries. See the plugin developer manual and docs/PLUGIN_EXTENSION_CATALOG.md.\n\n## Related topics\n- Extension Points and Skill Packages\n- Plugin development and loading\n- Tools and approval"
+    }
+  },
+  {
+    "id": "mcp-servers",
+    "keywords": "MCP 服务器 server STDIO HTTP 工具 导入 导出 连接测试 JSON tool import export",
+    "zh": {
+      "group": "插件与扩展",
+      "title": "MCP 服务器管理",
+      "summary": "设置 → MCP 服务器管理外部工具服务器，支持 STDIO 和 Streamable HTTP 两种传输。",
+      "content": "# MCP 服务器管理\n\n设置 → MCP 服务器管理外部工具服务器，支持 STDIO 和 Streamable HTTP 两种传输方式。\n\n## 加密环境变量\n在服务器列表页的“MCP 加密环境变量”中录入密钥值。值会加密保存在本机设置，渲染界面只收到变量名和受保护占位符；值只用于 MCP 请求，不会注入终端或其他子进程。MCP HTTP 配置的 Bearer 环境变量字段填写对应变量名。\n\n## 添加服务器\nSTDIO 需填写命令、参数、环境变量和工作目录；HTTP 需填写地址、令牌环境变量名和请求头。导入 JSON 可批量添加（导入后默认停用）。名称不可重复。\n\n## 测试连接\n点击测试会建立真实连接并拉取工具列表，显示可用工具数量和名称。\n\n## 自动加载到对话\n应用启动及 MCP 配置变更后，Sage 会在后台连接已启用的服务器并缓存工具清单。API 对话直接使用缓存；停用的服务器不会提供工具，连接失败的服务器会被跳过。调用仍遵循现有工具授权规则。\n\n## 启用与导出\n每个服务器可独立启用或停用。导出 JSON 生成不含密钥的模板，便于分享配置。\n\n## 边界与注意\n导入的服务器默认停用，需手动启用。环境变量中的密钥不随 MCP 模板导出；加密设置备份会保护本机变量。完整开发契约见插件 SDK 的 EXTENSIBILITY.md。\n\n\n## 从配置到可调用\n1. STDIO 使用本机实际存在的可执行文件；参数按项填写，确认工作目录和依赖已安装。\n2. HTTP 填写服务器真实 MCP 端点，不能用普通网页地址代替；令牌字段填环境变量名，不是把密钥写进工具描述。\n3. 保存，测试连接，检查发现的工具名，再启用。\n4. 回到对话的能力选择器搜索服务器名；缺失时点击刷新。\n\n## 缓存与恢复\n已发现的目录被复用以减少发送延迟；后台按需刷新，失败来源会重试，选择器也能强制刷新。修改地址、环境变量或停用服务器后，旧目录不能把调用悄悄转发到新配置，需要重新发现。\n\n## 常见失败\n命令不存在：在终端验证完整路径，不假定图形应用继承你的 shell PATH。\n连接超时：检查服务是否运行、代理、证书和端点。\n有连接但零工具：确认服务提供 tools/list，而非仅资源或提示模板。\n工具执行失败：区分发现成功与具体参数/权限失败，查看该次工具结果。MCP 返回的内容按数据处理，不应充当追加授权。\n\n## 相关主题\n- 扩展点与技能包\n- 插件开发与加载\n- 工具调用与审批"
+    },
+    "en": {
+      "group": "Plugins & extensions",
+      "title": "MCP server management",
+      "summary": "Settings → MCP manages external tool servers with STDIO and Streamable HTTP transports.",
+      "content": "# MCP server management\n\nSettings → MCP manages external tool servers with STDIO and Streamable HTTP transports.\n\n## Encrypted environment variables\nEnter secret values under “Encrypted MCP environment variables” on the server list page. Values are encrypted in local settings; the renderer only receives variable names and protected placeholders. Secrets are used for MCP requests only and are not injected into terminals or other child processes. The HTTP Bearer field references a variable by name.\n\n## Adding servers\nSTDIO requires a command, arguments, environment variables and working directory. HTTP requires a URL, bearer-token env var name and headers. JSON import adds servers in bulk (imported as disabled). Names must be unique.\n\n## Test connection\nTest establishes a real session and pulls the tool list, showing available tool count and names.\n\n## Automatic loading in conversations\nSage connects to enabled servers and caches their tool catalogues in the background after startup or an MCP settings change. API conversations use the cached catalogue directly. Disabled servers are excluded, failed connections are skipped, and tool calls still follow the existing approval rules.\n\n## Enable and export\nEach server can be enabled or disabled independently. Export produces a secret-free JSON template for sharing configuration.\n\n## Limits\nImported servers start disabled and must be enabled manually. MCP template exports omit secret environment values; encrypted settings backups protect them. Full contracts are documented in the SDK EXTENSIBILITY.md.\n\n\n## From configuration to a callable tool\n1. For STDIO use an existing executable, separate arguments correctly and verify the working directory and dependencies.\n2. For HTTP use the actual MCP endpoint, not a website URL. The token field names an environment variable; do not put secrets in descriptions.\n3. Save, test, inspect discovered tool names and enable.\n4. Search the server in the conversation picker and refresh if missing.\n\n## Cache and recovery\nCatalogues are reused to reduce send latency. Background refresh retries failed sources; the picker can force discovery. Changing an endpoint/environment or disabling a server prevents stale calls from silently targeting the changed configuration.\n\n## Common failures\nExecutable missing: verify the full path in a terminal; GUI applications may not inherit your shell PATH.\nTimeout: inspect service availability, proxy, certificate and endpoint.\nConnected with zero tools: confirm tools/list support; a server may expose only resources or prompts.\nExecution failure: discovery success does not validate every argument or permission. Read the tool result. MCP output is data, not additional user authorization.\n\n## Related topics\n- Extension Points and Skill Packages\n- Plugin development and loading\n- Tools and approval"
+    }
+  },
+  {
+    "id": "engine-plugins",
+    "keywords": "CLI 引擎 插件 Claude Codex backend adapter native engine",
+    "zh": {
+      "group": "插件与扩展",
+      "title": "CLI 引擎插件",
+      "summary": "API 默认内置，CLI 通过独立插件接入。",
+      "content": "# CLI 引擎插件\n\n默认只有 API 直连。在设置 → 全局 → 插件配置安装 Claude Code、Codex 或其他引擎插件，全局启用，然后在通用设置中选择引擎。Claude/Codex 不随 DMG 分发。插件未安装或未启用时不会启动 CLI。\n\n## 安全边界\n插件的开发管理放在全局，加载目录前先打开测试项目。引擎插件可执行本机代码，安装时请核对来源及 engine.native 权限。普通界面插件仍在沙箱中运行。\n\n## 扩展\n新增 CLI 可以创建 CLI 引擎插件工程，实现 Engine API v1，无需修改主程序。接口、取消和工具审批规范见插件开发手册。\n\n## 相关主题\n- 插件开发与加载\n- 模型与后端\n- 工具调用与审批"
+    },
+    "en": {
+      "group": "Plugins & extensions",
+      "title": "CLI engine plugins",
+      "summary": "API is built in; CLIs use independent adapters.",
+      "content": "# CLI engine plugins\n\nInstall a CLI engine under Settings → Global → Plugins, enable it globally, then select it in General settings. Claude/Codex do not ship in the DMG. Missing or disabled plugins cannot launch a CLI.\n\n## Security boundary\nDevelopment is managed globally with an explicit test project. Native engine adapters execute local code: review the source and engine.native permission. Ordinary UI plugins remain sandboxed.\n\n## Extending\nCreate a CLI engine plugin and implement Engine API v1 to add another CLI without host changes. See the plugin manual for cancellation and tool approval requirements.\n\n## Related topics\n- Plugin development and loading\n- Models and backends\n- Tools and approval"
+    }
+  },
+  {
+    "id": "browser-plugin",
+    "keywords": "浏览器 网页 标签 书签 端口 空白页 本地 地址栏 browser bookmark tab url",
+    "zh": {
+      "group": "内置模块",
+      "title": "内置浏览器",
+      "summary": "内置浏览器在应用内打开网页，支持本地端口快捷芯片、书签与文件地址。",
+      "content": "# 内置浏览器\n\nBrowser 是 Sage 宿主模块：安装并在项目启用后，网页链接优先在应用内标签页打开；未启用时交给系统浏览器。宿主模块只能停用，不能单独卸载。\n\n## 空白页与导航\n新标签空白页聚合本地端口快捷芯片（一键打开本机开发服务）与书签；地址栏支持网址、file:// 和本地绝对路径。\n\n## 书签\n在浏览器菜单中管理书签：添加当前页、编辑名称与地址、删除；书签保存在应用数据里，跨项目可用。\n\n## 边界与注意\n内嵌网页的渲染与系统浏览器独立，个别站点出现兼容性问题时可改用系统浏览器打开。\n\n## 相关主题\n- 文件编辑与程序内打开\n- 技能（浏览器验收技能）\n- 插件列表与启用范围"
+    },
+    "en": {
+      "group": "Built-in modules",
+      "title": "Built-in browser",
+      "summary": "The built-in browser opens web pages in app tabs with local-port chips, bookmarks and file addresses.",
+      "content": "# Built-in browser\n\nBrowser is a Sage host module: once installed and enabled for a project, web links prefer in-app tabs; otherwise they go to the system browser. Host modules can be disabled but not uninstalled separately.\n\n## Blank page and navigation\nThe new-tab blank page aggregates local-port chips (one click opens a local dev server) and bookmarks. The address bar accepts URLs, file:// addresses and local absolute paths.\n\n## Bookmarks\nManage bookmarks from the browser menu: add the current page, edit name and address, and delete. Bookmarks live in app data and work across projects.\n\n## Limits\nEmbedded rendering is independent of the system browser. If a specific site has compatibility issues, open it in the system browser instead.\n\n## Related topics\n- File editing and opening inside Sage\n- Skills (browser acceptance skill)\n- Plugin list and activation scope"
+    }
+  },
+  {
+    "id": "git-plugin",
+    "keywords": "Git 仓库 分支 切换 检出 标签 提交 历史 扫描 git branch commit repository fetch pull push stage unstage commit branch rebase merge upstream 首次推送 暂存 取消暂存 提交",
+    "zh": {
+      "group": "内置模块",
+      "title": "Git 侧栏",
+      "summary": "Git 侧栏异步扫描仓库，提供分支切换/新建、提交历史与引用筛选。",
+      "content": "# Git 侧栏\n\nGit 分区自动发现当前项目及其子目录中的仓库；Git 与 Browser 始终可用。先确认顶部仓库路径，再执行会改变分支、索引或远端的操作。\n\n## 日常修改到提交\n1. 在 Git 中打开工作区变更，选择文件检查差异。\n2. 使用“暂存当前文件”或“暂存全部”。暂存表示准备提交，不会推送到远端。\n3. 使用“取消暂存”可保留工作区内容，仅把修改移出暂存区；尚无首个提交的仓库也支持。\n4. 输入提交说明，点击“提交暂存更改”。只有暂存区进入此次提交；未暂存修改保留。\n5. 提交失败时保留说明并显示错误；检查冲突、Git 用户身份、提交钩子，再决定是否重试。\n\n## Fetch、Pull、Push\n| 操作 | 会改变什么 | 需要注意 |\n| --- | --- | --- |\n| Fetch | 下载对象、更新远程跟踪引用、清理已删除远程引用 | 不切换分支、不合并工作区 |\n| Pull | 获取远端后快进当前分支 | 仅允许 ff-only，分歧时会拒绝 |\n| Push | 上传本地提交到配置的远端/上游 | 首次推送选择远程并设置上游 |\n\n每个仓库同时只运行一个修改操作；共享 Git 目录的 worktree 也共用这个限制。执行中显示状态并禁用重复触发。成功和失败都会刷新相关列表。\n\n## 分支与标签\n双击或右键分支可切换。远程分支可检出并建立本地跟踪分支；本地分支支持新建、重命名、删除、配置或取消上游。右键还提供合并、变基、快进更新以及新建标签。删除本地分支使用 Git 的已合并检查；远程删除会真实改变远端。不要把本地引用的删除与远端删除混淆。\n\n历史行右键可从指定提交建分支，或检出提交。检出弹窗中留空会进入分离 HEAD；需要继续开发时填写新分支名称。所有输入都在程序内完成，取消不改变仓库。\n\n## 历史与文件\n按引用聚焦历史，使用搜索/分页浏览提交。查看父提交、改动文件和该提交的文件树。历史文本在只读标签中打开，图片可预览；查看历史文件不会覆盖工作区。长分支名可悬停看完整名称。\n\n## 配置\n设置 → 插件 → Git 中可设置仓库扫描间隔、分支前缀、force-with-lease 推送与提交说明指引。分支前缀仅对不带命名空间的新名称应用；已有前缀或包含 / 时不重复添加。强制推送选项会改变推送行为，开启前确认这是你需要的历史重写流程。首次发布分支使用普通推送。\n\n## 相关主题\n- Git 故障与冲突恢复\n- 文件编辑与程序内打开\n- 终端面板\n"
+    },
+    "en": {
+      "group": "Built-in modules",
+      "title": "Git sidebar",
+      "summary": "The Git sidebar scans repositories asynchronously and offers branch checkout/create, history and ref filtering.",
+      "content": "# Git sidebar\n\nGit discovers repositories in the current project and its child directories. Git and Browser are always available. Confirm the repository path before changing branches, the index or a remote.\n\n## Changes to a commit\n1. Open working changes and select a file to inspect its diff.\n2. Stage selected or Stage all. Staging prepares a commit; it does not push.\n3. Unstage preserves working files and removes their changes from the index, including before the repository's first commit.\n4. Enter a message and Commit staged changes. Only the index is committed; unstaged changes remain.\n5. A failed commit retains the message and shows an error. Check conflicts, author identity and hooks before retrying.\n\n## Fetch, Pull and Push\n| Operation | Effect | Important detail |\n| --- | --- | --- |\n| Fetch | Downloads objects, updates remote tracking refs and prunes deleted refs | Does not switch or merge the working branch |\n| Pull | Fetches and fast-forwards the current branch | ff-only rejects diverged history |\n| Push | Uploads commits to the configured remote/upstream | First publication asks for a remote and sets upstream |\n\nOnly one mutation runs per repository at a time, including worktrees sharing a Git directory. Progress disables duplicate actions. Relevant lists refresh after either success or failure.\n\n## Branches and tags\nDouble-click or use the branch context menu to switch. Track a remote branch locally; create, rename or delete local branches; set or remove upstreams. Context actions also merge, rebase, fast-forward and create tags. Local deletion requires Git's merged-history checks; deleting a remote branch really changes the remote.\n\nA history-row menu creates a branch from a commit or checks out that commit. Leave the checkout name empty to detach HEAD; enter a name to continue on a new branch. In-app dialogs can be cancelled without mutating the repository.\n\n## History and files\nFocus history on a ref, search or page through commits, inspect parents, changed files and historical trees. Historical text opens read-only; images can be previewed. Viewing historical files never overwrites working files. Hover truncated refs for their complete names.\n\n## Configuration\nSettings → Plugins → Git controls scan interval, branch prefix, force-with-lease and commit-message guidance. Prefixes apply to new names without a namespace; existing prefixes or names containing / are not prefixed again. Enable forced pushes only for an intended history-rewriting workflow. First publication uses a normal push.\n\n## Related topics\n- Git troubleshooting and conflict recovery\n- File editing and in-app opening\n- Terminal panel\n"
+    }
+  },
+  {
+    "id": "git-recovery",
+    "keywords": "Git fetch pull push rejected conflict rebase merge upstream authentication 分歧 拒绝 冲突 变基 身份",
+    "zh": {
+      "group": "内置模块",
+      "title": "Git 故障与冲突恢复",
+      "summary": "诊断身份、远端、分歧、冲突和缓存，不丢失本地修改。",
+      "content": "# Git 故障与冲突恢复\n\n先读错误内容，确认仓库路径和当前分支；不要用反复点击或强制推送掩盖问题。\n\n## 拉取被拒绝\n“无上游”：首次推送并选择远程，或在分支菜单配置已存在的上游。\n“无法快进”：本地与远端各有提交。先 Fetch，比较历史，再选择合并或变基；Sage 的 Pull 不会替你自动选择策略。\n“本地修改将被覆盖”：先提交需要保存的修改，或在终端按你的工作流 stash；切换分支不会自动丢弃文件。\n\n## 推送失败\n检查远程 URL、网络、SSH agent 或凭据助手。Sage 不会弹出隐藏终端让你输入密码；可以在终端完成认证配置后重试。\nnon-fast-forward 表示远端包含本地没有的历史，先获取并整合。不要仅为消除错误开启强制推送。force-with-lease 也不是备份，且服务器保护分支仍可能拒绝。\n分离 HEAD 不适合作为日常推送起点；从该提交创建本地分支后再发布。\n\n## 解决合并或变基冲突\n1. 打开工作区变更，检查冲突文件中的双方内容。\n2. 用编辑器保留需要的结果，移除冲突标记，保存。\n3. 暂存解决后的文件，确认没有剩余冲突。\n4. 合并可提交暂存结果；变基用分支菜单“继续变基”。\n5. 不想继续时使用“中止合并”或“中止变基”。中止由 Git 恢复操作前状态；操作前已有复杂修改时先核对 Git 的提示。\n\n## 仓库或历史不对\n确认当前项目与所选子仓库，手动刷新。后台扫描优先使用缓存以加快切换；刷新会重新读取。没有 origin 不代表不是仓库；首次推送可选择其他已配置远程。刚初始化且尚无提交的仓库没有历史，这是正常状态。\n\n## 提交失败\n提示作者身份缺失时，在终端为该仓库配置 user.name 与 user.email，再重试。钩子失败时根据其日志修复；Sage 不会自动跳过钩子。空提交说明不能提交，未暂存文件也不会自动加入提交。\n\n## 精确核验\n需要确认实际结果时，在对应仓库终端查看 git status、git branch -vv、git remote -v、git log --oneline --decorate -10。涉及凭据的输出不应粘贴到公开报告。\n"
+    },
+    "en": {
+      "group": "Built-in modules",
+      "title": "Git troubleshooting and conflict recovery",
+      "summary": "Diagnose identity, remotes, divergence, conflicts and stale data while preserving work.",
+      "content": "# Git troubleshooting and conflict recovery\n\nRead the error and confirm the repository and branch before retrying. Repeated clicks or forced pushes do not resolve the underlying cause.\n\n## Pull rejected\nNo upstream: publish the branch to a chosen remote or configure an existing upstream in the branch menu.\nCannot fast-forward: both histories have commits. Fetch, compare and explicitly choose merge or rebase. Sage's Pull does not silently choose a strategy.\nLocal changes would be overwritten: commit the intended changes or use your stash workflow in the terminal. Switching never automatically discards files.\n\n## Push failed\nCheck the remote URL, connectivity, SSH agent or credential helper. Sage does not wait for a password in an invisible terminal; configure authentication in the terminal and retry.\nA non-fast-forward rejection means remote history is missing locally. Fetch and integrate first. Do not enable force merely to silence the error. force-with-lease is not a backup, and server-side branch protection can still reject it.\nFor detached HEAD, create a local branch from that commit before publishing.\n\n## Merge or rebase conflicts\n1. Open working changes and inspect both sides of each conflict.\n2. Keep the intended result in the editor, remove conflict markers and save.\n3. Stage the resolutions and ensure no conflicts remain.\n4. Commit a merge result; use Continue rebase for a rebase.\n5. Use Abort merge or Abort rebase to stop. Git restores the operation's earlier state; inspect its warning when complex pre-existing changes make recovery uncertain.\n\n## Wrong repository or stale history\nCheck the project and selected child repository, then refresh. Background scans use cached data for quick switching; manual refresh re-reads it. A repository does not need a remote named origin. A newly initialized repository has no history until the first commit.\n\n## Commit failed\nFor missing author identity, configure user.name and user.email for this repository in the terminal. Fix failed hooks from their output; Sage does not bypass hooks. Empty messages are rejected and unstaged files are not automatically committed.\n\n## Verify results\nIn the matching repository terminal inspect git status, git branch -vv, git remote -v and git log --oneline --decorate -10. Do not publish credential-bearing output.\n"
+    }
+  },
+  {
+    "id": "project-wiki",
+    "keywords": "Wiki 文档 目录 生成 项目 DeepWiki Mermaid docs",
+    "zh": {
+      "group": "内置模块",
+      "title": "项目 Wiki 与 DeepWiki",
+      "summary": "Docs 插件可为项目生成带目录的 Wiki 文档，并内嵌 DeepWiki 查看。",
+      "content": "# 项目 Wiki 与 DeepWiki\n\nDocs 是 Sage 插件：安装并在项目启用后，侧栏出现 docs/wiki 标签，可为项目生成 Wiki 文档，并内嵌查看 DeepWiki。\n\n## 生成 Wiki\n选择生成深度后创建：生成是流式的，可随时停止；完成后得到带目录导航的 Markdown 文档，支持 Mermaid 图表。对结果不满意可重新生成或删除后重来。\n\n## 阅读与排查\n目录条目点击即跳转对应小节；生成失败时检查模型配置与请求监控器中的错误。\n\n## 相关主题\n- 插件列表与启用范围\n- 模型与后端\n- 请求监控与 debug 定位"
+    },
+    "en": {
+      "group": "Built-in modules",
+      "title": "Project Wiki and DeepWiki",
+      "summary": "The Docs plugin generates a table-of-contents Wiki for a project and embeds DeepWiki viewing.",
+      "content": "# Project Wiki and DeepWiki\n\nDocs is a Sage plugin: once installed and enabled for a project, a docs/wiki tab appears in the sidebar. It generates project Wiki documents and embeds DeepWiki viewing.\n\n## Generating a Wiki\nPick a depth and create: generation streams and can be stopped at any time. The result is a Markdown document with table-of-contents navigation and Mermaid diagrams. Regenerate or delete and retry when the result disappoints.\n\n## Reading and troubleshooting\nClick a TOC entry to jump to its section. When generation fails, check the model configuration and errors in the request monitor.\n\n## Related topics\n- Plugin list and activation scope\n- Models and backends\n- Request monitor and debug links"
+    }
+  },
+  {
+    "id": "terminal-panel",
+    "keywords": "终端 terminal xterm 命令行 shell bash zsh 面板 多终端 快捷键 pane",
+    "zh": {
+      "group": "内置模块",
+      "title": "终端面板",
+      "summary": "终端面板在应用内提供多标签终端，每个标签独立 PTY，支持主题配色与快捷键。",
+      "content": "# 终端面板\n\n终端面板在应用内提供多标签终端，每个标签拥有独立 PTY 进程，支持主题配色和可调字号。\n\n## 打开与关闭\n快捷键 Ctrl/Cmd+` 切换终端面板；标签栏支持新建、关闭单个和关闭全部终端。标签切换时保留各自的回滚历史。\n\n## 主题与字号\n终端颜色（背景、前景、光标、选中）自动跟随应用主题。字号跟随设置 → 外观的代码字号，改动立即生效。\n\n## 边界与注意\n终端进程随窗口关闭而终止，不会跨窗口保留。进程退出后标签显示退出码。\n\n## 相关主题\n- 键盘快捷键\n- 文件编辑与程序内打开\n- 安全方案与文件沙箱"
+    },
+    "en": {
+      "group": "Built-in modules",
+      "title": "Terminal panel",
+      "summary": "The terminal panel provides multi-tab terminals inside the app, each with its own PTY, theme colors and shortcut.",
+      "content": "# Terminal panel\n\nThe terminal panel provides multi-tab terminals inside the app. Each tab has its own PTY process with theme-matched colors and adjustable font size.\n\n## Open and close\nCtrl/Cmd+` toggles the terminal panel. The tab bar supports creating, closing individual and closing all terminals. Scrollback history is preserved when switching tabs.\n\n## Theme and font size\nTerminal colors (background, foreground, cursor, selection) follow the app theme automatically. Font size follows Settings → Appearance code font size and applies immediately.\n\n## Limits\nTerminal processes end when the window closes and are not shared across windows. An exited process shows its exit code in the tab.\n\n## Related topics\n- Keyboard shortcuts\n- File editing and opening inside Sage\n- Security policies and filesystem sandbox"
+    }
+  },
+  {
+    "id": "desktop-pet",
+    "keywords": "宠物 桌面宠物 pet 悬浮 语音 气泡 对话 快捷 贴边 眨眼 招呼 拎起 拖拽 形象 overlay voice bubble edge blink greeting drag appearance 四角 对角 角落 corner diagonal",
+    "zh": {
+      "group": "内置模块",
+      "title": "桌面宠物",
+      "summary": "桌面宠物提供常驻的对话、语音与消息入口；支持四种形象、拖动、四边四角探头和鼠标互动。",
+      "content": "# 桌面宠物\n\n桌面宠物是独立的透明悬浮窗口，可拖到显示器可见工作区的任意位置，用文字或语音发起项目对话，并查看回复和后台消息。\n\n## 启用与配置\n设置 → 通用 → 桌面宠物。总开关、宠物形象、宠物对话方式放在同一设置区，修改后自动保存。形象可选像素猫、漫画猫、像素狗、漫画狗；宠物右键菜单也可切换。形象“关闭”只隐藏图片，保留常驻的小入口；关闭桌面宠物总开关才会全部隐藏。\n\n对话方式默认“同一个对话持续进行”，在当前宠物会话里复用同一项目的对话；换项目时创建新对话。选择“每次新建对话”则每次发送都新建。\n\n## 文字与语音\n1. 鼠标靠近宠物，出现编辑和语音两个按钮。点击编辑才展开输入条；点击加号选择最近项目。\n2. 输入文字后点击发送或按 Enter。未选项目时先选择项目；回复显示为气泡，完整内容可在主窗口查看。\n3. 语音按钮直接开始录音，变为黑色圆点；点击圆点停止。已选项目且有转写时自动发送，未选项目时保留转写供选择项目后发送。麦克风、识别服务和输入设备使用客户端的语音设置。\n4. Escape 返回小入口。鼠标离开约 300 毫秒后收起工具条，保留草稿、项目与录音会话；再次靠近继续操作。形象关闭时小入口与展开的输入条保持常驻。\n\n## 贴边、四角与打招呼\n拖到屏幕可见工作区的边缘时，只露出头和爪，待机时会眨眼。拖到四个角落时沿对角探头，朝屏幕内部露出头和爪。鼠标靠近时轻轻点头打招呼，并显示对话和语音入口；每次靠近招呼一次，停留不会反复重启动作。\n\n对话框、项目面板与消息气泡朝屏幕内部展开：左边向右、右边向左、上边向下、下边向上；四角同时沿两个方向向内展开，探头留在角落。操作工具和收到消息都保持探头贴边。离开后工具条收起，草稿保留；有消息的气泡按自身规则收起。\n\n轻点探头会向内跑出来，四角沿对角出来；按住移动超过 4 像素后拖动，松开不会误触跑出。沿边拖动时保持探头，向内拉开约 48 点后露出全身。菜单栏和 Dock 不属于可见工作区。\n\n## 拎起与位置\n按住全身拖动会变为悬空垂爪姿态，围绕颈部轻摆。悬空身体保留正常比例并使用更高的显示空间，不因塞进正方形而突然变小。松手有约半秒的落地回弹，不会自动滑到屏幕底部。拖动时暂停待机和鼠标互动。\n\n位置与贴边方向保存在本机 pet-state.json，重启后恢复；副屏移除时回到当前可见屏幕。位置不随设置备份迁移。\n\n## 消息与权限\n新到的活动消息、定时任务完成或失败结果可显示可点击气泡。通知约 8 秒后消失，也可关闭；点击打开对应活动或任务执行对话。宠物回复优先，通知排队，拖动中暂缓展示。任务的静默和条件通知设置继续生效；启用宠物不会重播历史活动。\n\n权限审批仍在主窗口处理。页面隐藏或系统开启“减少动态效果”时暂停自动动画，对话和气泡仍可使用。右键菜单提供形象切换和退出宠物；退出会关闭宠物总开关。\n\n## 相关主题\n- 语音输入与授权\n- 定时任务\n- 外观与主题\n"
+    },
+    "en": {
+      "group": "Built-in modules",
+      "title": "Desktop pet",
+      "summary": "A desktop entry for project chat, voice and notifications, with four pet appearances, dragging and interactive side and corner peeking.",
+      "content": "# Desktop pet\n\nThe desktop pet is an independent transparent overlay. Drag it within a display's visible work area to start project chats with text or voice and read replies or background notifications.\n\n## Enable and configure\nOpen Settings → General → Desktop Pet. The enable switch, appearance and chat mode are grouped together and save automatically. Choose Pixel cat, Comic cat, Pixel dog or Comic dog; the pet's context menu also switches appearance. Appearance Off hides the image while keeping the small launcher visible. Turn off Desktop Pet to hide both.\n\nThe default chat mode keeps an ongoing conversation for the same project during the current pet session. Changing projects creates a new conversation. New conversation each time starts one for every message.\n\n## Text and voice\n1. Move near the pet to reveal the edit and voice buttons. Click edit to expand the input; use the plus button to choose a recent project.\n2. Type and press Enter or click Send. Select a project before sending. Replies appear in bubbles; open the main window for full content.\n3. Click voice to record. The button becomes a black dot; click it to stop. A transcript with a selected project sends automatically. Without a project, the transcript remains for review and project selection. The pet uses the client's microphone, recognition service and input device settings.\n4. Escape returns to the small launcher. Leaving hides the tools after about 300 ms while preserving the draft, project and recording session. Move back to continue. With appearance Off, the launcher and expanded input remain visible.\n\n## Side and corner peeking\nDrag to the visible work-area edge to leave only the head and paws showing. At any of the four corners, the head and paws peek diagonally toward the desktop interior. The pet blinks while waiting and nods gently when the pointer approaches. Each visit triggers one greeting; staying nearby does not repeatedly restart it. Chat and voice controls remain available.\n\nThe chat bar, project list and message bubbles open inward: right from the left edge, left from the right edge, down from the top and up from the bottom. At a corner, content opens inward along both axes while the head stays in place. Using tools or receiving messages keeps the head tucked. Leaving hides tools while retaining the draft; bubbles follow their own dismissal rules.\n\nClick the head to bring the pet out, diagonally from a corner. Moving more than 4 pixels while holding starts a drag without triggering the click on release. Drag along an edge to keep peeking; pull about 48 points inward to reveal the full body. Menu bars and the Dock are outside the visible work area.\n\n## Holding and position\nHolding the full body switches to a hanging pose that sways gently around the scruff. A taller drawing area preserves its proportions instead of shrinking it into a square. Release gives a short landing bounce at that position; the pet does not slide to the screen bottom. Holding pauses idle and pointer animations.\n\nPosition and edge are stored locally in pet-state.json and restored after restart. Removing a monitor brings the pet back into the available work area. Position is not transferred by settings backups.\n\n## Messages and permissions\nNew activity messages and scheduled task success or failure can show clickable bubbles. Notifications dismiss after about 8 seconds or manually; clicking opens the associated activity or task run. Replies take priority over queued notifications, and dragging defers display. Task silence and conditional notification settings still apply; enabling the pet does not replay old activities.\n\nApproval requests are handled in the main window. Hidden pages and Reduce Motion pause automatic animation while chat and bubbles remain usable. The context menu can switch appearance or quit the pet; quitting turns off its enable switch.\n\n## Related topics\n- Voice input and permissions\n- Scheduled tasks\n- Appearance and themes\n"
+    }
+  },
+  {
+    "id": "scheduled-intro",
+    "keywords": "定时 计划 任务 触发 周期 提醒 scheduled cron timer",
+    "zh": {
+      "group": "自动化与渠道",
+      "title": "定时任务",
+      "summary": "定时任务按配置的时间触发项目对话，并保存执行结果。",
+      "content": "# 定时任务\n\n在对话中描述时间、工作内容、范围和结果去向；Sage 生成任务确认卡，保存后才进入计划。也可在定时任务页新建。\n\n## 创建步骤\n1. 说明频率或一次性执行时间，并指定项目与目标，例如“每天 9 点检查本项目构建状态，把摘要写回这个对话”。\n2. 在确认卡检查名称、指令、计划、模型、超时时间、授权方式和输出目标。\n3. 有来源对话时可继承来源授权；也可关闭继承，选择独立安全方案。\n4. 保存后核对下次执行时间。先手动“立即运行”验证模型、工具和输出配置，再等待计划触发。\n\n## 执行与输出\n任务用独立的 API 执行上下文运行，不覆盖你正在输入的对话。可写入指定对话、输出新对话、投递渠道或静默执行。结果工作流可添加条件子步骤；条件不匹配的节点不执行其后续分支，匹配结果按配置投递。\n\n## 时间与生命周期\n按本机时区计算，需要 Sage 运行。任务页显示下次时间与上次结果；恢复后的逾期周期会合并补跑，同一任务不重叠执行。暂停只停止未来触发，查看当前运行状态判断是否仍有执行。关联对话归档后会暂停有关任务，避免继续写入已归档对话。\n\n## 修改、导入和导出\n编辑后保存完整配置；遇到“任务已变化”请重新加载再编辑，避免覆盖另一处修改。导出是可分享的配置模板，不带来源对话的授权快照。导入后默认暂停，需要检查模型、目标对话、渠道和安全方案，再启用。\n\n## 记录与审批\n展开运行记录可区分执行失败、等待审批、超时与投递失败。需要超出已有授权时仍会等待人工决定，未及时处理会按任务超时结束。模型执行成功而渠道投递失败，不等于任务内容执行失败；先检查投递记录再决定是否重跑。\n\n## 相关主题\n- 定时任务如何继承授权\n- 渠道接入\n- 请求监控与 debug 定位\n"
+    },
+    "en": {
+      "group": "Automation & channels",
+      "title": "Scheduled tasks",
+      "summary": "Scheduled tasks start project conversations at configured times and retain results.",
+      "content": "# Scheduled tasks\n\nDescribe the time, work, scope and destination in a conversation. Sage presents a confirmation card and schedules only after saving. You can also create a task on the Scheduled tasks page.\n\n## Create a task\n1. State a frequency or one-time date and the project, for example “Every day at 9, check this project's build status and write a summary back here.”\n2. Review name, instructions, schedule, model, timeout, authorization and destinations.\n3. A linked conversation can supply inherited authorization; turn inheritance off to select an independent policy.\n4. Check the next run after saving. Use Run now to verify the model, tools and output before relying on the schedule.\n\n## Execution and output\nTasks run in isolated API contexts without overwriting your interactive conversation. Output can go to a selected conversation, a new conversation, channels or silent execution. Result workflows support conditional steps; nonmatching nodes skip their descendants and matching results follow configured destinations.\n\n## Time and lifecycle\nSchedules use the computer's local timezone and require Sage to remain running. The task page shows next and latest runs. Missed recurring triggers are coalesced after resumption; runs for the same task do not overlap. Pause stops future triggers; inspect the current run separately. Archiving a linked conversation pauses associated tasks.\n\n## Edit, import and export\nSave the full edited configuration. If another editor changed the task, reload rather than overwriting it. Export produces a reusable template without source-conversation approval snapshots. Imports start paused: review model, destination conversation, channels and policy before enabling.\n\n## History and approvals\nRun details distinguish execution failure, pending approval, timeout and delivery failure. Work beyond existing authorization still waits for a human decision and is bounded by task timeout. Successful execution with failed channel delivery is a different outcome; inspect delivery details before rerunning the work.\n\n## Related topics\n- Scheduled authorization inheritance\n- Channel integration\n- Request monitor and debug links\n"
+    }
+  },
+  {
+    "id": "scheduled-authorization",
+    "keywords": "定时 继承 授权 快照 白名单 scheduled authorization inheritance policy source grants approval",
+    "zh": {
+      "group": "自动化与渠道",
+      "title": "定时任务如何继承授权",
+      "summary": "继承来源方案与具体授权，理解过期、重新保存和额外审批。",
+      "content": "# 定时任务如何继承授权\n\n可以继承，但任务获得的权限不能超出确认时的来源对话。对话生成的新任务默认勾选继承，确认卡可查看或改成独立方案。\n\n## 继承哪些内容\n- 来源对话实际生效的安全方案快照，包括文件、命令、网络与预审规则。\n- 来源对话中可重复使用的具体工具调用授权：工具名及完整参数必须匹配。\n- “本对话全部允许”不会作为无限授权复制；只保存该授权下已经确认或实际通过的具体调用。\n- 一次性批准、已经消费的执行凭证、系统麦克风/屏幕权限不会被复制。\n\n例如，允许某个 Bash 命令访问一个指定域名，不会顺带允许另一个命令、不同端口或额外目标。插件工具的方法与参数、MCP 工具标识也参与匹配。任务中新的调用仍按继承的安全方案决策，必要时等待审批。\n\n## 授权何时失效\n每次运行会检查来源对话、项目和安全方案。来源不存在、被归档、项目不匹配，或方案内容、启用插件代码/权限/配置、MCP 地址/环境发生变化时，原快照不能继续使用，任务会显示错误。先检查来源对话的当前方案，再编辑任务并保存，明确重新捕获授权。仅暂停或重新启用不会自动扩大授权。\n\n## 重启与后续修改\n保存到任务中的具体调用快照可以跨重启保留；来源对话之后新增的临时授权不会自动追加到旧任务。重新保存时只捕获此刻仍可获得的来源授权。旧任务没有快照时沿用原先的独立方案行为，不会无提示升级权限。\n\n## 独立方案与导入\n取消继承后可选择任务自己的安全方案。插件直接创建、手动新建且没有来源对话的任务不能凭空继承。导出的任务文件不包含可复用授权快照；导入后重新配置独立方案并检查输出目标。\n\n## 遇到重复审批\n对照运行记录中的工具名、路径、命令、域名与参数，确认是否与之前授权完全相同。动态文件名、不同查询参数或新目标可能需要新审批。不要为消除提示把任务改成完全访问；先按实际工作范围调整来源方案。\n"
+    },
+    "en": {
+      "group": "Automation & channels",
+      "title": "Scheduled authorization inheritance",
+      "summary": "Understand inherited policy, exact grants, invalidation and additional approval.",
+      "content": "# Scheduled authorization inheritance\n\nInheritance is available, bounded by the originating conversation at confirmation time. New conversation-created tasks select it by default; the confirmation card can switch to an independent policy.\n\n## What is inherited\n- A snapshot of the effective source policy, including file, command, network and review rules.\n- Reusable approvals for exact calls: tool name and complete arguments must match.\n- An “allow everything in this conversation” grant is not copied as an unlimited future grant; only concrete calls confirmed or actually admitted under it are retained.\n- One-time approvals, consumed execution receipts and operating-system microphone/screen permissions are not transferred.\n\nApproving a Bash command for one destination does not authorize another command, port or extra target. Plugin methods and arguments and MCP tool aliases also participate in matching. New calls are evaluated under the inherited policy and may require human approval.\n\n## Invalidation\nEach run checks the source conversation, project and policy. A missing or archived source, a project mismatch or changes to policy contents, active plugin code/permissions/settings, or MCP destinations/environment invalidate the snapshot. Review the source policy, edit the task and save to explicitly capture authorization again. Pausing or re-enabling alone never widens authorization.\n\n## Restarts and later changes\nSaved exact-call snapshots survive restart. Later temporary approvals in the source do not silently extend existing tasks. Resaving captures only source grants currently available. Older tasks without snapshots retain their existing independent-policy behavior.\n\n## Independent policies and import\nDisable inheritance to choose the task's own policy. Plugin-created tasks and manual tasks without a source cannot invent inherited permission. Exported templates exclude reusable authorization snapshots; imports require policy and destination review.\n\n## Repeated approval requests\nCompare tool name, path, command, destination and complete arguments against the earlier approval. Dynamic filenames, changed query arguments or new destinations may require approval. Adjust policy to the actual scope instead of selecting full access merely to suppress prompts.\n"
+    }
+  },
+  {
+    "id": "channels-intro",
+    "keywords": "渠道 接入 平台 消息 凭据 回调 channel integration webhook",
+    "zh": {
+      "group": "自动化与渠道",
+      "title": "渠道接入",
+      "summary": "渠道连接外部消息平台与项目对话，支持配置收发目标。",
+      "content": "# 渠道接入\n\n渠道连接外部消息平台与项目对话，支持配置收发目标。\n\n## 配置\n在项目渠道中填写平台凭据、接收目标和所需回调信息，启用后测试连接。入站消息可触发对话，输出可按渠道规则转发。\n\n## 排查\n检查平台权限、订阅事件、接收目标和凭据是否一致。外部消息不会自动扩大项目安全权限。\n\n## 服务健康检测\n设置中反馈和更新服务旁显示健康状态点：绿色正常、红色异常（未配置、超时或接口错误）、灰色未探测。探测在主进程中执行，启动时和每 5 分钟自动刷新，进入设置页或修改地址时也会触发。\n\n\n## 相关主题\n- 飞书长连接与实时回复\n- 中继连接与部署\n- 定时任务"
+    },
+    "en": {
+      "group": "Automation & channels",
+      "title": "Channel integration",
+      "summary": "Channels connect external messaging platforms with project conversations and configured destinations.",
+      "content": "# Channel integration\n\nChannels connect external messaging platforms with project conversations and configured destinations.\n\n## Setup\nEnter platform credentials, recipient and callback information, then enable and test the channel. Inbound messages can trigger conversations and responses can be forwarded according to channel settings.\n\n## Troubleshooting\nCheck permissions, subscribed events, recipients and credentials. External messages do not automatically expand project security permissions.\n\n## Service health probes\nSettings shows health dots next to feedback and update services: green for OK, red for errors (not configured, timeout or HTTP error), grey for not yet probed. Probes run in the main process, refresh on startup and every 5 minutes, and also trigger when entering settings or changing addresses.\n\n\n## Related topics\n- Feishu long connection and live replies\n- Relay connection and deployment\n- Scheduled tasks"
+    }
+  },
+  {
+    "id": "channels-feishu",
+    "keywords": "飞书 长连接 实时 回复 卡片 websocket 机器人 feishu lark card",
+    "zh": {
+      "group": "自动化与渠道",
+      "title": "飞书长连接与实时回复",
+      "summary": "飞书应用渠道可选择 Webhook 或 WebSocket 长连接接收消息，并单独开启实时回复。",
+      "content": "# 飞书长连接与实时回复\n\n飞书应用渠道可选择 Webhook 或 WebSocket 长连接接收消息，并单独开启实时回复。\n\n## 两个不同选项\nWebSocket 用于接收入站事件，不等于输出流式回复。实时回复使用消息卡片更新同一条消息，显示逐步生成的内容。\n\n## 配置检查\n确认应用凭据、事件订阅和接收目标匹配。长连接需要程序运行及可用网络；卡片更新仍受飞书权限、接口限制与网络延迟影响。\n\n## 相关主题\n- 渠道接入\n- 中继连接与部署"
+    },
+    "en": {
+      "group": "Automation & channels",
+      "title": "Feishu long connection and live replies",
+      "summary": "Feishu app channels can receive messages through Webhook or WebSocket and separately enable live replies.",
+      "content": "# Feishu long connection and live replies\n\nFeishu app channels can receive messages through Webhook or WebSocket and separately enable live replies.\n\n## Two different options\nWebSocket receives inbound events; it does not itself stream outgoing replies. Live replies update one message card as content is generated.\n\n## Configuration\nCheck application credentials, event subscriptions and recipients. Long connections require the app to run with network access. Card updates remain subject to Feishu permissions, API limits and latency.\n\n## Related topics\n- Channel integration\n- Relay connection and deployment"
+    }
+  },
+  {
+    "id": "channels-relay",
+    "keywords": "中继 relay 部署 服务端 token 申请 下载 更新 download server",
+    "zh": {
+      "group": "自动化与渠道",
+      "title": "中继连接与部署",
+      "summary": "中继用于外部消息与桌面程序之间的连接，应分别配置服务端与客户端。",
+      "content": "# 中继连接与部署\n\n中继用于外部消息与桌面程序之间的连接，应分别配置服务端与客户端。\n\n## 部署\n按仓库中 sage-website 的部署说明设置地址、令牌和回调。上传安装包不会更新中继服务代码，服务端变更需要部署程序并重启服务。\n\n## 申请 Token\n设置 → 中继连接：还没填 Token 且中继站点的申请页（连接地址 + /apply）可以访问时，Token 输入框旁会出现「申请」按钮，点击在外部浏览器打开申请页自助提交申请，后台审批通过后凭页面给出的查询密钥取回 Token。填好 Token 后该按钮自动隐藏；申请页不可用时同样不显示，需联系管理员直接发放。\n\n## 下载清理\nsage-website 启动时及每小时检查 download，依据 latest-mac.json 删除更旧的 Sage 发布文件；保留当前版本、新版本预上传和其他文件。\n\n## 相关主题\n- 首次配置引导\n- 插件市场"
+    },
+    "en": {
+      "group": "Automation & channels",
+      "title": "Relay connection and deployment",
+      "summary": "A relay connects external messages and the desktop app; configure server and client separately.",
+      "content": "# Relay connection and deployment\n\nA relay connects external messages and the desktop app; configure server and client separately.\n\n## Deployment\nFollow the sage-website deployment guide for addresses, tokens and callbacks. Uploading an installer does not update relay code; server code changes require deployment and restart.\n\n## Requesting a token\nSettings → Relay: while the Token field is empty and the relay site exposes an application page (connection address + /apply), an Apply button appears next to the field and opens that page in your browser. Submit the request there; once an administrator approves it, collect the token with the query key shown on the page. The button hides once a token is filled in, and stays hidden when the page is unreachable — ask an administrator to issue a token directly.\n\n## Download cleanup\nsage-website checks download on startup and hourly, deleting older Sage releases according to latest-mac.json. Current releases, newer staged uploads and unrelated files are retained.\n\n## Related topics\n- First-run setup\n- Plugin marketplace"
+    }
+  },
+  {
+    "id": "spec-intro",
+    "keywords": "Spec 工作流 需求 设计 任务 三阶段 spec workflow requirements design tasks",
+    "zh": {
+      "group": "工作流",
+      "title": "Spec 工作流概览",
+      "summary": "Spec 用需求、设计、任务三份文档组织开发；先安装并在项目启用 Specs 插件。",
+      "content": "# Spec 工作流概览\n\nSpec 用需求、设计、任务三份文档组织开发：先明确要做什么，再细化怎么做，最后拆成可执行任务。Spec 是可选插件，先安装并在项目启用 Specs 插件，再从侧栏 specs 入口创建或查看。\n\n## 三个阶段\n1. 需求：描述目标、使用场景与验收标准。\n2. 设计：细化方案、约束与取舍。\n3. 任务：拆解成可执行、可检查的条目。\n\n## 边界与注意\n文档确认不等于放开工具权限：执行仍受安全策略控制（见「工具调用与审批」）。各阶段入口与操作取决于已安装的 Specs 插件版本。\n\n## 架构全景\n侧栏的架构视图按钮展示项目中所有 Spec 的架构全景：按工程维度分类，显示任务进度和完成状态，便于纵览整体工程进展。\n\n\n## 相关主题\n- 创建 Spec\n- 细化需求与设计\n- 执行与重试"
+    },
+    "en": {
+      "group": "Workflows",
+      "title": "Spec workflow",
+      "summary": "Spec organizes development through requirements, design and task documents; install and enable the Specs plugin first.",
+      "content": "# Spec workflow\n\nSpec organizes development through three documents: requirements (what to build), design (how) and tasks (executable, checkable items). Spec is an optional plugin — install and enable the Specs plugin for the project, then use the specs entry in the sidebar.\n\n## Three phases\n1. Requirements: goals, use cases and acceptance criteria.\n2. Design: approach, constraints and trade-offs.\n3. Tasks: work broken into executable, verifiable items.\n\n## Limits\nDocument approval does not grant unrestricted tool permissions; execution still follows security policy (see \"Tools and approval\"). Entry points depend on the installed Specs plugin version.\n\n## Architecture map\nThe architecture view button in the sidebar shows all Specs in the project: classified by engineering dimension with task progress and completion status for an overview of overall progress.\n\n\n## Related topics\n- Create a Spec\n- Refine requirements and design\n- Execute and retry"
+    }
+  },
+  {
+    "id": "spec-create",
+    "keywords": "创建 Spec 需求 验收标准 目标 create requirements acceptance",
+    "zh": {
+      "group": "工作流",
+      "title": "创建 Spec",
+      "summary": "描述目标、使用场景与验收标准，生成需求文档后逐步确认设计与任务。",
+      "content": "# 创建 Spec\n\n在 specs 入口新建：描述目标、使用场景与验收标准，生成需求文档后逐步确认设计与任务。\n\n## 步骤\n1. 填写目标与背景；验收标准越具体，生成文档越可用。\n2. 生成后先核对文档中的假设，不符合实际的直接改。\n3. 确认需求后再进入设计与任务阶段。\n\n## 边界与注意\n先核对文档中的假设，再批准后续执行；文档只是计划，真实结果以执行为准。\n\n## 相关主题\n- Spec 工作流概览\n- 细化需求与设计\n- 执行与重试"
+    },
+    "en": {
+      "group": "Workflows",
+      "title": "Create a Spec",
+      "summary": "Describe goals, use cases and acceptance criteria, then confirm design and tasks from the generated requirements.",
+      "content": "# Create a Spec\n\nCreate one from the specs entry: describe goals, use cases and acceptance criteria, then confirm design and tasks from the generated requirements document.\n\n## Steps\n1. Fill in the goal and background; the more specific the acceptance criteria, the more usable the generated document.\n2. After generation, verify the assumptions in the document and edit what does not match reality.\n3. Confirm requirements before moving into design and tasks.\n\n## Limits\nVerify assumptions before approving execution. The document is only a plan — real results come from execution.\n\n## Related topics\n- Spec workflow\n- Refine requirements and design\n- Execute and retry"
+    }
+  },
+  {
+    "id": "spec-refine",
+    "keywords": "细化 修改 约束 一致性 设计 refine design constraints",
+    "zh": {
+      "group": "工作流",
+      "title": "细化需求与设计",
+      "summary": "在 Spec 对话中补充约束与修改意见，核对需求、设计和任务之间是否一致。",
+      "content": "# 细化需求与设计\n\n在 Spec 对话中补充约束与修改意见，让文档逼近真实意图。\n\n## 做法\n- 对照需求检查设计：技术选型与流程是否覆盖全部验收标准。\n- 修改意见直接写在 Spec 对话里，重新生成对应阶段文档。\n- 保持三份文档一致：改一处，同步检查另外两处。\n\n## 边界与注意\n文档确认不等于放开所有工具权限，执行仍受安全策略控制。\n\n## 相关主题\n- 创建 Spec\n- 执行与重试\n- 工具调用与审批"
+    },
+    "en": {
+      "group": "Workflows",
+      "title": "Refine requirements and design",
+      "summary": "Add constraints and feedback in the Spec conversation and keep requirements, design and tasks consistent.",
+      "content": "# Refine requirements and design\n\nAdd constraints and feedback in the Spec conversation so the documents converge on real intent.\n\n## Practices\n- Check the design against the requirements: do the choices and flow cover every acceptance criterion?\n- Write feedback directly in the Spec conversation and regenerate the affected phase document.\n- Keep the three documents consistent: when one changes, re-check the other two.\n\n## Limits\nDocument approval does not grant unrestricted tool permissions; execution still follows security policy.\n\n## Related topics\n- Create a Spec\n- Execute and retry\n- Tools and approval"
+    }
+  },
+  {
+    "id": "spec-execute",
+    "keywords": "执行 重试 任务 失败 产物 execute retry tasks",
+    "zh": {
+      "group": "工作流",
+      "title": "执行与重试",
+      "summary": "按任务执行并检查实际产物与验收结果；失败后先读错误、核对已完成操作，再重试相关任务。",
+      "content": "# 执行与重试\n\n按任务列表执行，逐项检查实际产物与验收结果；失败的任务先读错误、核对已完成操作，再重试。\n\n## 步骤\n1. 从任务阶段启动执行，观察每条任务的产物。\n2. 任务失败时先阅读错误信息，核对该任务已产生的文件与外部效果。\n3. 修复原因后只重试相关任务，避免整轮重来造成重复修改。\n\n## 边界与注意\n具体入口取决于已安装的 Specs 插件版本；执行中的工具调用仍走审批流程。\n\n## 相关主题\n- Spec 工作流概览\n- 逆向分析与优化\n- 工具调用与审批"
+    },
+    "en": {
+      "group": "Workflows",
+      "title": "Execute and retry",
+      "summary": "Execute tasks and inspect artifacts and acceptance results; on failure read errors and retry only affected tasks.",
+      "content": "# Execute and retry\n\nExecute the task list and check each task's actual artifacts and acceptance results. For failed tasks, read the error and verify completed effects before retrying.\n\n## Steps\n1. Start execution from the tasks phase and watch each task's artifacts.\n2. On failure, read the error message and check the files and external effects the task already produced.\n3. Fix the cause and retry only the affected tasks; avoid rerunning everything and duplicating changes.\n\n## Limits\nEntry points depend on the installed Specs plugin version; tool calls during execution still go through approval.\n\n## Related topics\n- Spec workflow\n- Analyze existing work\n- Tools and approval"
+    }
+  },
+  {
+    "id": "spec-retro",
+    "keywords": "逆向 分析 已有项目 反向 改进 retro analysis existing",
+    "zh": {
+      "group": "工作流",
+      "title": "逆向分析与优化",
+      "summary": "对已有项目先分析文件结构与行为，再反向整理出需求、设计和改进任务。",
+      "content": "# 逆向分析与优化\n\n对已有项目先分析文件结构与行为，再反向整理出需求、设计和改进任务。\n\n## 做法\n1. 从逆向分析入口开始，让 AI 通读项目结构、关键文件与运行行为。\n2. 把 AI 的结论与实际代码、运行结果和测试相互核对，尤其关注它声称“没有问题”的部分。\n3. 确认后再生成改进任务，按「执行与重试」推进。\n\n## 相关主题\n- Spec 工作流概览\n- 执行与重试"
+    },
+    "en": {
+      "group": "Workflows",
+      "title": "Analyze existing work",
+      "summary": "Analyze structure and behavior before deriving requirements, design and improvement tasks for an existing project.",
+      "content": "# Analyze existing work\n\nAnalyze an existing project's structure and behavior first, then derive requirements, design and improvement tasks in reverse.\n\n## Practices\n1. Start from the reverse-analysis entry and let the AI read the project structure, key files and runtime behavior.\n2. Cross-check AI conclusions against actual code, runtime results and tests — especially the parts it claims have \"no issues\".\n3. Only then generate improvement tasks and proceed per \"Execute and retry\".\n\n## Related topics\n- Spec workflow\n- Execute and retry"
+    }
+  },
+  {
+    "id": "loop-intro",
+    "keywords": "Loop 迭代 自主 循环 评估 指标 终止条件 iteration evaluation metrics",
+    "zh": {
+      "group": "工作流",
+      "title": "Loop 自主迭代",
+      "summary": "Loop 以目标和评估结果驱动多轮改进；执行前明确终止条件与资源预算。",
+      "content": "# Loop 自主迭代\n\nLoop 以目标和评估结果驱动多轮改进：设定目标与评估指标后，循环自动执行、评估、调整，直到达标或触顶预算。可用入口取决于当前安装和启用的插件（如 delivery-loop）。\n\n## 使用要点\n执行前明确终止条件与资源预算（轮数、时间）；评估指标尽量可量化，减少“看起来好了”的误判。\n\n## 边界与注意\n循环中的工具调用仍需遵守安全策略与审批；每轮结论要与实际产物核对，不要只看循环自述。\n\n## 相关主题\n- Spec 工作流概览\n- 执行与重试\n- 工具调用与审批"
+    },
+    "en": {
+      "group": "Workflows",
+      "title": "Loop iteration",
+      "summary": "Loop uses goals and evaluations to drive iterative improvement; define stopping conditions and budgets first.",
+      "content": "# Loop iteration\n\nLoop drives multi-round improvement from a goal and evaluation results: set the goal and metrics, and the loop executes, evaluates and adjusts until it passes or hits the budget. Available entry points depend on the installed and enabled plugins (such as delivery-loop).\n\n## Practices\nDefine stopping conditions and resource budgets (rounds, time) before starting. Prefer quantifiable evaluation metrics over \"looks better now\" judgments.\n\n## Limits\nTool calls inside the loop still follow security policy and approval. Verify each round's claims against actual artifacts instead of trusting the loop's own summary.\n\n## Related topics\n- Spec workflow\n- Execute and retry\n- Tools and approval"
+    }
+  },
+  {
+    "id": "sandbox-intro",
+    "keywords": "安全 方案 沙箱 文件 范围 授权 policy sandbox",
+    "zh": {
+      "group": "安全与授权",
+      "title": "安全方案与文件沙箱",
+      "summary": "在“安全与授权”中管理方案，在对话输入框旁选择生效方案。",
+      "content": "# 安全方案与文件沙箱\n\n在“安全与授权”中管理方案，在对话输入框旁选择生效方案。\n\n## 生效时机\n方案名称可同步展示；执行策略变更在下一次开始或恢复执行时生效，不改变正在运行的操作。\n\n## 文件边界\n命令默认不能联网，且受项目文件范围、受保护配置和环境变量约束。批准普通命令不会解除沙箱。网页工具的域名规则不控制命令的网络权限。\n\n## 文件列表目录过滤\n设置 → 安全与授权的文件列表目录过滤可指定要从文件列表、文件名搜索和内容搜索中隐藏的目录名（如 .sage、tmp）。过滤对所有项目生效，不删除文件也不控制模型访问权限。默认隐藏 .sage 目录。\n\n\n\n## 方案外观与管理\n方案可设置名称、说明、图标与颜色，便于区分。图标和颜色选择器可点外部关闭，Esc 关闭并返回触发按钮；未选择不改动值。一次只展开一个选择器。更改外观不会更改工具执行权限。\n\n## 人工批准的范围\n一次批准只处理当前请求；可重复批准按具体工具与参数复用；对话范围授权仍受确定的拒绝规则与执行沙箱约束。定时任务继承需要另存快照，参见“定时任务如何继承授权”。\n\n## 相关主题\n- 保留沙箱，联网单独审批\n- 工具调用与审批"
+    },
+    "en": {
+      "group": "Security",
+      "title": "Security policies and filesystem sandbox",
+      "summary": "Manage policies under Security and authorization and select one beside the composer.",
+      "content": "# Security policies and filesystem sandbox\n\nManage policies under Security and authorization and select one beside the composer.\n\n## When changes apply\nPolicy names can update immediately; execution-policy changes take effect on the next start or resume, not during an active operation.\n\n## Filesystem boundaries\nCommands are offline by default and restricted by project scope, protected paths and environment rules. Ordinary approval does not remove the sandbox. Web-tool domain rules do not govern command networking.\n\n## File browser directory filters\nSettings → Security directory filters let you hide directory names (such as .sage, tmp) from the file list, filename search and content search. Filters apply to all projects. They do not delete files or control model access. The .sage directory is hidden by default.\n\n\n\n## Policy appearance and management\nNames, descriptions, icons and colors help distinguish policies. Click outside an icon/color picker to dismiss it, or Escape to close and restore trigger focus. Dismissal without selection preserves the value; only one picker opens at a time. Appearance changes do not change execution permissions.\n\n## Manual approval scope\nOne-time approval applies to the current request. Reusable approval matches the tool and arguments. Conversation grants remain subject to deterministic denials and runtime sandboxing. Scheduled inheritance uses a separate snapshot; see Scheduled authorization inheritance.\n\n## Related topics\n- Keep sandbox, approve networking separately\n- Tools and approval"
+    }
+  },
+  {
+    "id": "sandbox-network",
+    "keywords": "联网 下载 npm curl DNS socket internet offline network approval",
+    "zh": {
+      "group": "安全与授权",
+      "title": "保留沙箱，联网单独审批",
+      "summary": "编辑安全方案，在“直接允许”下启用“保留沙箱，联网单独审批”。",
+      "content": "# 保留沙箱，联网单独审批\n\n编辑安全方案，在“直接允许”下启用“保留沙箱，联网单独审批”。\n\n## AI 预审后人工批准\n模型使用 Bash 的 network=true 和 networkReason 申请联网，说明用途、目标和发送数据。AI 先预审：拒绝会拦截；建议允许、无法确定、失败或超时均交给你最终决定。使用配置的预审模型，未指定则跟随对话。\n\n## 授权范围\n点击“仅本次允许联网”后，仅该命令及其子进程可向任意 IP 地址发起连接；文件隔离不变，不开放监听。说明中的域名不是强制限制，网页域名列表也不限制此权限。\n\n## 失败处理\n授权单次使用，命令、策略或已检查脚本变化会使授权失效。下载失败时重新申请，不应关闭文件沙箱或绕过拒绝。\n\n## 相关主题\n- 安全方案与文件沙箱\n- 工具调用与审批\n- 历史与日志清理"
+    },
+    "en": {
+      "group": "Security",
+      "title": "Keep sandbox, approve networking separately",
+      "summary": "Edit a security policy and enable Keep sandbox, approve networking separately under Direct allow.",
+      "content": "# Keep sandbox, approve networking separately\n\nEdit a security policy and enable Keep sandbox, approve networking separately under Direct allow.\n\n## AI review then human approval\nThe model requests Bash with network=true and networkReason describing purpose, destinations and data sent. AI denial blocks the request. Recommendations to allow, uncertainty, failures and timeouts all require your final decision. The configured review model is used, otherwise the conversation model.\n\n## Permission scope\nAllow network once enables outbound connections to any IP address for that command and its descendants. Filesystem isolation remains and listening stays disabled. Mentioned domains are not enforced restrictions; web-tool domain lists do not restrict this grant.\n\n## Failures\nGrants are single-use and invalidated by command, policy or checked-script changes. Request approval again when needed; do not bypass a denial or remove filesystem isolation.\n\n## Related topics\n- Security policies and filesystem sandbox\n- Tools and approval\n- History and log cleanup"
+    }
+  },
+  {
+    "id": "monitor-intro",
+    "keywords": "debug 调试 请求 响应 request monitor logs",
+    "zh": {
+      "group": "数据、排查与设置",
+      "title": "请求监控与 debug 定位",
+      "summary": "请求监控器保存模型调用的请求、响应、用量和错误，便于排查。",
+      "content": "# 请求监控与 debug 定位\n\n请求监控器保存模型调用的请求、响应、用量和错误，便于排查。\n\n## 从回复定位\n点击回复底部复制、文档图标旁的 debug 图标。监控器筛选该回复对应的请求，并选中最新一条；一次回复可能包含多次模型调用。\n\n## 历史记录\n旧记录若没有消息关联或已清理，会提示无法精确定位，并显示该对话记录。请求日志保存在项目 .sage/monitor/，与安全决策日志不同。\n\n## 相关主题\n- 模型与后端\n- 历史与日志清理\n- 项目 Wiki 与 DeepWiki\n## 诊断记录的内存限制\n监控保留最近的有限记录：最多 800 条，估算载荷 24 MiB，大字段和图片会截断或省略；这不修改实际模型请求或完整对话。慢磁盘时最多等待写入 32 条诊断记录，超出的新诊断可能不落盘。实时工作流预览也只显示有限尾部，完整生成文档仍保存在项目中。\n"
+    },
+    "en": {
+      "group": "Data, diagnostics & settings",
+      "title": "Request monitor and debug links",
+      "summary": "The request monitor records model requests, responses, usage and errors.",
+      "content": "# Request monitor and debug links\n\nThe request monitor records model requests, responses, usage and errors.\n\n## Locate a reply\nClick the debug icon beside the copy/document actions below a reply. The monitor filters requests linked to that reply and selects the latest; a single reply may involve several model calls.\n\n## Historical records\nOlder records without message links, or removed records, cannot be located exactly. The monitor explains this and shows conversation records. Request logs live under the project's .sage/monitor/, separately from security decisions.\n\n## Related topics\n- Models and backends\n- History and log cleanup\n- Project Wiki and DeepWiki\n## Diagnostic memory limits\nThe monitor keeps at most 800 recent records and 24 MiB of estimated payload. Large fields and images are shortened or omitted; actual model requests and full conversations are unchanged. A slow disk queues at most 32 diagnostic writes, so additional diagnostics may not be persisted. Live workflow previews show bounded tails while completed documents remain in the project.\n"
+    }
+  },
+  {
+    "id": "troubleshooting",
+    "keywords": "帮助 FAQ troubleshoot error help 无响应 不工作 报错 慢 找不到 怎么用 常见问题",
+    "zh": {
+      "group": "数据、排查与设置",
+      "title": "常见问题与排查顺序",
+      "summary": "按现象定位到项目、模型、授权、扩展、Git 和系统权限。",
+      "content": "# 常见问题与排查顺序\n\n描述问题时附上操作入口、期望结果、实际错误、当前项目和版本，比“不能用”更容易定位。先核对状态，不必先重装或清空数据。\n\n## 对话和速度\n| 现象 | 先检查 | 对应帮助 |\n| --- | --- | --- |\n| 模型不对 | 对话/项目覆盖、执行引擎 | 模型与后端 |\n| 一直等待 | 是否在审批、工具、队列或模型请求阶段 | 工具调用与审批、请求监控 |\n| 输入变慢 | 是否在录音、优化输入或有大附件 | 语音输入、上下文策略 |\n| 回答中断 | 错误记录、已完成工具、可恢复状态 | 退出后的恢复执行 |\n| 费用或词元增大 | 历史长度、图片、工具输出、压缩策略 | 上下文窗口与压缩策略 |\n\n## 插件、Git 和任务\n| 现象 | 先检查 | 对应帮助 |\n| --- | --- | --- |\n| 找不到插件按钮 | 是否安装、项目有效启用、依赖、slot | 插件列表、界面插槽 |\n| 技能同名或未出现 | 项目覆盖、名称唯一性、刷新 | 技能、能力选择器 |\n| MCP 无工具 | 启用、连接测试、真实端点、刷新 | MCP 服务器管理 |\n| Pull/Push 拒绝 | 上游、分歧、认证、未提交修改 | Git 故障与冲突恢复 |\n| 定时任务未触发 | 应用运行、启用状态、时区、下次时间 | 定时任务 |\n| 任务要求再次授权 | 参数变化、来源方案变化、快照状态 | 定时任务如何继承授权 |\n| 执行成功但没收到结果 | 输出目标、渠道可用性、投递错误 | 渠道接入、运行记录 |\n\n## 界面与系统\n快捷键无反应先看焦点、模态窗口、重复绑定；录音无声检查麦克风和语音识别权限；截屏失败检查屏幕录制权限。历史文件不能编辑时确认是否只读 Git 快照。文件列表缺项检查目录过滤，不要先删除项目缓存。\n\n## 收集信息\n在帮助中确认版本；复制具体错误，必要时查看请求监控、插件日志、决策记录和任务运行记录。截图前检查凭据与私人内容。备份设置再尝试有破坏性的恢复；不要把删除整个数据目录当成常规修复。\n"
+    },
+    "en": {
+      "group": "Data, diagnostics & settings",
+      "title": "Common problems and diagnostic order",
+      "summary": "Route symptoms to project, model, approval, extension, Git and OS diagnostics.",
+      "content": "# Common problems and diagnostic order\n\nReport the entry point, expected result, actual error, project and version. Inspect state before reinstalling or clearing data.\n\n## Chat and speed\n| Symptom | First check | Help topic |\n| --- | --- | --- |\n| Wrong model | Conversation/project overrides and engine | Models and backends |\n| Waiting indefinitely | Approval, tool, queue or model phase | Tools and approval; Request monitor |\n| Input feels locked | Dictation, optimization or large attachments | Voice input; Context strategy |\n| Interrupted answer | Error, completed tools and resumable state | Resume after exit |\n| Increased tokens/cost | History, images, tool output and compression | Context window and compression |\n\n## Plugins, Git and tasks\n| Symptom | First check | Help topic |\n| --- | --- | --- |\n| Missing plugin button | Installation, project activation, dependencies, slot | Plugin activation; UI slots |\n| Missing/duplicate skill | Project overrides, unique names, refresh | Skills; Capability picker |\n| No MCP tools | Enablement, connection test, endpoint, refresh | MCP servers |\n| Pull/Push rejected | Upstream, divergence, authentication, local changes | Git troubleshooting |\n| Task did not trigger | Sage running, enablement, timezone, next run | Scheduled tasks |\n| Task asks again | Changed arguments, source policy or snapshot | Authorization inheritance |\n| Work succeeded but no output | Destination, channel and delivery error | Channels; Run history |\n\n## Interface and OS\nFor shortcuts check focus, modal dialogs and duplicate bindings. For voice check both microphone and speech permissions. For capture check Screen Recording. An uneditable historical file may be a read-only Git snapshot. Missing tree entries may be directory filtering, not lost data.\n\n## Collect evidence\nConfirm the version in Help. Copy the error and inspect request monitoring, plugin logs, decision history or task runs as relevant. Inspect screenshots for credentials/private content. Back up before destructive recovery; deleting the entire data directory is not a routine fix.\n"
+    }
+  },
+  {
+    "id": "data-storage",
+    "keywords": "存储 对话 迁移 备份 目录 chats meta.json storage migration backup",
+    "zh": {
+      "group": "数据、排查与设置",
+      "title": "对话存储与 chats 迁移",
+      "summary": "对话记录保存在项目 .sage/chats/<id>/meta.json，对话记忆在同目录 memory.json。",
+      "content": "# 对话存储与 chats 迁移\n\n对话记录保存在项目 .sage/chats/<id>/meta.json，对话记忆在同目录 memory.json。\n\n## 旧目录迁移\n首次访问会将 .sage/conversations/ 迁移到 chats/。两目录同时存在时合并缺失数据，同名冲突保留 chats 文件并备份旧文件到 chats/.legacy-conversations/。\n\n## 备份\n迁移不会把进程恢复为运行状态。备份项目时包含 .sage 数据目录；不要直接改名某个对话 ID 目录。\n\n## 相关主题\n- 长期记忆与自动融合\n- 设置备份与恢复\n- 历史与日志清理"
+    },
+    "en": {
+      "group": "Data, diagnostics & settings",
+      "title": "Chat storage and migration",
+      "summary": "Conversations are stored in .sage/chats/<id>/meta.json; conversation memory uses memory.json beside it.",
+      "content": "# Chat storage and migration\n\nConversations are stored in .sage/chats/<id>/meta.json; conversation memory uses memory.json beside it.\n\n## Legacy migration\nOn first access, .sage/conversations/ migrates to chats/. When both exist, missing data is merged. Conflicting chats files are retained and old files backed up under chats/.legacy-conversations/.\n\n## Backups\nMigration does not restore a running process. Include .sage when backing up projects and do not manually rename conversation-ID folders.\n\n## Related topics\n- Long-term memory and auto-merge\n- Settings backup and recovery\n- History and log cleanup"
+    }
+  },
+  {
+    "id": "memory-merge",
+    "keywords": "记忆 memory 重复 融合 冲突 优先级",
+    "zh": {
+      "group": "数据、排查与设置",
+      "title": "长期记忆与自动融合",
+      "summary": "记忆分当前对话、项目、全局三层；同一件事只留一条，重复与冲突自动融合，以最新为准。",
+      "content": "# 长期记忆与自动融合\n\n记忆分三层：当前对话（.sage/chats/<id>/memory.json）> 项目（.sage/memory.json）> 全局（~/.sage/memory.json）。同一件事只保留一条。\n\n## 写入即融合\n新增记忆时按字符相似度查重：同一层里已有相同表述、或只差几个字的冲突表述，不再新增条目，而是并入既有条目——正文以最新一次写入为准，标签取并集，首次创建时间保留，被替换的旧说法记在该条的 mergedFrom 里。若新写入的内容只是旧条目的缩略复述，则保留更完整的旧正文，避免细节越写越少。\n\n## 冲突与优先级\n内容冲突时以更新时间最新的一条为准；生效范围仍是当前对话 > 项目 > 全局。跨层不互删：全局和项目各有一条时，项目那条压住全局，删任一层不影响另一层。对话注入时同一件事只给最新一条。\n\n## 历史重复\n旧版本遗留的重复会在打开设置 → 记忆时自动分层合并；合并前原文件备份到同目录的 .merge-backups/（每层最多保留 5 份）。备份失败时宁可不合并也不删除。\n\n## 相关主题\n- 对话存储与 chats 迁移\n- 历史与日志清理"
+    },
+    "en": {
+      "group": "Data, diagnostics & settings",
+      "title": "Long-term memory and auto-merge",
+      "summary": "Memory has three scopes — chat, project, global. One fact keeps one entry: duplicates and conflicts merge automatically, newest first.",
+      "content": "# Long-term memory and auto-merge\n\nMemory lives in three scopes: this chat (.sage/chats/<id>/memory.json) > project (.sage/memory.json) > global (~/.sage/memory.json). One fact keeps one entry.\n\n## Merged on save\nNew entries are checked by character similarity. An identical statement, or one differing by only a few characters, is folded into the existing entry instead of adding a duplicate: the newest wording wins, tags are unioned, the original creation date is kept, and the replaced wording is stored in that entry's mergedFrom. If the new text is only a shorter restatement, the more complete existing text is kept so details do not shrink over time.\n\n## Conflicts and priority\nWhen two memories contradict, the one updated most recently wins. Effective scope is still chat > project > global. Scopes never delete each other: a project entry shadows the global twin, and removing either leaves the other intact. Injection passes one copy per fact.\n\n## Legacy duplicates\nDuplicates left by older releases are merged per scope when you open Settings → Memory. Before a merge, the file is copied to .merge-backups/ beside it (up to 5 copies per scope). If the backup cannot be written, the merge is skipped rather than deleting anything.\n\n## Related topics\n- Chat storage and migration\n- History and log cleanup"
+    }
+  },
+  {
+    "id": "data-cleanup",
+    "keywords": "清理 空间 删除 history retention audit decisions.log",
+    "zh": {
+      "group": "数据、排查与设置",
+      "title": "历史与日志清理",
+      "summary": "在设置 → 通用最下方配置保留天数、份数和日志大小。",
+      "content": "# 历史与日志清理\n\n在设置 → 通用最下方配置保留天数、份数和日志大小。\n\n## 历史快照\nsettings.json.history 与 projects.json.history 默认保留最近 50 份正常快照；只删除同时超过 30 天、且不属于最近 50 份的快照。损坏备份不自动删除。保存清理配置或新增历史时检查。\n\n## 决策日志\n原 decisions.log 改为应用数据目录 decisions/ 下按日期、项目分片。默认单文件 5 MB、保留 30 天、总量 100 MB；天数或总量超限时删除最旧文件。写入与查询通常每小时检查，新分片或配置变更立即检查。\n\n## 旧日志\naudit.log 是旧版安全审计记录，保留兼容查询。请求监控日志是另一套数据，不受本页决策日志条件控制。\n\n## 相关主题\n- 设置备份与恢复\n- 请求监控与 debug 定位\n- 工具调用与审批"
+    },
+    "en": {
+      "group": "Data, diagnostics & settings",
+      "title": "History and log cleanup",
+      "summary": "Configure retention days, snapshot counts and log sizes at the bottom of Settings → General.",
+      "content": "# History and log cleanup\n\nConfigure retention days, snapshot counts and log sizes at the bottom of Settings → General.\n\n## History snapshots\nsettings.json.history and projects.json.history keep at least the newest 50 valid snapshots by default. Only snapshots both older than 30 days and outside the newest 50 are deleted. Corrupt backups are preserved. Checks run on retention-settings or history saves.\n\n## Decision logs\nFormer decisions.log data uses date/project shards under decisions/ in app data. Defaults: 5 MB per file, 30 days, 100 MB total. Exceeding age or total size removes oldest files. Writes and queries check hourly, immediately on new shards or changed configuration.\n\n## Legacy logs\naudit.log is older security audit history, still readable. Request-monitor logs are separate and are not controlled by these decision-log settings.\n\n## Related topics\n- Settings backup and recovery\n- Request monitor and debug links\n- Tools and approval"
+    }
+  },
+  {
+    "id": "settings-backup",
+    "keywords": "设置 备份 恢复 导出 导入 快照 export import snapshot",
+    "zh": {
+      "group": "数据、排查与设置",
+      "title": "设置备份与恢复",
+      "summary": "通用设置中提供配置导出、导入和历史恢复。",
+      "content": "# 设置备份与恢复\n\n通用设置中提供配置导出、导入和历史恢复。\n\n## 保存保护\n设置使用原子替换和历史快照。多窗口版本冲突时保留草稿，重新加载确认后再保存。损坏设置不会直接被空配置覆盖。\n\n## 凭据\n按界面提供的加密、密码和模块选择进行备份。跨主机恢复可能需要对应密码或重新填写凭据。\n\n## 相关主题\n- 历史与日志清理\n- 对话存储与 chats 迁移\n- 更新与时间显示"
+    },
+    "en": {
+      "group": "Data, diagnostics & settings",
+      "title": "Settings backup and recovery",
+      "summary": "General settings provide configuration export, import and history recovery.",
+      "content": "# Settings backup and recovery\n\nGeneral settings provide configuration export, import and history recovery.\n\n## Save protection\nSettings use atomic replacement and history snapshots. If another window changes the revision, keep your draft and reload before saving. Damaged settings are not silently replaced with empty configuration.\n\n## Credentials\nUse the offered encryption, password and module-selection options. Restoring on another host may require a password or entering credentials again.\n\n## Related topics\n- History and log cleanup\n- Chat storage and migration\n- Updates and timestamps"
+    }
+  },
+  {
+    "id": "update-intro",
+    "keywords": "更新 升级 版本 时间 显示 update upgrade version timestamp",
+    "zh": {
+      "group": "数据、排查与设置",
+      "title": "更新与时间显示",
+      "summary": "自动更新可检查、下载并安装新版本，更新源可在设置中配置。",
+      "content": "# 更新与时间显示\n\n自动更新可检查、下载并安装新版本，更新源可在设置中配置。\n\n## 更新前后\n保存文件并核对正在运行的任务。更新桌面程序不等于部署服务端程序。重新打开后，未完成计划可从继续执行入口恢复。\n\n## 时间格式\n普通对话不显示秒：当天只显示时分，昨天显示“昨天”，本年省略年份，其他年份显示完整日期。审计与请求监控等需要精确时间的场景保留秒。\n\n## 运行时配置\n设置 → 通用最上方的运行时配置可调整主进程工作参数：最大工具迭代次数、请求超时、工具输出上限、文件读取上限、上下文压缩阈值、插件包大小上限、MCP 超时、调度器间隔、渠道重试次数与连接超时。每项有安全范围，恢复默认一键重置。改动对新请求生效。\n\n## 防止系统休眠\n设置 → 通用开启后，macOS 在 Sage 运行期间不会进入休眠，确保服务和渠道消息持续可用。完全退出 Sage 后恢复系统默认行为。\n\n\n## 相关主题\n- 设置备份与恢复\n- 退出后的恢复执行\n- 中继连接与部署"
+    },
+    "en": {
+      "group": "Data, diagnostics & settings",
+      "title": "Updates and timestamps",
+      "summary": "Automatic updates can check, download and install releases using the configured update source.",
+      "content": "# Updates and timestamps\n\nAutomatic updates can check, download and install releases using the configured update source.\n\n## Before and after updating\nSave files and inspect running tasks. Updating the desktop app does not deploy server code. Reopened unfinished plans can use Continue execution.\n\n## Timestamps\nOrdinary chats omit seconds: today shows time only, yesterday has a label, this year omits the year, and other years show a full date. Audit and request-monitor views retain seconds where precision matters.\n\n## Runtime configuration\nSettings → General runtime configuration adjusts main-process limits: max tool iterations, request timeout, tool output cap, file read cap, context compression threshold, plugin package size cap, MCP timeout, scheduler interval, channel retry count and connection timeout. Each field has safe bounds. Restore defaults resets all. Changes apply to new requests.\n\n## Prevent system sleep\nSettings → General prevent sleep keeps macOS awake while Sage runs so services and channel messages stay available. System defaults resume when Sage quits.\n\n\n## Related topics\n- Settings backup and recovery\n- Resume after interruption\n- Relay connection and deployment"
+    }
+  },
+  {
+    "id": "appearance",
+    "keywords": "外观 主题 深色 浅色 护眼 颜色 字体 字号 自定义 theme dark light font appearance",
+    "zh": {
+      "group": "数据、排查与设置",
+      "title": "外观与主题",
+      "summary": "外观页切换深浅色与主题，支持自定义主题色、字体和字号。",
+      "content": "# 外观与主题\n\n设置 → 外观选择浅色、深色或跟随系统，也可以选用内置扩展主题或创建自定义主题。\n\n## 自定义主题\n复制当前配色即可创建新主题并命名；自定义主题可继续调整、删除。内置扩展主题的改动只存差异，可逐行重置或整体回滚到默认色。\n\n## 字体与字号\n主题色、字体、字号按浅色/深色分别设置，改动立即生效并跟随所选主题保存。\n\n## 日期与时间\n设置 → 外观的日期与时间区可配置时区（跟随系统或指定 IANA 时区）、日期格式预设和自定义格式。智能日期开启后，今天只显示时分、昨天显示标签、本年省略年份。格式支持 YYYY、MM、DD、HH、mm、ss 等占位符，下方实时预览。\n\n\n## 相关主题\n- 更新与时间显示\n- 设置备份与恢复"
+    },
+    "en": {
+      "group": "Data, diagnostics & settings",
+      "title": "Appearance and themes",
+      "summary": "The appearance page switches light/dark and themes, with custom colors, fonts and font sizes.",
+      "content": "# Appearance and themes\n\nSettings → Appearance offers light, dark or system-following modes, plus built-in extended themes and custom themes.\n\n## Custom themes\nCopy the current colors to create a new named theme; custom themes can be adjusted and deleted. Changes to a built-in extended theme are stored as a diff only, with per-row reset and full rollback to default colors.\n\n## Fonts and sizes\nTheme colors, fonts and font sizes are set separately for light and dark; changes apply immediately and are saved with the selected theme.\n\n## Date and time\nSettings → Appearance → Date & time configures the timezone (system or IANA), date format presets and custom patterns. Smart dates show time-only for today, a label for yesterday and omit the year for the current year. Format tokens include YYYY, MM, DD, HH, mm, ss. A live preview is shown below.\n\n\n## Related topics\n- Updates and timestamps\n- Settings backup and recovery"
+    }
+  },
+  {
+    "id": "multi-window",
+    "keywords": "多窗口 新窗口 window 跨窗口 同步 独立 multi-window new window sync",
+    "zh": {
+      "group": "数据、排查与设置",
+      "title": "多窗口协作",
+      "summary": "可为不同项目打开独立窗口，每个窗口拥有独立的标签、终端和对话状态。",
+      "content": "# 多窗口协作\n\n可为不同项目打开独立窗口，每个窗口拥有独立的标签页、终端和对话状态。\n\n## 打开新窗口\n文件 → 在新窗口中打开，或快捷键 Ctrl/Cmd+N。新窗口自动选择当前项目，也可指定其他项目路径。\n\n## 独立状态\n每个窗口维护自己的文件标签、终端面板和对话列表。切换项目时，旧终端会释放，旧对话会中止。标签页状态按窗口持久化，重载后自动恢复。\n\n## 跨窗口同步\n对话列表变更会在窗口间同步合并，避免重复或丢失。设置修改在各窗口重新加载时生效。\n\n## 边界与注意\n关闭窗口会终止该窗口的所有终端进程。关闭窗口前如有运行中的任务会提示确认。不同窗口不共享标签页状态。\n\n## 相关主题\n- 键盘快捷键\n- 对话存储与 chats 迁移\n- 退出后的恢复执行"
+    },
+    "en": {
+      "group": "Data, diagnostics & settings",
+      "title": "Multi-window workspace",
+      "summary": "Open separate windows for different projects, each with its own tabs, terminals and conversation state.",
+      "content": "# Multi-window workspace\n\nOpen separate windows for different projects. Each window maintains its own tabs, terminals and conversation state.\n\n## Opening new windows\nFile → Open in New Window, or Ctrl/Cmd+N. The new window selects the current project automatically, or a different project path can be specified.\n\n## Independent state\nEach window keeps its own file tabs, terminal panel and conversation list. Switching projects releases old terminals and aborts old conversations. Tab state persists per window and restores on reload.\n\n## Cross-window sync\nConversation list changes merge across windows to avoid duplicates or loss. Settings changes take effect when each window reloads.\n\n## Limits\nClosing a window terminates all its terminal processes. Running tasks prompt for confirmation before the window closes. Tab state is not shared between windows.\n\n## Related topics\n- Keyboard shortcuts\n- Chat storage and migration\n- Resume after interruption"
+    }
+  },
+  {
+    "id": "voice-input",
+    "keywords": "语音 听写 麦克风 授权 识别 录音 voice microphone dictation speech",
+    "zh": {
+      "group": "数据、排查与设置",
+      "title": "语音输入与授权",
+      "summary": "对话输入框与桌面宠物支持语音听写，首次使用需授权系统麦克风与语音识别。",
+      "content": "# 语音输入与授权\n\n语音听写把识别结果放进当前对话草稿；不会自动发送。请先选择正确对话，再开始录音。\n\n## 两种快捷键\n| 模式 | 默认按键 | 行为 |\n| --- | --- | --- |\n| 按住说话 | Fn | 按住开始，松开停止；离开窗口自动停止 |\n| 手动开关 | Fn + Control | 按一次开始，再按一次停止 |\n\n两种模式都只在 Sage 窗口内生效，可在设置 → 键盘快捷键重新绑定或取消绑定。输入框旁麦克风按钮与手动开关一致。持续按键不会反复切换。若已经手动录音，按住模式不会抢占该次录音。\n\n## 首次授权\nmacOS 的麦克风和语音识别是两项独立权限。按提示授权；被拒时点“打开系统设置”进入对应面板。授权等待期间松开按住键会取消本次开始；授权后需要重新按住，不会突然继续采音。\n\n## 录音与停止\n录音期间输入框显示转写，分段会拼接。停止后检查文字再发送。切换对话、关闭窗口或开始优化输入会停止采音，避免内容进入错误草稿。手动模式录音中可再次按快捷键或麦克风按钮停止。\n\n## 输入设备与排查\n设置 → 通用可选择麦克风；未指定时跟随系统默认。刷新设备会请求权限并重新扫描。\n无文字：确认设备有声音、系统权限已允许、语音助手可用；查看界面显示的具体错误。\n识别不准：降低环境噪声，确认应用语言，中英文混说的效果仍受系统识别影响。\n按键无反应：确认焦点在 Sage、没有正在录制快捷键、没有模态弹窗，并检查冲突或已取消绑定。\n\n## Fn 键说明\nmacOS 使用原生 AppKit 事件识别 Fn/地球键。按住 Fn 说话；Fn + Control（Fn⌃）切换录音，两种按键顺序都支持。设置中录制 Fn 组合时松开 Fn 完成。原生模块不可用会显示提示；没有 Fn 的键盘可以重新绑定。已有自定义绑定保留，点“恢复默认”使用上述按键。\n"
+    },
+    "en": {
+      "group": "Data, diagnostics & settings",
+      "title": "Voice input and permissions",
+      "summary": "The composer and the desktop pet support voice dictation; macOS microphone and speech recognition permissions are required first.",
+      "content": "# Voice input and permissions\n\nVoice dictation writes into the current draft and never sends automatically. Select the intended conversation first.\n\n## Two shortcut modes\n| Mode | Default | Behavior |\n| --- | --- | --- |\n| Hold to talk | Fn | Hold to start; release or leave the window to stop |\n| Manual toggle | Fn + Control | Press once to start and again to stop |\n\nBoth work only in Sage and can be reassigned or cleared in Settings → Keyboard shortcuts. The microphone button uses manual toggle behavior. Key repeat does not repeatedly switch recording. Hold mode does not take ownership of an existing manual recording.\n\n## First authorization\nmacOS microphone and Speech Recognition permissions are independent. Follow the prompt; after denial, Open system settings leads to the relevant panel. Releasing a held key while permission is pending cancels that start. After granting permission, hold again; capture does not unexpectedly resume.\n\n## Recording and stopping\nTranscription updates the draft and joins finalized segments. Review it after stopping before sending. Switching conversations, closing the window or optimizing input stops capture. In manual mode, press the shortcut or microphone button again to stop.\n\n## Device and troubleshooting\nChoose a microphone in Settings → General or follow the system default. Refresh requests permission and scans devices.\nNo text: check input levels, system permissions and the voice helper; read the specific displayed error.\nPoor recognition: reduce noise and check application language; mixed-language results depend on system recognition.\nNo shortcut response: focus Sage, close modal dialogs, finish shortcut recording and check conflicts or cleared bindings.\n\n## Fn key\nOn macOS, native AppKit events recognize Fn/Globe. Hold Fn to talk; Fn + Control (Fn⌃) toggles recording in either key order. Release Fn to finish recording a new Fn binding in settings. A warning appears if the native module is unavailable; keyboards without Fn can use a custom binding. Existing custom bindings are preserved; choose Restore default to use these keys.\n"
+    }
+  },
+  {
+    "id": "screenshot",
+    "keywords": "截图 截屏 快捷键 标注 马赛克 裁剪 复制 剪贴板 保存 下载 重复授权 screen capture screenshot annotate crop clipboard permission 蒙版 选区 拖拽 尺寸 overlay selection resize Retina",
+    "zh": {
+      "group": "数据、排查与设置",
+      "title": "截屏、标注与复制",
+      "summary": "在半透明桌面蒙版上框选、移动和缩放范围，标注后勾选复制或保存 PNG。",
+      "content": "# 截屏、标注与复制\n\n默认 Shift + Cmd + A（⇧⌘A）冻结鼠标所在显示器的桌面并显示半透明蒙版。快捷键只在 Sage 窗口内响应，可在设置中修改。对话、设置、文件页面使用同一套屏幕选区与标注工具。\n\n## 使用\n1. 让 Sage 获得焦点，按截屏快捷键。\n2. 在桌面蒙版上拖出选区：外部压暗，内部保持清晰，选区旁实时显示导出的像素尺寸。\n3. 在选区内拖动可移动范围，拖动八个边角控制点可调整大小；确认前随时可以修改。工具栏跟随选区并避开屏幕边缘。\n4. 点击绿色勾号（Enter / Cmd + C），把编辑后的图片复制到剪贴板并关闭编辑器；或点击下载图标（Cmd + S），选择位置保存 PNG。\n5. 需要发到对话时，自己回到目标输入框按 Cmd + V，再检查并发送。\n\n截图不会自动加入草稿或发送。复制和保存是两个独立出口，保存不会覆盖剪贴板。取消保存会保留当前编辑，保存或复制失败也会保留图片供重试；红色叉号或 Esc 关闭编辑器。截屏失败和权限提示都在独立截屏窗口显示。正常结束时蒙版平滑渐隐；系统开启减少动态效果时直接关闭。\n\n## 调整选区\n选区工具下可直接拖动内部；画图时拖动边框、控制点，或按住空格拖动，仍可调整范围。调整选区不会缩放背景或标注；超出选区的内容不会导出。在选区外重新拖动可重选范围。Cmd + A 选中整个显示器；拖动中按 Esc 撤回本次拖动，再按 Esc 退出。\n\n多显示器时，使用工具栏的显示器下拉框，或按 Control + Tab 切换。每次选择一个显示器，不跨屏拼接；切换或重新截屏成功后重新选择范围。显示器断开、旋转、分辨率或缩放改变时会退出当前截屏，避免位置错位；Dock 工作区域变化不影响选区。\n\n## 标注工具\n- 矩形、圆形、箭头：按住鼠标拖画。\n- 点击标注工具展开小面板：三个圆点选择线条粗细，色块直接选择蓝、绿、黄、黑、白或红；再次点击可收起。画笔支持拖动画线。\n- 马赛克：拖选要打码的区域，输出 PNG 会把打码结果合并到图片。\n- 文字：点击图片直接输入，三个 A 选择字号；可重新点击已有文字继续修改，支持多行。\n- 表情：小面板提供 48 个表情，可滚动选择，方向键按六列导航；选择表情和大小后点击图片放置；马赛克用三个圆点选择颗粒大小。\n- 选区：移动或调整要保留的范围；撤销可恢复前一次范围。\n- 撤销 Cmd + Z、重做 Shift + Cmd + Z；最多保留 200 步编辑。\n- 重新截屏：隐藏蒙版后重新读取屏幕；失败保留当前选区和编辑，成功替换为新的完整背景。\n\n## 修改标注\n确认复制或保存前，标注一直可编辑。点击已有框、圆、线、画笔、马赛克或表情重新选中，再调整色块、粗细或大小；选框的八个点可缩放，拖动边框或图案可移动。空白处开始新标注，Esc 取消当前编辑或选择。\n\n点击文字直接输入，重新点击可改内容、颜色和字号。Delete / Backspace 或小面板的垃圾桶删除选中标注；撤销、重做同样适用于移动、缩放、修改和删除。使用“调整选区”、绿色边框或按住空格调整最终截图范围；导出不含标注选择框和输入框。\n\n## 权限与限制\n首次截屏会请求屏幕录制权限。需要授权时点击“打开系统设置”，在隐私与安全性 → 屏幕与系统录音（或屏幕录制）中开启 Sage，再回来重新截屏。macOS 要求重启时，退出并重开 Sage。\n\n截图文件最多 24 MiB，最多 24 × 1024 × 1024 像素，单边不超过 16384 像素。常见 Retina 屏幕保留原像素；超高分辨率或多屏超过内存预算时，背景会按比例缩小，尺寸提示始终对应最终图片像素。读取多屏缩略图的估算总量限制为 48 × 1024 × 1024 像素。捕获不产生临时图片文件，关闭截屏即释放图片和编辑历史。粘贴到对话后仍遵循对话配置的图片大小上限及模型视觉能力。\n\n## 多个 Sage 条目\n旧版曾从 dev.sage.app 迁移到 sage.app；历史签名或多份安装也可能留下同名记录。仅凭显示顺序无法确定哪条属于当前安装。在“应用程序”中打开当前 Sage，在设置 → 安全与授权 → 系统权限查看当前实际状态和应用标识。安装更新不会自动合并历史系统权限条目。开发态 Electron 的权限与安装版 Sage 分开处理，无法识别身份时不会重置其他实例的权限。\n\n## 无反应或失败\n检查 Sage 是否在前台、有无模态窗口或快捷键冲突、是否正在读取屏幕。屏幕读取超时后可稍候重试，未结束的原生请求不会重复堆积。编辑器已经打开时重复触发会回到现有编辑器。归档对话、输入优化和录音期间不触发截屏。当前交互截屏面向 macOS。\n\n工具栏支持 Tab 导航，方向键切换工具和选项。Control + Shift + Tab 反向切换显示器。截图背景绘制完成后才显示。\n"
+    },
+    "en": {
+      "group": "Data, diagnostics & settings",
+      "title": "Capture, annotate and copy",
+      "summary": "Select, move and resize an area over a dimmed desktop, annotate, then copy or save a PNG.",
+      "content": "# Capture, annotate and copy\n\nShift + Cmd + A (⇧⌘A) freezes the display under the pointer and shows a dimmed desktop overlay while Sage is focused. Customize it in shortcut settings. Chats, settings and files all use this screen-selection and annotation workflow.\n\n## Use\n1. Focus Sage and press the capture shortcut.\n2. Drag an area on the desktop overlay. The outside is dimmed, the inside stays clear, and the output pixel dimensions appear beside it.\n3. Drag inside to move the area or use any of its eight handles to resize before confirming. The toolbar follows the selection and stays within the display.\n4. Click the green check (Enter / Cmd + C) to copy the edited image and close; or click the download icon (Cmd + S) to save a PNG to a chosen location.\n5. To use the image in a chat, focus its composer, paste with Cmd + V, review and send.\n\nCapture never adds a draft attachment or sends a message automatically. Saving does not replace the clipboard. Cancelling a save, or a copy/save failure, preserves your edits. The red cross or Escape closes the editor. Capture errors and permission instructions appear in the independent window. The overlay fades out smoothly on normal dismissal; reduced-motion settings close it directly.\n\n## Adjust selection\nUse the selection tool to drag inside. While annotating, drag a border or handle, or hold Space while dragging to move. Adjustments do not scale the background or annotations; content outside the selection is excluded from export. Drag outside to select a new area. Cmd + A selects the full display. Escape during a drag restores the previous area; Escape again exits capture.\n\nWith multiple displays, use the display dropdown or Control + Tab to switch. Capture selects one display at a time, without stitching across displays. A successful display switch or retake starts a new selection. Disconnecting, rotating, resizing or changing the scale of the captured display closes the overlay to avoid incorrect coordinates. Dock work-area changes preserve it.\n\n## Tools\n- Drag rectangles, ellipses or arrows.\n- Click an annotation tool to open its options. Three dots choose line width; swatches choose blue, green, yellow, black, white or red. Click the tool again to close its options.\n- Drag a mosaic region. Export flattens the pixelated area into the PNG.\n- Click the image and type directly. The three A buttons choose size; click existing text to edit it again. Multiple lines are supported.\n- Choose from 48 emoji in a scrollable six-column grid. Arrow keys navigate the grid; choose a size, then click to place it. Mosaic uses three dots for block size.\n- Select moves or resizes the retained area; undo restores the previous selection.\n- Cmd + Z undoes; Shift + Cmd + Z redoes. History holds up to 200 edits.\n- Retake hides the overlay before reading the screen again. A failure preserves the current selection and edits; success replaces them with a fresh full background.\n\n## Edit annotations\nAll annotations remain editable until you copy or save. Click an existing shape, line, pen stroke, mosaic or emoji to select it, then change its color, width or size. Use the eight handles to resize, or drag its border or drawing to move it. Start a new annotation in empty space. Escape cancels the current edit or selection.\n\nClick text to type directly or edit its content, color and size again. Delete / Backspace or the options trash button removes the selected annotation. Undo and redo include moves, resizing, changes and deletion. Adjust selection, the green border or Space-drag changes the final crop. Object handles and text input are excluded from export.\n\n## Permission and limits\nFirst use requests Screen Recording permission. Choose Open System Settings and allow Sage under Privacy & Security → Screen & System Audio Recording (or Screen Recording), then retake. Quit and reopen if macOS asks.\n\nImages are limited to 24 MiB, 24 × 1024 × 1024 pixels and 16384 pixels per edge. Typical Retina displays retain native pixels. Very large or numerous displays may be proportionally reduced to stay within memory limits; the dimension label always reports output pixels. Estimated total thumbnail allocation is capped at 48 × 1024 × 1024 pixels. Capturing creates no temporary image file; closing releases the image and history. Pasting into chat still follows chat attachment limits and model vision capabilities.\n\n## Duplicate Sage entries\nOlder versions changed the identifier from dev.sage.app to sage.app. Historical signatures or multiple installed copies may also leave matching names. Display order alone cannot identify the current copy. Open Sage from Applications, then check its current identity and actual status in Settings → Security & Authorization → System permissions. Updating does not merge old system records. Development Electron and installed Sage use separate permission identities; an unknown host will not reset another instance's permissions.\n\n## No response or failure\nCheck foreground focus, modal windows, conflicting shortcuts and an active capture. A screen-read timeout allows retrying later without accumulating unfinished native requests. Repeating capture while an editor is open returns to it. Archived chats, input optimization and dictation disable capture. Interactive capture currently targets macOS.\n\nTab navigates controls; arrow keys navigate tools and options. Control + Shift + Tab switches displays in reverse. The background is drawn before the editor appears.\n"
+    }
+  },
+  {
+    "id": "shortcuts",
+    "keywords": "快捷键 键盘 shortcut keyboard 按键 绑定 冲突 rebind conflict keybinding",
+    "zh": {
+      "group": "数据、排查与设置",
+      "title": "键盘快捷键",
+      "summary": "设置 → 键盘快捷键可搜索、重绑和重置全局快捷键，冲突自动标红提示。",
+      "content": "# 键盘快捷键\n\n设置 → 键盘快捷键管理应用快捷键绑定，支持搜索、重绑、重置和冲突检测。\n\n## 分组与搜索\n快捷键按窗口与终端、对话、编辑器和预览查看四组分类。搜索框可按名称、描述或默认按键过滤。\n\n## 重绑与重置\n点击铅笔图标进入录制模式，按下目标组合键即完成重绑，Esc 取消。每条快捷键可单独恢复默认，也可一键全部重置。不可重绑的快捷键显示锁定图标。\n\n## 冲突检测\n同一组合键被多条快捷键使用时，冲突项标红并悬停显示对方名称。单独按键允许方向键、功能键和翻页键；Fn 单键及 Fn 组合仅用于两种语音操作。\n\n## 边界与注意\n快捷键改动立即生效并跟随设置保存。macOS 显示符号（⌘⌃⌥⇧），其他平台显示文本。\n\n\n## 语音和截屏\n按住说话默认 Fn，手动录音开关默认 Fn + Control，截屏默认 Cmd + Shift + A。都只在 Sage 窗口内生效。录制新组合时按键不会触发原有操作；Esc 退出录制。按住模式松键、失焦后停止，快速松键也会取消仍在等待系统授权的开始动作。\n\n## 冲突排查\nCmd + A 与 Cmd + Shift + A 是不同按键。设置中若发现重复绑定，清除其中一项或换成其他组合。Fn 使用原生事件识别。系统或其他应用的全局快捷键仍可能先于 Sage 处理；可在对方设置中取消冲突绑定。\n\n## 相关主题\n- 终端面板\n- 多窗口协作\n- 外观与主题"
+    },
+    "en": {
+      "group": "Data, diagnostics & settings",
+      "title": "Keyboard shortcuts",
+      "summary": "Settings → Keyboard shortcuts searches, rebinds and resets global shortcuts with automatic conflict detection.",
+      "content": "# Keyboard shortcuts\n\nSettings → Keyboard shortcuts manages app key bindings with search, rebind, reset and conflict detection.\n\n## Groups and search\nShortcuts are categorized into Window & Terminal, Chat, Editor and Preview & View. The search box filters by name, description or default key.\n\n## Rebind and reset\nClick the pencil icon to enter recording mode; press the desired key combination to rebind, Esc to cancel. Each shortcut can be individually restored to default, or all at once with Reset All. Non-rebindable shortcuts show a lock icon.\n\n## Conflict detection\nWhen the same combination is used by multiple shortcuts, conflicts are highlighted in red with a hover tooltip showing the other shortcut. Bare keys are allowed for arrows, function keys and page navigation; Fn and Fn combinations are reserved for the two voice actions.\n\n## Limits\nShortcut changes apply immediately and are saved with settings. macOS shows symbols (⌘⌃⌥⇧); other platforms show text.\n\n\n## Voice and screenshots\nHold to talk defaults to Fn, manual dictation to Fn + Control, and capture to Cmd + Shift + A. All are Sage-window shortcuts. Recording a new binding intercepts keys instead of invoking existing actions; Escape cancels recording. Releasing or blurring ends a held recording, including cancellation while system authorization is pending.\n\n## Conflicts\nCmd + A and Cmd + Shift + A are distinct. Clear or reassign duplicate bindings. Fn uses native events. System or other applications’ global shortcuts can still take precedence; remove conflicting bindings in those applications.\n\n## Related topics\n- Terminal panel\n- Multi-window workspace\n- Appearance and themes"
+    }
+  }
+]

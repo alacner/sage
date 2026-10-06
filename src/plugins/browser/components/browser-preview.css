@@ -1,0 +1,29 @@
+.browser-pane { display:flex; flex:1; flex-direction:column; min-width:0; min-height:0; overflow:hidden; }
+.browser-pane > .browser-view { flex:1; min-height:0; }
+.browser-preview-heading { display:flex; align-items:center; gap:8px; padding:4px 10px; background:var(--bg-2); color:var(--text-dim); border-bottom:1px solid var(--border); font-size:12px; flex-shrink:0; }
+.browser-preview-heading span { flex:1; min-width:0; }
+.browser-preview-float { position:fixed; z-index:900; width:400px; height:300px; max-width:calc(100vw - 16px); max-height:calc(100vh - 16px); min-width:min(220px, calc(100vw - 16px)); min-height:190px; resize:vertical; border:1px solid var(--border); border-radius:14px; box-shadow:0 18px 64px #0005; background:var(--bg-1); }
+.browser-preview-float .browser-preview-heading { cursor:move; touch-action:none; user-select:none; }
+.browser-preview-float .browser-preview-title { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:11px; line-height:1.25; }
+.browser-preview-float .browser-toolbar { padding:4px 6px; gap:3px; }
+.browser-preview-float .browser-url-bar, .browser-preview-float .browser-url-input { min-width:0; }
+.browser-preview-float .browser-nav-buttons, .browser-preview-float .browser-action-buttons { gap:0; }
+.browser-preview-float .browser-status-bar { padding-bottom:9px; }
+
+.browser-preview-content { position:relative; display:flex; flex:1; min-width:0; min-height:0; overflow:hidden; }
+.browser-preview-surface { display:flex; flex:1; min-width:0; min-height:0; }
+.browser-preview-surface > .browser-view { flex:1; min-height:0; }
+.browser-preview-content.is-agent-controlled .browser-preview-surface { pointer-events:none; user-select:none; }
+.browser-agent-input-shield { position:absolute; inset:0; z-index:10; cursor:not-allowed; touch-action:none; }
+
+.browser-preview-toolbar-hidden .browser-toolbar { display:none; }
+.browser-preview-toolbar-hidden .browser-preview-heading { padding-block:2px; }
+.browser-preview-heading-with-toolbar .browser-preview-title { display:none; }
+.browser-preview-toolbar-host { display:flex; flex:1; min-width:0; }
+.browser-preview-toolbar-host .browser-toolbar { min-width:0; flex:1; gap:2px; padding:0; border:0; background:transparent; }
+.browser-preview-toolbar-host .browser-action-buttons,
+.browser-preview-toolbar-host > [data-plugin-slot] { display:none; }
+.browser-preview-toolbar-host .browser-nav-buttons { flex-shrink:0; }
+.browser-preview-toolbar-host .browser-nav-buttons .icon-btn { padding:3px; }
+.browser-preview-toolbar-host .browser-url-bar { flex:1; min-width:0; padding:2px 5px; }
+.browser-preview-toolbar-host .browser-url-input { min-width:0; overflow:hidden; text-overflow:ellipsis; }

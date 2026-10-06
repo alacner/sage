@@ -1,0 +1,23 @@
+{
+  "format": 1,
+  "id": "sage.mcp",
+  "name": "MCP Connector",
+  "version": "1.1.0",
+  "sdk": "^1.1.0",
+  "entry": "plugin.js",
+  "description": "Connect Sage to local Model Context Protocol servers.",
+  "category": "integration",
+  "permissions": ["mcp.connect"],
+  "services": {
+    "mcp": {
+      "version": "1.0.0",
+      "methods": {
+        "servers":{"description":"List configured enabled servers without credentials","input":{"type":"object"},"tool":true},
+        "tools":{"description":"List tools of a configured server","input":{"type":"object","properties":{"serverId":{"type":"string"}},"required":["serverId"]},"tool":true},
+        "call":{"description":"Call a configured server tool","input":{"type":"object","properties":{"serverId":{"type":"string"},"name":{"type":"string"},"arguments":{"type":"object"}},"required":["serverId","name"]},"tool":true},
+        "listTools": {"description":"List tools exposed by a local MCP server.","input":{"type":"object","properties":{"command":{"type":"string"},"args":{"type":"array","items":{"type":"string"}}},"required":["command"]},"tool":true},
+        "callTool": {"description":"Call a tool exposed by a local MCP server.","input":{"type":"object","properties":{"command":{"type":"string"},"args":{"type":"array","items":{"type":"string"}},"name":{"type":"string"},"arguments":{"type":"object"}},"required":["command","name"]},"tool":true}
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "packageVersion": "0.6.821",
+  "provenance": "Byte-exact compiled CSS from verified /Applications/Sage.app 0.6.821",
+  "helpTopics": 59,
+  "spriteAtlasFrameCounts": [
+    1,
+    8,
+    12
+  ],
+  "styles": {
+    "app-entry-HvUm5mjR.css": "621363e333b8f518e11f1381d8fa8e58bf4caa7cff6d628e408fd1c5feb13ca8",
+    "SettingsView-t6XP8NHe.css": "b31f7b7f69ce9dcb8239adea75de4f0102301501c13736fffd25c2eb4fd3c09c",
+    "UsageAnalytics-BbXxYffj.css": "6cfb2aa4fd0f9fa31ab58e12f3100f537f0ee72ee4c2b99472a4f16e79bad1a5",
+    "entry-DlhBFl93.css": "7d4f312e8c6041993b7fdbf4013b7079b341af358e4ce0dbe6d4c2bba7e856b9"
+  }
+}

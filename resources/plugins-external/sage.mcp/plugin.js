@@ -1,0 +1,1 @@
+globalThis.sagePlugin={services:{mcp:{servers:(args,sdk)=>sdk.host('mcp','servers',args),tools:(args,sdk)=>sdk.host('mcp','tools',args),call:(args,sdk)=>sdk.host('mcp','call',args),listTools:(args,sdk)=>sdk.host('mcp','listTools',args),callTool:(args,sdk)=>sdk.host('mcp','callTool',args)}}};

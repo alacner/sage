@@ -1,0 +1,144 @@
+/* Git 提交历史：只补 git-browser.css 没管的行内布局。
+
+   ⚠️ 本文件曾经是一整份「浅色主题」硬编码样式（#fff / #333 / #f5f5f5 / #999 …）。
+   组件里 import 顺序是 GitHistoryView.css → git-browser.css，但打包产物里两块的
+   先后是反的（实测 dist/assets/index-*.css：git-browser.css 在偏移 16.5k，本文件在
+   26.3k）——同特异度后来者胜，于是深色主题下整片提交列表被刷成白底，而选中行走
+   git-browser.css 的 accent 深绿底（特异度更高），标题却还是本文件的 #333 →
+   深绿底配深灰字，几乎看不见。
+   所以这里：颜色一律走主题变量；git-browser.css 已经管着的属性（列宽、hover、
+   选中底色）不再重复声明，避免再来一次「谁在后面谁赢」。 */
+.git-history-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: var(--bg-1);
+  color: var(--text);
+}
+
+.git-history-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* 每一行提交记录 - 紧凑的单行布局（gap 收紧，让消息紧贴左侧图谱） */
+.git-commit-row {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 12px 0 0;
+  gap: 6px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.1s;
+  font-size: 12px;
+  text-align: left;
+}
+
+/* 左侧分支图谱 SVG */
+.git-graph-svg {
+  flex-shrink: 0;
+  display: block;
+}
+
+/* 引用标签（分支/标签）——配色见 git-browser.css 的 .git-ref--head/branch/remote/tag */
+.git-commit-refs {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 1;
+  min-width: 0;
+  max-width: 45%;
+  overflow: hidden;
+}
+
+.git-commit-summary {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 120px;
+  overflow: hidden;
+}
+
+/* 引用徽章（.git-ref / .git-ref--head…）的尺寸与配色全部在 git-browser.css，
+   这里不再补一份：写死颜色的那套旧规则（.git-ref.head 等）类名根本不匹配。 */
+
+/* 提交信息 - 占据主要空间（颜色继承 --text，选中行才不会和底色打架） */
+.git-commit-message {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 作者（列宽与 flex 布局由 git-browser.css 统一给） */
+.git-commit-author {
+  font-size: 11px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+/* 哈希 */
+.git-commit-hash {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+  width: 56px;
+  text-align: right;
+}
+
+/* 时间（列宽由 git-browser.css 给） */
+.git-commit-time {
+  font-size: 11px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+  text-align: right;
+}
+
+/* 目录未进行 git 管理：纵向引导卡片（图标 + 说明 + 操作） */
+.git-history-notrepo {
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+}
+
+.git-history-notrepo .git-notrepo-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.git-history-notrepo .git-notrepo-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+.git-history-end { height: 1px; flex: 0 0 1px; }
+
+/* 提交行右键菜单：元信息区（底部分隔线下显示短哈希 + 提交信息） */
+.git-ctx-menu-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 10px 4px;
+  font-size: 11px;
+  max-width: 260px;
+}
+
+.git-ctx-menu-msg {
+  color: var(--text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}

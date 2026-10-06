@@ -1,0 +1,557 @@
+{
+  "format": 1,
+  "id": "sage.browser",
+  "name": "Browser Automation",
+  "version": "1.2.0",
+  "sdk": "^1.0.0",
+  "entry": "plugin.js",
+  "description": "Independent browser service for Sage and other plugins.",
+  "permissions": [
+    "browser.control",
+    "browser.debug",
+    "browser.files",
+    "browser.tabs"
+  ],
+  "hostDependencies": {
+    "browser": "^1.0.0"
+  },
+  "services": {
+    "automation": {
+      "version": "1.1.0",
+      "methods": {
+        "tabs": {
+          "description": "List integrated browser tabs available to this project.",
+          "input": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+          },
+          "tool": true
+        },
+        "attach": {
+          "description": "Attach a scoped browser handle to an integrated browser tab.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "tabId": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "tabId"
+            ]
+          },
+          "tool": true
+        },
+        "create": {
+          "description": "Create an isolated browser window.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string"
+              },
+              "width": {
+                "type": "integer",
+                "minimum": 320,
+                "maximum": 3840
+              },
+              "height": {
+                "type": "integer",
+                "minimum": 200,
+                "maximum": 2160
+              }
+            },
+            "additionalProperties": false
+          },
+          "tool": true
+        },
+        "list": {
+          "description": "List browser handles owned by the calling plugin.",
+          "input": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+          },
+          "tool": true
+        },
+        "close": {
+          "description": "Close an owned browser handle.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id"
+            ]
+          },
+          "tool": true
+        },
+        "back": {
+          "description": "Navigate back.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id"
+            ]
+          },
+          "tool": true
+        },
+        "forward": {
+          "description": "Navigate forward.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id"
+            ]
+          },
+          "tool": true
+        },
+        "reload": {
+          "description": "Reload the page.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id"
+            ]
+          },
+          "tool": true
+        },
+        "snapshot": {
+          "description": "Read the page URL, title, visible text, and common elements.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id"
+            ]
+          },
+          "tool": true
+        },
+        "screenshot": {
+          "description": "Capture a PNG screenshot.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id"
+            ]
+          },
+          "tool": true
+        },
+        "console": {
+          "description": "Read recent console and download events.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id"
+            ]
+          },
+          "tool": true
+        },
+        "show": {
+          "description": "Show the browser window and pause automation for manual control.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id"
+            ]
+          },
+          "tool": true
+        },
+        "hide": {
+          "description": "Hide the browser window.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id"
+            ]
+          },
+          "tool": true
+        },
+        "pause": {
+          "description": "Pause automation for manual control.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id"
+            ]
+          },
+          "tool": true
+        },
+        "resume": {
+          "description": "Resume automation.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id"
+            ]
+          },
+          "tool": true
+        },
+        "frames": {
+          "description": "Read the current frame tree.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id"
+            ]
+          },
+          "tool": true
+        },
+        "navigate": {
+          "description": "Navigate to an HTTP or HTTPS URL.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "url": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "url"
+            ]
+          },
+          "tool": true
+        },
+        "click": {
+          "description": "Click the unique element matching a CSS selector.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "selector": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "selector"
+            ]
+          },
+          "tool": true
+        },
+        "wait": {
+          "description": "Wait until a unique element matching a CSS selector exists.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "selector": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "selector"
+            ]
+          },
+          "tool": true
+        },
+        "fill": {
+          "description": "Set the value of a unique input or textarea and dispatch input/change events.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "selector": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000
+              },
+              "text": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "selector",
+              "text"
+            ]
+          },
+          "tool": true
+        },
+        "select": {
+          "description": "Set the value of a unique select element.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "selector": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000
+              },
+              "text": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "selector",
+              "text"
+            ]
+          },
+          "tool": true
+        },
+        "press": {
+          "description": "Send a key press.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 30
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "key"
+            ]
+          },
+          "tool": true
+        },
+        "scroll": {
+          "description": "Scroll the page up or down.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "text": {
+                "type": "string",
+                "enum": [
+                  "up",
+                  "down"
+                ]
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id"
+            ]
+          },
+          "tool": true
+        },
+        "evaluate": {
+          "description": "Evaluate JavaScript in the current page. Requires browser.debug.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "expression": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100000
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "expression"
+            ]
+          },
+          "tool": true
+        },
+        "cdp": {
+          "description": "Send a page-scoped Chrome DevTools Protocol command. Requires browser.debug.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "command": {
+                "type": "string",
+                "minLength": 1
+              },
+              "params": {
+                "type": "object"
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "command"
+            ]
+          },
+          "tool": true
+        },
+        "upload": {
+          "description": "Choose a project-contained file for a page file input. Requires browser.files.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "selector": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000
+              },
+              "file": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "selector",
+              "file"
+            ]
+          },
+          "tool": true
+        },
+        "download": {
+          "description": "Enable project-contained downloads for this browser handle. Requires browser.files.",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "id"
+            ]
+          },
+          "tool": true
+        }
+      }
+    }
+  },
+  "contributes": [
+    {
+      "id": "browser",
+      "slot": "sidebar.middle",
+      "title": "Browser",
+      "view": "views/browser.html"
+    }
+  ]
+}

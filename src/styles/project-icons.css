@@ -1,0 +1,13 @@
+.project-dropdown-item.has-project-icon { padding-left: 40px; }
+.project-dropdown-item .project-icon-edit { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 26px; height: 28px; min-height: 28px; padding: 0; display: flex; align-items: center; justify-content: center; color: var(--text-mute); opacity: .65; border-radius: var(--radius-sm); }
+.project-dropdown-item.active .project-icon-edit { color: var(--text); opacity: 1; }
+.project-icon-edit:hover { opacity: 1; background: var(--bg-3); }
+.project-icon-unread { position: absolute; right: 0; top: 3px; width: 4px; height: 4px; border-radius: 50%; background: var(--text-mute); opacity: .65; }
+.project-icon-picker { padding: 10px; margin: 6px 0; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.project-icon-picker-heading { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 12px; color: var(--text-secondary); }
+.project-icon-picker-heading span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.project-icon-options { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; }
+.project-icon-option { height: 32px; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); color: var(--text-secondary); border: 1px solid transparent; }
+.project-icon-option:hover { background: var(--bg-3); }
+.project-icon-option.active { color: var(--text); background: var(--accent-soft); border-color: var(--border); }
+.project-icon-picker-error { margin: 6px 0 0; color: var(--danger); font-size: 11px; }

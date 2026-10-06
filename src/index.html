@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sage</title>
+    <script>
+      // Pet transparency must be in place before the first paint, not a React effect.
+      if (new URLSearchParams(location.search).get('view') === 'pet') document.documentElement.classList.add('sage-pet');
+    </script>
+    <style>
+      html.sage-pet, html.sage-pet body, html.sage-pet #root { background: transparent !important; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./main.tsx"></script>
+  </body>
+</html>

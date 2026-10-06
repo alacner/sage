@@ -1,0 +1,290 @@
+.security-summary { display:flex;align-items:center;gap:12px;padding:18px;border:1px solid var(--border);border-radius:12px;margin:20px 0; }
+.security-summary>div { flex:1; }.security-summary p { margin:5px 0 0;color:var(--text-dim);font-size:12px; }
+.security-menu { position:relative; }.security-trigger { display:flex;align-items:center;gap:7px;background:transparent;border:1px solid var(--border);border-radius:8px;color:inherit;padding:6px 10px;font-size:12px;cursor:pointer; }
+.security-popover { position:absolute;bottom:calc(100% + 10px);right:0;width:min(360px,85vw);background:var(--bg-1);border:1px solid var(--border);border-radius:14px;box-shadow:0 12px 45px #0003;padding:8px;z-index:60; }
+.security-popover-heading { font-size:11px;color:var(--text-dim);padding:9px 10px; }.security-menu-option { display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px 10px;border:0;border-radius:8px;color:inherit;background:transparent;cursor:pointer; }.security-menu-option:hover { background:var(--bg-2); }.security-menu-option span { flex:1; }.security-menu-option strong { display:block;font-size:13px; }.security-menu-option small { display:block;margin-top:5px;color:var(--text-dim);line-height:1.5;font-size:12px; }.security-popover-foot { border-top:1px solid var(--border);padding:12px 10px 3px;font-size:11px;line-height:1.6;color:var(--text-dim); }.security-popover-foot svg { vertical-align:middle;margin-right:5px; }
+.security-backdrop { position:fixed;inset:0;background:#0006;display:flex;align-items:center;justify-content:center;z-index:1500;padding:24px; }
+.security-settings-page { width:min(700px,100%);max-height:90vh;display:flex;flex-direction:column;border-radius:18px;background:var(--bg-1);color:var(--text);border:1px solid var(--border);box-shadow:0 24px 90px #0004;outline:none; }
+.security-settings-page header { display:flex;justify-content:space-between;align-items:flex-start;padding:24px 28px 16px; }.security-settings-page h2 { display:flex;gap:10px;align-items:center;font-size:22px;margin:5px 0 8px; }.security-settings-page header p { margin:0;font-size:12px;color:var(--text-dim);overflow-wrap:anywhere; }.security-eyebrow { font-size:11px;color:var(--text-dim); }
+.security-tabs { display:flex;gap:20px;padding:0 28px;border-bottom:1px solid var(--border); }.security-tabs button { background:none;border:0;border-bottom:2px solid transparent;padding:12px 0;color:var(--text-dim);cursor:pointer;font-size:13px; }.security-tabs button[aria-pressed=true] { color:var(--text);border-color:var(--accent); }
+.security-tabs button:hover:not([aria-pressed=true]) { background:transparent;border-color:transparent;color:var(--text); }
+.security-content { overflow-y:auto;padding:24px 28px;min-height:340px; }.security-content h3 { font-size:17px;margin:0 0 8px; }.security-muted { font-size:13px;color:var(--text-dim);line-height:1.7;margin:0 0 20px; }
+.security-boundaries { border:1px solid var(--border);border-radius:12px; }.security-boundaries>div { display:flex;gap:13px;align-items:flex-start;padding:18px; }.security-boundaries>div+div { border-top:1px solid var(--border); }.security-boundaries span { flex:1; }.security-boundaries strong { display:block;font-size:13px; }.security-boundaries small { display:block;line-height:1.6;color:var(--text-dim);margin-top:5px;font-size:12px; }.security-boundaries b { font-size:11px;padding:3px 7px;background:var(--bg-2);border-radius:5px;font-weight:500; }
+.security-note { font-size:12px;color:var(--text-dim);line-height:1.7;margin:14px 0 0; }.security-choices { display:grid;gap:10px; }.security-choices>label { display:flex;align-items:flex-start;gap:12px;padding:16px;border:1px solid var(--border);border-radius:10px;cursor:pointer; }.security-choices>label.selected { border-color:var(--accent);background:color-mix(in srgb,var(--accent) 5%,transparent); }.security-choices input { width:auto;margin:3px 0;accent-color:var(--accent); }.security-choices strong { display:block;font-size:13px; }.security-choices small { display:block;line-height:1.6;font-size:12px;color:var(--text-dim);margin-top:5px; }
+.security-review-options { margin-top:20px; }.security-review-options label,.security-rule label { display:block;font-size:12px; }.security-settings-page textarea,.security-settings-page select { display:block;width:100%;box-sizing:border-box;background:var(--bg-2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px;font:inherit;margin-top:8px; }.security-settings-page textarea { resize:vertical;line-height:1.7; }.security-inline-fields { display:grid;grid-template-columns:1fr 110px;gap:12px;margin-top:14px; }.security-result { margin-top:20px;padding:16px;border-radius:10px;background:var(--bg-2);font-size:13px; }.security-result p { line-height:1.7;margin:8px 0; }.security-result small { color:var(--text-dim);font-size:12px;line-height:1.6; }
+.security-rule-group { border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px; }.security-rule-group summary { cursor:pointer;font-size:13px;font-weight:600; }.security-rule { margin-top:18px; }.security-rule small { float:right;color:var(--text-dim); }.security-rule textarea { font-family:ui-monospace,monospace;font-size:12px; }.security-error { font-size:12px;color:#cf4545;line-height:1.6; }
+.security-settings-page footer { border-top:1px solid var(--border);padding:16px 28px; }.security-settings-page footer>small { display:block;color:var(--text-dim);font-size:11px;margin-bottom:12px; }.security-settings-page footer>div { display:flex;justify-content:flex-end;gap:8px; }.security-settings-page footer button { display:flex;align-items:center;gap:6px; }.security-settings-page button:focus-visible,.security-settings-page summary:focus-visible,.security-trigger:focus-visible { outline:none;outline-offset:3px; }
+@media(max-width:600px) { .security-backdrop { padding:10px; }.security-settings-page header,.security-content,.security-settings-page footer { padding:18px; }.security-tabs { padding:0 18px; }.security-inline-fields { grid-template-columns:1fr; }.security-settings-page footer>div { flex-wrap:wrap; } }
+
+.security-feature-list { display:flex;flex-direction:column;gap:24px; }
+.security-feature-section { padding:20px;border:1px solid var(--border);border-radius:12px; }
+.security-feature-section:first-child { order:1; }
+.security-tabs { flex-wrap:wrap;column-gap:20px;row-gap:0; }
+.security-tabs-roles { margin-left:auto; }
+
+/* Embedded settings page: the parent settings area owns scrolling. */
+.security-settings-page { width:100%;max-height:none;border:0;border-radius:0;box-shadow:none;background:transparent; }
+.security-settings-page header { display:block;padding:0 0 20px; }
+.security-settings-page header h2 { margin:0 0 8px; }
+.security-settings-page .security-tabs { padding:0;gap:0 24px; }
+.security-settings-page .security-content { overflow:visible;min-height:0;padding:20px 0; }
+.security-settings-page .security-feature-section { padding:20px;background:var(--bg-2); }
+.security-settings-page footer { padding:16px 0; }
+.security-settings-page footer>div { align-items:center; }
+.security-settings-page footer [role=status] { font-size:12px;color:var(--text-dim); }
+.security-settings-page .security-rule-group { background:var(--bg-2); }
+@media(max-width:600px) { .security-settings-page .security-feature-section { padding:16px; }.security-settings-page .security-boundaries>div { flex-wrap:wrap; }.security-settings-page .security-boundaries span { min-width:140px; } }
+
+.security-profile-toolbar { display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:18px; }
+.security-profile-toolbar select { min-width:220px;flex:1; }
+.security-profile-fields { display:grid;grid-template-columns:1fr 2fr;gap:16px;margin-bottom:20px; }
+.security-profile-fields label { display:flex;flex-direction:column;gap:8px; }
+.security-profile-fields input { width:100%;box-sizing:border-box; }
+.security-selector { position:relative; }
+.security-profile-menu { position:absolute;bottom:calc(100% + 8px);left:0;width:300px;max-height:360px;overflow:auto;padding:6px;background:var(--bg-1);border:1px solid var(--border);border-radius:12px;box-shadow:0 6px 24px #0002;z-index:100; }
+/* 消息内嵌入口：弹层向下展开，避免被聊天滚动区上沿裁切 */
+.security-drop-down .security-profile-menu { bottom:auto;top:calc(100% + 8px); }
+/* 拒绝提示行：说明文字 + 方案入口按钮同行排列 */
+.sandbox-deny-inline { display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px; }
+.security-profile-menu button { display:flex;flex-direction:column;gap:5px;text-align:left;width:100%;padding:10px;border:0;border-radius:7px;background:transparent;color:var(--text); }
+.security-profile-menu small { color:var(--text-dim); }
+@media(max-width:600px) { .security-profile-fields { grid-template-columns:1fr; } }
+
+.security-profile-toolbar h3 { margin:0;flex:1; }
+.security-policy-list { border:1px solid var(--border);border-radius:12px;overflow:hidden; }
+.security-policy-row { display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg-1); }
+.security-policy-row + .security-policy-row { border-top:1px solid var(--border); }
+.security-policy-row.dragging { opacity:.45; }
+.security-policy-text { flex:1;min-width:120px; }
+.security-policy-text strong { font-size:15px; }
+.security-policy-text p { font-size:12px;line-height:1.6;margin:5px 0 0;opacity:.8;overflow-wrap:anywhere; }
+.security-policy-actions { display:flex;gap:4px;align-items:center;flex-wrap:wrap; }
+.security-policy-actions button { display:flex;gap:5px;align-items:center; }
+.security-policy-actions button[aria-pressed=true] { color:var(--accent); }
+.security-drag { display:flex;width:18px;padding:0;border:0;background:none;color:var(--text-dim);cursor:grab;flex-shrink:0;min-height:0; }
+.security-drag:hover { background:none;border-color:transparent; }
+.security-full-access { color:#f97316!important; }
+.security-policy-row.security-full-access { background:color-mix(in srgb,#f97316 5%,var(--bg-1)); }
+.security-profile-menu .security-policy-option { flex-direction:row;align-items:center;gap:12px; }
+.security-policy-option>svg { flex-shrink:0; }
+.security-policy-option>span { flex:1; }
+.security-profile-menu .security-policy-option small { display:block;margin-top:5px;color:inherit;opacity:.8;line-height:1.5; }
+.security-profile-menu .security-full-access { border-radius:9px; }
+.security-profile-menu { width:min(380px,85vw); }
+.security-profile-fields input[type=color] { width:70px;min-height:36px; }
+@media(max-width:800px) { .security-policy-row { flex-wrap:wrap; }.security-policy-actions { width:100%;padding-left:44px; } }
+.security-profile-toolbar .btn-secondary { display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);border-radius:8px;background:var(--bg-1);color:var(--text);padding:8px 12px;font:inherit;font-size:13px;cursor:pointer; }
+.security-profile-toolbar .btn-secondary:hover { background:var(--bg-2);border-color:var(--accent); }
+.security-profile-menu { left:auto;right:0; }
+.security-profile-fields input[type=color] { border:1px solid var(--border);border-radius:8px;padding:4px;background:var(--bg-1); }
+.security-settings-page .security-review-options label+label { margin-top:16px; }
+.security-feature-list + section { margin-top:18px; }
+
+.security-menu-heading { display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 8px 10px;border-bottom:1px solid var(--border);margin-bottom:4px;font-size:12px;color:var(--text-dim); }
+.security-menu-heading>span { min-width:0;line-height:1.5; }
+.security-profile-menu .security-menu-heading button { width:auto;flex-shrink:0;padding:0;border-radius:0;border-bottom:1px solid currentColor;background:transparent;min-height:0;font:inherit;color:var(--text);line-height:1.6; }
+.security-profile-menu .security-menu-heading button:hover { background:transparent;color:var(--accent); }
+.security-profile-menu .security-policy-option { padding:12px 10px;border-radius:9px; }
+.security-policy-check { margin-left:6px;color:var(--text-dim); }
+
+.full-access-backdrop { position:fixed;inset:0;z-index:10000;background:#0005;display:flex;align-items:center;justify-content:center;padding:24px; }
+.full-access-dialog { box-sizing:border-box;width:min(620px,100%);max-height:calc(100vh - 48px);overflow:auto;border:1px solid var(--border);border-radius:20px;background:var(--bg-1);color:var(--text);box-shadow:0 20px 70px #0003;padding:24px; }
+.full-access-dialog h2 { display:flex;align-items:center;gap:12px;font-size:22px;line-height:1.4;margin:0 0 18px; }
+.full-access-dialog h2 svg { flex-shrink:0; }
+.full-access-dialog p { color:var(--text-dim);font-size:14px;line-height:1.7;margin:16px 0; }
+.full-access-capabilities { border-radius:14px;background:var(--bg-2);padding:4px 16px; }
+.full-access-capabilities>div { display:flex;align-items:center;gap:14px;padding:14px 0; }
+.full-access-capabilities>div+div { border-top:1px solid var(--border); }
+.full-access-capabilities svg { flex-shrink:0; }
+.full-access-capabilities .files { color:#369bf5; }.full-access-capabilities .internet { color:#25bde8; }
+.full-access-capabilities strong { display:block;font-size:15px; }.full-access-capabilities small { display:block;margin-top:4px;color:var(--text-dim);font-size:13px;line-height:1.6; }
+.full-access-actions { display:flex;justify-content:flex-end;gap:12px;margin-top:20px; }
+.full-access-actions button { display:inline-flex;align-items:center;justify-content:center;gap:7px;border:0;border-radius:22px;padding:10px 22px;background:var(--bg-2);color:var(--text);font:inherit;cursor:pointer; }
+.full-access-actions .full-access-confirm { color:#e34239;background:color-mix(in srgb,#ef4444 12%,var(--bg-1)); }
+.full-access-actions button:disabled { opacity:.55;cursor:wait; }.full-access-actions button:focus-visible { outline:none;outline-offset:3px; }
+.full-access-dialog p.security-error,.full-access-dialog .full-access-default-note { color:#e34239; }
+@media(max-width:600px) { .full-access-backdrop { padding:12px; }.full-access-dialog { padding:20px;max-height:calc(100vh - 24px); }.full-access-dialog h2 { font-size:20px; } }
+.security-icon-field { display:flex;flex-direction:column;gap:8px; }
+.security-icon-grid { display:grid;grid-template-columns:repeat(auto-fill,36px);gap:8px; }
+.security-icon-grid button { display:flex;align-items:center;justify-content:center;width:36px;height:36px;padding:0;border:1px solid var(--border);border-radius:8px;background:var(--bg-1);color:var(--text-dim);cursor:pointer; }
+.security-icon-grid button:hover,.security-icon-grid button[aria-pressed=true] { color:var(--accent);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--bg-1)); }
+.security-icon-grid button:focus-visible { outline:none;outline-offset:2px; }
+
+.security-rule-group summary input { margin: 0 10px 0 4px; accent-color: var(--accent); vertical-align: middle; }
+.security-inline-fields > label { margin-top: 0 !important; }
+.security-inline-fields .model-selector-label { font-weight: inherit; margin-bottom: 8px; }
+.security-rule-group .security-choices { margin-top: 16px; }
+
+.security-icon-grid { grid-template-columns: repeat(6, minmax(28px, 1fr)); grid-template-rows: repeat(3, 36px); }
+.security-icon-grid button { width:100%; }
+.security-color-grid button span { width:20px;height:20px;border-radius:50%; }
+.security-color-grid button[aria-pressed=true] span { outline:2px solid var(--text);outline-offset:3px; }
+
+.security-profile-fields .security-color-grid input.security-custom-color { box-sizing:border-box;width:100%;height:36px;min-height:36px;margin:0;padding:6px;border:1px solid var(--border);border-radius:8px;background:var(--bg-1);cursor:pointer; }
+.security-custom-color:focus-visible { outline:none;outline-offset:2px; }
+
+.security-menu-heading {display:grid;grid-template-columns:1fr auto;gap:2px 12px;}.security-menu-heading>button:first-child {justify-self:start;grid-row:1 / 3;}.security-menu-heading>.security-menu-timing {grid-column:2;text-align:right;font-size:10px;color:var(--text-dim);}
+.decision-filters {display:flex;flex-wrap:wrap;gap:8px;}.decision-filters input {flex:1 1 280px;}.decision-filters select {max-width:260px;}
+.decision-entries {display:flex;flex-direction:column;gap:10px;}.decision-entry {border:1px solid var(--border);border-radius:10px;padding:14px;background:var(--bg-1);overflow-wrap:anywhere;}
+.decision-entry header {display:flex;gap:14px;align-items:center;flex-wrap:wrap;}.decision-entry time {margin-left:auto;color:var(--text-dim);font-size:12px;}
+.decision-entry.deny header>strong {color:#dc2626;}.decision-entry.allow header>strong {color:#16a34a;}.decision-context {color:var(--text-dim);font-size:12px;margin:8px 0;}
+.decision-entry p {margin:8px 0 0;white-space:pre-wrap;}.decision-operation code {white-space:pre-wrap;}
+/* Icon cells keep a 11-per-row compact grid; palette swatches are rounded cards (design-ref). */
+.security-profile-appearance {grid-column:1 / -1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start;}
+.security-appearance-picker {min-width:0;border:1px solid var(--border);border-radius:10px;background:var(--bg-1);}
+.security-appearance-picker > summary {display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:42px;padding:8px 12px;cursor:pointer;list-style:none;font-size:12px;font-weight:550;}
+.security-appearance-picker > summary::-webkit-details-marker {display:none;}
+.security-appearance-picker[open] > summary {border-bottom:1px solid var(--border);}
+.security-appearance-preview {display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:7px;background:var(--bg-2);color:var(--text-dim);}
+.security-appearance-color-preview {display:block;width:28px;height:22px;border:1px solid color-mix(in srgb,var(--text) 18%,transparent);border-radius:6px;}
+.security-appearance-picker > .security-icon-grid {margin:10px 12px 12px;}
+.security-appearance-picker > .security-color-palette {width:auto;min-width:0;margin:10px 12px 12px;}
+.security-profile-appearance .security-icon-grid {width:max-content;grid-template-columns:repeat(11,38px);grid-template-rows:none;grid-auto-rows:38px;gap:8px;}
+.security-profile-appearance .security-icon-grid button {width:38px;height:38px;box-sizing:border-box;border:1px solid transparent;border-radius:10px;background:var(--bg-1);}
+.security-profile-appearance .security-icon-grid button:hover {border-color:var(--border);}
+.security-profile-appearance .security-icon-grid button[aria-pressed=true] {border-color:var(--accent);box-shadow:0 0 0 1px var(--accent);background:color-mix(in srgb,var(--accent) 6%,var(--bg-1));color:var(--accent);}
+/* 色板卡片化：圆角色块、去掉发丝边；flex:1 使其与左侧图标网格等高。 */
+.security-color-palette {box-sizing:border-box;display:flex;flex:1;min-width:240px;flex-direction:column;justify-content:space-between;gap:10px;padding:12px;border:1px solid var(--border);border-radius:12px;background:var(--bg-1);}
+.security-standard-section,.security-theme-section {display:flex;flex-direction:column;gap:6px;}
+.security-color-palette span {font-size:11px;line-height:14px;color:var(--text-dim);}
+.security-theme-colors,.security-standard-colors {display:grid;grid-template-columns:repeat(10,1fr);gap:4px;}
+.security-theme-colors>div {display:flex;flex-direction:column;gap:4px;min-width:0;}
+.security-theme-shades {display:flex;flex-direction:column;gap:4px;}
+/* min-height:0 关键——全局 button 基线 min-height:32px 会把 aspect-ratio:1/1 的色块强行撑成 32px 高的竖条（视觉上像马赛克/短横线竖栏），归零后色块恢复正方形圆角卡片。 */
+.security-color-palette button {width:100%;height:auto;min-height:0;aspect-ratio:1/1;min-width:0;box-sizing:border-box;padding:0;border:0;border-radius:6px;cursor:pointer;}
+.security-theme-colors>div>button,.security-standard-colors button {border-radius:8px;}
+.security-color-palette button[aria-pressed=true] {outline:2px solid var(--accent);outline-offset:2px;position:relative;z-index:1;}
+.security-color-palette button:focus-visible {outline:none;outline-offset:2px;position:relative;z-index:2;}
+.security-profile-fields label.security-more-colors {display:flex;flex-direction:row;align-items:center;gap:8px;margin:0;padding-top:8px;border-top:1px solid var(--border);font-size:12px;white-space:nowrap;cursor:pointer;}
+.security-profile-fields .security-more-colors input[type=color] {width:20px;height:20px;min-height:20px;padding:1px;margin:0;border-radius:6px;}
+@media(max-width:800px) {.security-profile-appearance {grid-template-columns:minmax(0,1fr);}}
+@media(max-width:600px) {.security-profile-appearance .security-icon-grid {grid-template-columns:repeat(11,30px);grid-auto-rows:30px;}.security-profile-appearance .security-icon-grid button {width:30px;height:30px;min-height:0;}}
+.decision-filters input {flex-basis:100%;}
+.decision-filters .btn-secondary {display:inline-flex;align-items:center;justify-content:center;padding:7px 12px;border:1px solid var(--border);border-radius:8px;background:var(--bg-1);color:var(--text);font:inherit;font-size:13px;cursor:pointer;}
+.decision-filters .btn-secondary:hover {border-color:var(--accent);}
+
+.security-policy-disabled .security-policy-text,.security-policy-disabled>svg {opacity:.45;}
+.security-profiles>.security-muted {margin:0 0 14px;}
+.security-policy-actions {gap:4px;}
+.security-policy-actions .btn-ghost {padding:6px 8px;}
+
+/* Match the standard settings cards and compact row actions. */
+.security-profiles .security-policy-list {background:var(--bg-0);border-radius:var(--radius-md);}
+.security-profiles .security-policy-row {background:transparent;padding:12px 14px;gap:10px;min-height:62px;box-sizing:border-box;}
+.security-profiles .security-policy-row.security-full-access {background:transparent;}
+.security-profiles .security-policy-text strong {font-size:13px;line-height:1.5;font-weight:600;}
+.security-profiles .security-policy-text p {font-size:12px;line-height:1.5;color:var(--text-dim);opacity:1;margin-top:3px;}
+.security-profiles .security-policy-actions {gap:2px;flex-wrap:nowrap;flex-shrink:0;}
+.security-profiles .security-policy-actions .btn-ghost {width:30px;height:30px;min-height:0;padding:6px;justify-content:center;color:var(--text-dim);border-radius:6px;}
+.security-profiles .security-policy-actions .btn-ghost:hover {background:var(--bg-2);color:var(--text);}
+.security-profiles .security-policy-actions .btn-ghost[aria-pressed=true] {color:var(--accent);}
+.security-profiles .security-policy-actions .security-delete-action:hover {color:var(--danger,#ef4444);}
+.security-policy-badge {display:inline-block;margin-left:8px;padding:1px 6px;border-radius:4px;font-size:11px;line-height:1.5;font-weight:400;color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent);}
+.security-policy-badge.disabled {color:var(--text-dim);background:var(--bg-2);}
+.security-profiles .security-profile-toolbar {gap:8px;margin:16px 0 10px;}
+.security-profiles .security-profile-toolbar h3 {font-size:13px;font-weight:600;}
+.security-profiles .security-profile-toolbar .btn-secondary {padding:5px 9px;font-size:12px;}
+.security-profiles .security-profile-fields {background:var(--bg-0);border:1px solid var(--border);border-radius:var(--radius-md);padding:12px 14px;}
+@media(max-width:800px) {.security-profiles .security-policy-actions {width:auto;margin-left:auto;padding-left:28px;}}
+
+/* Policy editor uses the same spacing, surfaces and controls as General settings. */
+.security-profiles .security-profile-fields {grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:14px 18px;margin-bottom:16px;}
+.security-profiles .security-profile-fields > label,.security-profiles .security-icon-field > span {font-size:12px;font-weight:500;line-height:1.5;}
+.security-profiles .security-profile-fields > label {gap:6px;}
+.security-profiles .security-profile-fields > label > input {min-height:32px;padding:6px 10px;font-size:13px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg-1);color:var(--text);}
+.security-profiles .security-profile-description {grid-column:1 / -1;}
+.security-profiles .security-profile-appearance {grid-column:2;display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0;padding:0;border:0;}
+.security-profile-appearance-label {font-size:12px;font-weight:500;line-height:1.5;}
+.security-profile-appearance-controls {box-sizing:border-box;display:flex;align-items:center;gap:6px;width:max-content;height:32px;padding:2px;border:1px solid var(--border);border-radius:9px;background:var(--bg-1);}
+.security-profile-appearance-controls .security-appearance-picker {position:relative;border:0;background:transparent;}
+.security-profile-appearance-controls .security-appearance-picker > summary {box-sizing:border-box;justify-content:center;width:24px;height:24px;min-height:24px;padding:0;border:0;border-radius:6px;}
+.security-profile-appearance-controls .security-appearance-picker > summary > span:first-child {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.security-profile-appearance-controls .security-appearance-picker[open] > summary {border:0;}
+.security-profile-appearance-controls .security-appearance-preview {width:20px;height:20px;border-radius:5px;}
+.security-profile-appearance-controls .security-appearance-color-preview {width:22px;height:18px;}
+.security-profile-appearance-controls .security-appearance-picker > .security-icon-grid,.security-profile-appearance-controls .security-appearance-picker > .security-color-palette {position:absolute;top:calc(100% + 6px);left:0;z-index:20;margin:0;padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--bg-1);box-shadow:0 8px 24px #0002;}
+.security-profile-appearance-controls .security-appearance-picker > .security-icon-grid {width:min(470px,80vw);}
+.security-profile-appearance-controls .security-appearance-picker > .security-color-palette {width:260px;}
+.security-tabs-roles svg {color:var(--accent);}
+@media(max-width:600px) {.security-profiles .security-profile-fields {grid-template-columns:minmax(0,1fr);}.security-profiles .security-profile-appearance,.security-profiles .security-profile-description {grid-column:1;}}
+.security-settings-page .security-content {padding:14px 0 0;}
+.security-settings-page .security-feature-list {gap:12px;}
+.security-settings-page .security-muted {font-size:12px;line-height:1.6;margin:0 0 12px;}
+.security-settings-page .security-feature-list > .security-muted {margin:0;}
+.security-settings-page .security-rule-group,.security-settings-page .security-feature-section {padding:12px 14px;background:var(--bg-0);border:1px solid var(--border);border-radius:var(--radius-md);}
+.security-settings-page .security-feature-list > .security-rule-group {margin-bottom:0;}
+.security-settings-page .security-feature-list + section {margin-top:12px;}
+.security-settings-page .security-rule-group summary {font-size:13px;line-height:20px;font-weight:500;}
+.security-settings-page .security-rule-group h4,.security-settings-page .security-feature-section h3 {font-size:13px;font-weight:600;line-height:1.5;margin:0 0 8px;}
+.security-settings-page .security-choices {gap:0;}
+.security-settings-page .security-rule-group .security-choices {margin-top:8px;}
+.security-settings-page .security-choices > label {padding:10px 0;gap:10px;border:0;border-radius:0;background:transparent;}
+.security-settings-page .security-choices > label + label {border-top:1px solid var(--border);}
+.security-settings-page .security-choices strong {font-size:12px;font-weight:500;}
+.security-settings-page .security-choices small {margin-top:3px;line-height:1.6;}
+.security-settings-page .security-note {margin-top:8px;font-size:12px;line-height:1.6;}
+.security-settings-page .security-rule {margin-top:12px;}
+.security-settings-page textarea,.security-settings-page select {background:var(--bg-1);padding:8px 10px;font-size:12px;border-radius:var(--radius-sm);margin-top:6px;}
+.security-settings-page .security-review-options {margin-top:14px;}
+.security-review-example {margin:8px 0 0;line-height:1.6;}
+.security-settings-page footer {border:0;padding:6px 0;min-height:20px;}
+.security-settings-page summary:focus-visible {outline:none;outline-offset:4px;border-radius:3px;}
+
+/* Keep controls discoverable: compact does not mean unstyled. */
+.security-profiles .security-policy-row.is-default {box-shadow:inset 3px 0 var(--accent);background:color-mix(in srgb,var(--accent) 4%,var(--bg-0));}
+.security-profiles .security-policy-row.security-full-access {background:color-mix(in srgb,#f97316 4%,var(--bg-0));}
+.security-profiles .security-policy-text p {color:inherit;opacity:.8;}
+.security-profiles .security-policy-actions {gap:6px;}
+.security-profiles .security-policy-actions .btn-ghost {border:0;background:transparent;}
+.security-profiles .security-policy-actions .btn-ghost[aria-pressed=true] {color:var(--accent);background:transparent;}
+.security-profiles .security-policy-actions .btn-ghost:disabled {opacity:.4;cursor:not-allowed;}
+.security-profiles .security-policy-actions .btn-ghost:focus-visible {outline:2px solid var(--accent);outline-offset:2px;}
+.security-settings-page .security-choices > label {padding:10px;border-radius:6px;}
+.security-settings-page .security-choices > label.selected {background:color-mix(in srgb,var(--accent) 5%,var(--bg-0));}
+
+/* 系统权限（TCC）总览：安全与授权页底部，图标 + 名称/描述 + 状态胶囊 + 操作 */
+.sysperm {margin-top:28px;}
+.sysperm h3 {margin:0 0 4px;font-size:15px;}
+.sysperm-list {display:flex;flex-direction:column;padding:0;}
+.sysperm-row {display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);} 
+.sysperm-row:last-child {border-bottom:none;}
+.sysperm-icon {display:flex;align-items:center;justify-content:center;flex:0 0 auto;width:32px;height:32px;border-radius:8px;color:var(--fg-1);background:color-mix(in srgb,var(--fg-1) 7%,transparent);}
+.sysperm-text {flex:1 1 auto;min-width:0;}
+.sysperm-text > strong {font-size:13px;}
+.sysperm-text > p {margin:2px 0 0;font-size:12px;color:var(--fg-2);}
+.sysperm-toggle {display:inline-flex;align-items:flex-start;gap:6px;margin-top:8px;font-size:12px;color:var(--fg-2);cursor:pointer;}
+.sysperm-toggle input {width:auto;margin:2px 0 0;}
+.sysperm-status {flex:0 0 auto;font-size:12px;padding:2px 9px;border-radius:10px;white-space:nowrap;}
+.sysperm-status.ok {color:#2e9e5b;background:color-mix(in srgb,#2e9e5b 12%,transparent);}
+.sysperm-status.warn {color:var(--danger,#ef4444);background:color-mix(in srgb,var(--danger,#ef4444) 12%,transparent);}
+.sysperm-status.muted {color:var(--fg-2);background:color-mix(in srgb,var(--fg-2) 10%,transparent);}
+.sysperm-action {display:inline-flex;align-items:center;gap:5px;flex:0 0 auto;white-space:nowrap;}
+/* 签名身份说明（面板底部一行）：解释「系统设置里已授权、这里却显示未请求」的根因 */
+.sysperm-identity {margin:8px 2px 0;}
+
+.scheduled-security-selector { margin:14px 0; }
+.scheduled-security-selector > p { margin:7px 0; }
+.scheduled-security-selector .security-profile-menu { position:static; width:min(100%,440px); margin-top:8px; max-height:340px; }
+.scheduled-security-selector .security-menu-heading { justify-content:space-between; }
+.security-brain-prompt { display:grid; gap:5px; margin:12px 0; }
+.security-brain-prompt textarea { width:100%; }
+.security-review-role-editor { display:grid; grid-template-columns:minmax(190px, .34fr) minmax(0, 1fr); gap:18px; margin:14px 0; padding:14px; border:1px solid var(--border); border-radius:12px; background:var(--bg-1); }
+.security-review-role-nav { display:flex; flex-direction:column; gap:3px; min-width:0; max-height:520px; overflow:auto; padding-right:8px; border-right:1px solid var(--border); }
+.security-review-role-row { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:6px; }
+.security-review-role-select { display:flex; align-items:center; justify-content:flex-start; gap:6px; min-width:0; min-height:38px; padding:7px 9px; border:0; border-radius:8px; color:var(--text); background:transparent; text-align:left; cursor:pointer; }
+.security-review-role-select:hover { background:var(--bg-2); }
+.security-review-role-select.active { background:color-mix(in srgb, var(--accent) 10%, var(--bg-2)); color:var(--accent); }
+.security-review-role-nav-name { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:12px; font-weight:400; }
+.security-review-role-select small { color:var(--text-dim); font-size:11px; white-space:nowrap; }
+button.security-review-role-toggle { display:inline-flex; align-items:center; justify-content:center; flex:0 0 20px; width:20px; min-width:20px; max-width:20px; height:20px; min-height:20px; max-height:20px; margin:0; padding:0!important; border:0!important; border-radius:4px; background:transparent!important; box-shadow:none; color:var(--text-dim); cursor:pointer; }
+button.security-review-role-toggle.is-enabled { color:var(--accent); }
+button.security-review-role-toggle:hover:not(:disabled) { background:var(--bg-2)!important; color:var(--text); }
+.security-review-role-toggle:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+.security-review-role-nav .security-review-role-add { display:flex; justify-content:flex-start; margin-top:8px; padding:9px 10px; border:1px solid var(--border); font-weight:600; }
+.security-review-role-form { display:flex; flex-direction:column; min-width:0; gap:9px; padding:2px 1px; }
+.security-review-role-form > label { display:grid; gap:5px; color:var(--text-dim); font-size:12px; }
+.security-review-role-form input, .security-review-role-form textarea { width:100%; }
+.security-review-role-form textarea { min-height:180px; resize:vertical; font-size:12px; line-height:1.6; }
+.security-review-role-heading h4 { margin:0; font-size:12px; font-weight:400; }
+.security-review-role-actions { display:flex; gap:8px; }
+@media (max-width: 680px) { .security-review-role-editor { grid-template-columns:minmax(0,1fr); gap:12px; } .security-review-role-nav { display:grid; grid-template-columns:1fr; max-height:280px; padding:0 0 10px; border-right:0; border-bottom:1px solid var(--border); } }

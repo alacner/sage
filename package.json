@@ -1,0 +1,259 @@
+{
+  "name": "sage",
+  "version": "0.6.860",
+  "description": "A macOS AI workspace for conversations and extensible project workflows",
+  "main": "dist-electron/electron/main.js",
+  "author": "Sage",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -k -n vite,electron -c blue,green \"npm:dev:renderer\" \"npm:dev:electron\"",
+    "dev:renderer": "vite",
+    "dev:electron": "wait-on tcp:5173 && npm run build:native-shortcuts && tsc -p electron/tsconfig.json && cross-env NODE_ENV=development electron .",
+    "build:renderer": "vite build",
+    "build:electron": "tsc -p electron/tsconfig.json",
+    "build": "npm run build:native-shortcuts && npm run check:bundled-plugins && npm run build:workflow-plugins && node scripts/gen-build-info.cjs && npm run build:renderer && npm run build:electron && node scripts/install-recovered-renderer.cjs",
+    "preview": "npm run build && electron .",
+    "typecheck": "tsc --noEmit && tsc -p electron/tsconfig.json --noEmit",
+    "test:settings": "node scripts/test-settings-integrity.cjs && node scripts/test-settings-autosave.cjs && node scripts/test-provider-key-probe.cjs && node scripts/test-settings-relay-apply.cjs && node scripts/test-update-source.cjs",
+    "test:security": "node scripts/test-security-settings.cjs && node scripts/test-single-review-ui.cjs && node scripts/test-security-profiles.cjs && node scripts/test-security-profile-ui.cjs && node scripts/test-sandbox-review.cjs && node scripts/test-tool-decisions.cjs && node scripts/test-decision-history-ui.cjs && node scripts/test-cli-security.cjs && node scripts/test-privacy-probe.cjs && node scripts/test-privacy-identity.cjs && node scripts/test-review-policy.cjs && node scripts/test-review-check-editor.cjs",
+    "test:security-fixture": "node scripts/test-security-electron.cjs --browser",
+    "test:chat-rendering": "node scripts/test-chat-rendering.cjs && node scripts/test-file-path-bridge.cjs",
+    "test:expert-plan": "node scripts/test-expert-plan-dedup.cjs",
+    "test:archived": "node scripts/test-archived-readonly.cjs",
+    "test:chat-electron": "node scripts/test-chat-electron.cjs",
+    "test:chat-fixture": "node scripts/test-chat-electron.cjs --browser",
+    "test:chat-timeline": "npm run build:electron && node scripts/test-chat-timeline.cjs",
+    "test:mermaid": "node --experimental-strip-types scripts/test-mermaid-sanitize.mts && node --experimental-strip-types scripts/test-mermaid-font.mts && node --experimental-strip-types scripts/test-mermaid-theme.mts",
+    "check:docs": "node --experimental-strip-types scripts/validate-md-mermaid.mts",
+    "dist": "npm run build && electron-builder --mac --x64 --arm64 && node scripts/gen-latest.js",
+    "dist:dmg": "npm run build && electron-builder --mac dmg --x64 --arm64 && node scripts/gen-latest.js",
+    "release": "bash scripts/release.sh",
+    "test:plugins": "node scripts/test-plugin-market-network.cjs && node scripts/test-market-url.cjs && node scripts/test-plugin-platform.cjs && node scripts/test-plugin-ui.cjs && node scripts/test-plugin-nav.cjs && node scripts/test-delivery-loop.cjs && node scripts/test-plugin-manual-examples.cjs && node scripts/test-plugin-colors.cjs && node scripts/test-external-credential-plugins.cjs && node scripts/test-browser-adapter.cjs",
+    "test:extensions": "node scripts/test-extension-platform.cjs && node scripts/test-extension-ui.cjs && node scripts/test-model-extension.cjs && node scripts/test-mcp-sdk.cjs",
+    "test:mcp-env": "node scripts/test-mcp-environment-secrets.cjs && node scripts/test-mcp-sdk.cjs && node scripts/test-mcp-chat-tools.cjs",
+    "test:hooks": "node --experimental-strip-types scripts/test-hooks.mts && node scripts/test-hooks-runner.cjs && node scripts/test-plugin-hooks.cjs",
+    "test:website": "node scripts/test-website-console.cjs && node scripts/test-website-language.cjs && node scripts/test-website-feedback.cjs && node scripts/test-website-apply.cjs && node scripts/test-website-skill-market.cjs && node scripts/test-market-i18n.cjs",
+    "test:apply": "node scripts/test-website-apply.cjs",
+    "test:memory": "node scripts/test-memory-merge.cjs && node scripts/test-memory-ui.cjs",
+    "test:sidebar": "node scripts/test-sidebar-preview.cjs && node scripts/test-title-marquee.cjs && node scripts/test-sidebar-conversation-menu.cjs",
+    "test:filetree": "node --test scripts/test-filetree-refresh.cjs && node scripts/test-filetree-root-menu.cjs && node scripts/test-cursor-menu.cjs",
+    "test:tabs": "node --test scripts/test-empty-conversation-close.cjs && node scripts/test-tab-insertion.cjs && node scripts/test-tab-menu.cjs && node scripts/test-cursor-menu.cjs && node scripts/test-new-tab-menu.cjs && node scripts/test-archive-tab-close.cjs",
+    "test:popover": "node --experimental-strip-types scripts/test-popover-placement.mts && node scripts/test-cursor-menu.cjs",
+    "test:compact": "node scripts/test-compact-boundary.cjs",
+    "test:syntax": "node scripts/test-syntax-check.cjs",
+    "test:browser": "node --experimental-strip-types scripts/test-recent-visits.mts && node scripts/test-link-context-menu.cjs && node scripts/test-browser-link-context-menu.cjs",
+    "test:browser-lifecycle": "node --test scripts/test-browser-lifecycle.cjs scripts/test-plugin-browser-lifecycle.cjs && node scripts/test-browser-agent.cjs && node scripts/test-browser-preview.cjs",
+    "test:channels": "node scripts/test-channel-diagnosis.cjs && node scripts/test-channel-diag-ui.cjs && node scripts/test-feishu-realtime.cjs",
+    "test:git": "node scripts/test-git-scan-async.cjs && node scripts/test-git-browser.cjs && node scripts/test-git-branch-actions.cjs && node scripts/test-git-branch-ui.cjs && node scripts/test-git-workflow.cjs",
+    "test:window": "node scripts/test-dock-icon.cjs && node scripts/test-dock-native-render.cjs && python3 scripts/test-lsregister-prune.py && node scripts/test-dock-watchdog.cjs && node scripts/test-window-diagnostics.cjs && node scripts/test-conv-list-sync.cjs && npm run test:pet",
+    "test:pet": "node --experimental-strip-types scripts/test-pet.mts && node scripts/test-pet-avatar.cjs && node scripts/test-pet-ui.cjs && node scripts/test-pet-position.cjs && node scripts/test-pet-main.cjs && node scripts/test-pet-notifications.cjs",
+    "test:codex": "node scripts/test-codex-bridge.cjs",
+    "test:monitor": "node scripts/test-monitor-engine.cjs && node scripts/test-monitor-scope.cjs && node scripts/test-monitor-navigation.cjs",
+    "build:engines": "node scripts/build-engine-plugins.cjs",
+    "test:engines": "npm run build:engines && node scripts/test-engine-plugins.cjs && node scripts/test-engine-icons.cjs && node scripts/test-codex-bridge.cjs && node scripts/test-cli-security.cjs && node scripts/test-qoder-bridge.cjs && node scripts/test-engine-session.cjs",
+    "verify:dmg": "bash tools/verify-dmg.sh",
+    "clean:lsregister": "python3 tools/lsregister-prune-dead.py",
+    "test:model-availability": "node scripts/test-model-availability.cjs",
+    "test:model-types": "node scripts/test-model-types.cjs && node scripts/test-model-probe-report-ui.cjs && node scripts/test-model-types-shared.cjs",
+    "check:bundled-plugins": "node scripts/sync-electron-validation-skill.cjs --check && node scripts/check-bundled-plugins.cjs",
+    "test:markdown-images": "node scripts/test-markdown-images.cjs",
+    "test:temp-images": "node scripts/test-temp-image-upload.cjs",
+    "test:vision-routing": "node scripts/test-vision-routing.cjs",
+    "test:electron-validation": "node docs/testing/electron-validation/scripts/run.cjs --project . --timeout 120000 -- node scripts/test-browser-agent.cjs",
+    "build:workflow-plugins": "node scripts/build-workflow-plugins.cjs",
+    "test:workspace-ux": "node scripts/test-workspace-ux.cjs && node scripts/test-renderer-navigation.cjs && node scripts/test-window-overlays.cjs",
+    "test:scheduled": "node scripts/test-scheduled-authorization.cjs && node scripts/test-scheduled-workflow.cjs && node scripts/test-scheduled-workspace.cjs && node scripts/test-scheduled-conversation.cjs && node scripts/test-scheduled-execution.cjs && node scripts/test-scheduled-approvals.cjs && node scripts/test-project-relocation.cjs && node --test scripts/test-scheduled-output.cjs && node --test scripts/test-scheduled-final-text.cjs scripts/test-scheduled-conv-final.cjs && node scripts/test-scheduled-activity.cjs",
+    "test:experience": "node --test scripts/test-composer-overlay.cjs scripts/test-scheduled-error-notice.cjs && node scripts/test-global-capture-shortcut.cjs && node scripts/test-voice-session.cjs && node scripts/test-screenshot.cjs && node scripts/test-screenshot-selection.cjs && node scripts/test-screenshot-lifecycle.cjs && node scripts/test-screenshot-controls.cjs && node scripts/test-screenshot-objects.cjs && node --experimental-strip-types scripts/test-shortcuts.mts && node scripts/test-required-builtins.cjs",
+    "test:experience:electron": "node scripts/test-experience-ui.cjs",
+    "test:help": "node scripts/gen-help.cjs --check && node scripts/test-help.cjs && node scripts/test-plugin-manual-examples.cjs",
+    "build:native-shortcuts": "node scripts/build-native-shortcuts.cjs",
+    "test:screenshot": "node scripts/test-screenshot.cjs && node scripts/test-screenshot-selection.cjs && node scripts/test-screenshot-lifecycle.cjs && node scripts/test-screenshot-controls.cjs && node scripts/test-screenshot-objects.cjs && node scripts/test-screenshot-electron.cjs",
+    "test:resources": "node --expose-gc scripts/test-resource-memory.cjs && node scripts/test-resource-lifecycle.cjs",
+    "test:resources:electron": "npm run build:electron && node scripts/test-resource-electron.cjs",
+    "test:resources:native": "node scripts/test-voice-buffer.cjs",
+    "test:relay-status": "node scripts/test-relay-retry.cjs && node scripts/test-relay-client-profile.cjs && node scripts/test-relay-client-identity-ui.cjs",
+    "test:onboarding": "node scripts/test-onboarding.cjs && node scripts/test-onboarding-ui.cjs && node scripts/test-model-setup-guide.cjs",
+    "test:onboarding:electron": "node scripts/test-onboarding-electron.cjs",
+    "test:pet:browser": "node scripts/test-pet-browser.cjs",
+    "test:screenshot:browser": "node scripts/test-screenshot-browser.cjs",
+    "test:api-user-agent": "npm run build:electron && node scripts/test-api-user-agent-ui.cjs && node scripts/test-api-user-agent.cjs",
+    "test:tool-display-name": "node scripts/test-tool-display-name.cjs",
+    "test:conversation-approval": "node scripts/test-conversational-approval.cjs",
+    "test:settings-conversations": "node scripts/test-settings-conversation-list.cjs",
+    "test:client-profile": "node tools/sage-website/test-client-profile.cjs",
+    "test:desktop-observation": "node --test scripts/test-builtin-skills.cjs scripts/test-desktop-tool.cjs scripts/test-desktop-image-propagation.cjs scripts/test-desktop-chat-images.cjs",
+    "test:mac-update": "node --test scripts/test-mac-update-manifests.cjs && node scripts/test-update-source.cjs && node scripts/test-update-integrity.cjs && node scripts/test-update-cancel.cjs && node scripts/test-update-network-retry.cjs && node scripts/test-update-retry-actions.cjs && node tools/sage-website/test-download-cleanup.cjs",
+    "test:conversation-activity": "node --test scripts/test-conversation-read-state.cjs scripts/test-conversation-read-ui.cjs && node scripts/test-project-icons-ui.cjs",
+    "build:recovered": "node scripts/recover-renderer-build.cjs && npm run build:renderer && node scripts/install-recovered-renderer.cjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.3.159",
+    "@anthropic-ai/sdk": "^0.110.0",
+    "@larksuiteoapi/node-sdk": "^1.73.3",
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "@qoder-ai/qoder-agent-sdk": "1.0.50",
+    "@xterm/addon-fit": "^0.11.0",
+    "@xterm/xterm": "^6.0.0",
+    "html-to-image": "^1.11.13",
+    "js-yaml": "4.1.0",
+    "lucide-react": "^0.460.0",
+    "mdast-util-from-markdown": "^2.0.3",
+    "mdast-util-to-string": "^4.0.0",
+    "mermaid": "^11.4.0",
+    "node-pty": "^1.1.0",
+    "openai": "^7.4.0",
+    "prismjs": "^1.30.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-markdown": "^9.0.1",
+    "react-simple-code-editor": "^0.14.1",
+    "remark-gfm": "^4.0.1",
+    "ws": "^8.21.3",
+    "zod": "^4.4.3",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^20.14.0",
+    "@types/prismjs": "^1.26.6",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/ws": "^8.18.1",
+    "@vitejs/plugin-react": "^4.3.1",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "43.7.7",
+    "electron-builder": "^24.13.3",
+    "jsdom": "^29.1.1",
+    "sharp": "^0.34.5",
+    "typescript": "^5.4.5",
+    "vite": "^5.3.1",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "sage.app",
+    "productName": "Sage",
+    "copyright": "Copyright © 2026 Sage",
+    "asar": true,
+    "npmRebuild": false,
+    "afterPack": "scripts/after-pack.js",
+    "afterSign": "scripts/after-sign.js",
+    "asarUnpack": [
+      "node_modules/node-pty/**",
+      "node_modules/@anthropic-ai/claude-agent-sdk-darwin-*/**"
+    ],
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**",
+      "dist-electron/**",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "build/icon.icns",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "identity": null,
+      "extendInfo": {
+        "NSCameraUsageDescription": "Sage 内置浏览器需要摄像头以支持网页身份验证和视频通话。",
+        "NSMicrophoneUsageDescription": "Sage 需要麦克风以提供语音输入（听写）功能。",
+        "NSSpeechRecognitionUsageDescription": "Sage 使用 macOS 系统语音识别将你的语音转为文字。"
+      }
+    },
+    "dmg": {
+      "title": "Sage ${version}"
+    },
+    "extraResources": [
+      {
+        "from": "resources/skills",
+        "to": "skills",
+        "filter": [
+          "**/SKILL.md"
+        ]
+      },
+      {
+        "from": "resources/plugins",
+        "to": "plugins",
+        "filter": [
+          "**/*",
+          "!**/.sage",
+          "!**/.sage/**",
+          "!**/.git",
+          "!**/.git/**",
+          "!**/.DS_Store"
+        ]
+      },
+      {
+        "from": "resources/voice-helper",
+        "to": "voice-helper"
+      },
+      {
+        "from": "resources/plugin-sdk",
+        "to": "plugin-sdk"
+      },
+      {
+        "from": "docs/PLUGIN_MANUAL.md",
+        "to": "plugin-sdk/PLUGIN_MANUAL.md"
+      },
+      {
+        "from": "docs/PLUGIN_MANUAL.en.md",
+        "to": "plugin-sdk/PLUGIN_MANUAL.en.md"
+      },
+      {
+        "from": "docs/PLUGIN_PLATFORM_DESIGN.md",
+        "to": "plugin-sdk/PLUGIN_PLATFORM_DESIGN.md"
+      },
+      {
+        "from": "docs/EXTENSIBILITY.md",
+        "to": "plugin-sdk/EXTENSIBILITY.md"
+      },
+      {
+        "from": "docs/EXTENSION_COOKBOOK.md",
+        "to": "plugin-sdk/EXTENSION_COOKBOOK.md"
+      },
+      {
+        "from": "docs/PLUGIN_EXTENSION_CATALOG.md",
+        "to": "plugin-sdk/PLUGIN_EXTENSION_CATALOG.md"
+      },
+      {
+        "from": "docs/BACKEND_ENGINES.md",
+        "to": "plugin-sdk/BACKEND_ENGINES.md"
+      },
+      {
+        "from": "resources/build-info.json",
+        "to": "build-info.json"
+      },
+      {
+        "from": "build/icon.png",
+        "to": "dock-icon.png"
+      },
+      {
+        "from": "resources/voice-helper",
+        "to": "voice-helper"
+      },
+      {
+        "from": "resources/native",
+        "to": "native",
+        "filter": [
+          "*.node"
+        ]
+      }
+    ]
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

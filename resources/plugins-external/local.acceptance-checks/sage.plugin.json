@@ -1,0 +1,18 @@
+{
+  "format":1,"id":"local.acceptance-checks","name":"Web acceptance checks","version":"1.0.0","sdk":"^1.3.0","entry":"plugin.js","category":"development",
+  "description":"Additional DOM acceptance checks for the bundled browser skill.",
+  "dependencies":{"sage.browser-acceptance":"^1.0.0"},
+  "extensions":[{"id":"document-ready","point":"sage.browser-acceptance/assertions","version":"^1.0.0","title":"Document readiness","service":"checks","method":"ready"}],
+  "services": {
+    "checks": {
+      "version": "1.0.0",
+      "methods": {
+        "ready": {
+          "description": "Require a ready document and a nonempty title",
+          "input": {"type":"object"},
+          "output": {"type":"object","properties":{"passed":{"type":"boolean"},"detail":{"type":"string"}},"required":["passed","detail"],"additionalProperties":false}
+        }
+      }
+    }
+  }
+}

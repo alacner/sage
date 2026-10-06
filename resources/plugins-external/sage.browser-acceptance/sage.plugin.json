@@ -1,0 +1,154 @@
+{
+  "format": 1,
+  "id": "sage.browser-acceptance",
+  "name": "Browser acceptance / 浏览器验收",
+  "version": "1.1.0",
+  "sdk": "^1.2.0",
+  "entry": "plugin.js",
+  "artifactType": "skill",
+  "category": "development",
+  "description": "Verify web UI with an integrated browser, DOM evidence and vision analysis.",
+  "permissions": [
+    "browser.control",
+    "browser.debug",
+    "browser.tabs",
+    "models.use"
+  ],
+  "skills": [
+    {
+      "name": "browser-acceptance",
+      "description": "Validate web UI using real viewport screenshots, DOM checks and a vision model; report failures and iterate.",
+      "file": "skills/SKILL.md"
+    }
+  ],
+  "extensionPoints": [
+    {
+      "id": "assertions",
+      "version": "1.0.0",
+      "title": "Additional browser acceptance checks",
+      "input": {
+        "type": "object"
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "passed": {
+            "type": "boolean"
+          },
+          "detail": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "passed",
+          "detail"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "services": {
+    "acceptance": {
+      "version": "1.0.0",
+      "methods": {
+        "tabs": {
+          "description": "List integrated browser tabs for this project",
+          "input": {
+            "type": "object"
+          },
+          "tool": true
+        },
+        "open": {
+          "description": "Create an isolated browser viewport or attach to an integrated tab",
+          "input": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string"
+              },
+              "tabId": {
+                "type": "string"
+              },
+              "width": {
+                "type": "integer",
+                "minimum": 320,
+                "maximum": 1920
+              },
+              "height": {
+                "type": "integer",
+                "minimum": 200,
+                "maximum": 1200
+              }
+            },
+            "additionalProperties": false
+          },
+          "tool": true
+        },
+        "inspect": {
+          "description": "Inspect DOM geometry and capture a real screenshot",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "additionalProperties": false
+          },
+          "tool": true
+        },
+        "verify": {
+          "description": "Analyze the current browser screenshot against explicit acceptance criteria",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "criteria": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 12000
+              }
+            },
+            "required": [
+              "id",
+              "criteria"
+            ],
+            "additionalProperties": false
+          },
+          "tool": true
+        },
+        "close": {
+          "description": "Close an owned viewport or detach from an integrated tab",
+          "input": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "additionalProperties": false
+          },
+          "tool": true
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "sage.browser": "^1.2.0"
+  },
+  "consumes": [
+    {
+      "plugin": "sage.browser",
+      "service": "automation",
+      "version": "^1.1.0"
+    }
+  ]
+}

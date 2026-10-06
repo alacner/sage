@@ -1,0 +1,8 @@
+button.refresh-button.refresh-button { display:inline-flex; align-items:center; justify-content:center; flex:0 0 28px; width:28px; height:28px; min-width:28px; min-height:28px; max-width:28px; max-height:28px; padding:0; margin:0; border:0; border-radius:5px; background:transparent; color:var(--text-dim); line-height:1; cursor:pointer; }
+button.refresh-button.refresh-button:hover:not(:disabled) { background:var(--bg-2); color:var(--text); }
+button.refresh-button.refresh-button:disabled { opacity:.45; cursor:not-allowed; }
+button.refresh-button.refresh-button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+button.refresh-button.refresh-button svg { width:16px; height:16px; flex:none; }
+.refresh-button-spin { animation:refresh-button-spin 1s linear infinite; }
+@keyframes refresh-button-spin { to { transform:rotate(360deg); } }
+@media(prefers-reduced-motion:reduce) { .refresh-button-spin { animation:none; } }
